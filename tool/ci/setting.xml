@@ -1,61 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
-
-    <profiles>
-        <profile>
-            <id>debpre-profile</id>
-            <repositories>
-                <repository>
-                    <id>public</id>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                    <url>http://proxy/nexus/repository/maven-public/</url>
-                </repository>
-                <repository>
-                    <id>3rd-party</id>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <url>http://26.105.129.221/nexus/repository/3rdParty/</url>
-                </repository>
-                <repository>
-                    <id>legacy</id>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <url>http://26.105.129.221/nexus/repository/legacy/</url>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>maven.seasar.org</id>
-                    <url>http://maven.seasar.org/maven2</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-    </profiles>
-    <activeProfiles>
-        <activeProfile>
-            debpre-profile
-        </activeProfile>
-    </activeProfiles>
-
     <mirrors>
         <mirror>
             <id>private-repository</id>
@@ -63,5 +7,4 @@
             <url>http://proxy/nexus/repository/maven-public/</url>
         </mirror>
     </mirrors>
-
 </settings>
