@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${fimilyName} + さんのアルバム">アルバム</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="2">プロフィール</th>
+            <td rowspan="8">画像</td>
+        </tr>
+        <tr>
+            <th>氏名</th>
+            <td><p th:text="${familyName} + ' ' + ${personalName}"></p></td>
+        </tr>
+        <tr>
+            <th>社員番号</th>
+            <td><p th:text="${employeeId}"></p></td>
+        </tr>
+        <tr>
+            <th>年次</th>
+            <td><p th:text="${yearly}"></p></td>
+        </tr>
+        <tr>
+            <th>血液型</th>
+            <td><p th:text="${bloodType}"></p></td>
+        </tr>
+        <tr>
+            <th>所属チーム</th>
+            <td><p th:text="${team}"></p></td>
+        </tr>
+        <tr>
+            <th>担当顧客</th>
+            <td><p th:text="${customer}"></p></td>
+        </tr>
+        <tr>
+            <th>担当案件</th>
+            <td><p th:text="${project}"></p></td>
+        </tr>
+        <tr>
+            <th>プライベート</th>
+            <td colspan="2">※自由記述コーナー</td>
+        </tr>
+        <tr>
+            <td colspan="3"><p th:text="${privateSentence}"></p></td>
+        </tr>
+        <tr>
+            <th>経歴</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <table>
+                    <tr>
+                        <th colspan="2">時期</th>
+                        <th>出来事</th>
+                    </tr>
+                    <tr th:each="history : ${histories}">
+                        <td><p th:text="${history.year}"></p></td>
+                        <td><p th:text="${history.month}"></p></td>
+                        <td><p th:text="${history.event}"></p></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <th>コメント</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td colspan="3"><p th:text="${comment}"></p></td>
+        </tr>
+    </table>
+</body>
+</html>
