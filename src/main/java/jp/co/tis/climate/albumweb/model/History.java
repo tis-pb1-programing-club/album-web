@@ -4,8 +4,9 @@ import lombok.Data;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
+import org.seasar.doma.jdbc.entity.NamingType;
 
-@Entity
+@Entity(naming = NamingType.SNAKE_UPPER_CASE)
 @Table(name="HISTORY")
 @Data
 public class History {
