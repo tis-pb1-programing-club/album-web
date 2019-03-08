@@ -12,5 +12,5 @@ import java.util.List;
 public interface HistoryDao {
 
     @Select
-    List<History> findHistoryByAlbumId(Integer albumId);
+    List<History> findHistoryAllByPersonalId(Integer personalId);
 }

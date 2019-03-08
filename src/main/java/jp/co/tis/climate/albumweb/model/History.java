@@ -12,9 +12,10 @@ import org.seasar.doma.jdbc.entity.NamingType;
 public class History {
 
     @Id
-    private Integer historyId;
+    private Integer personalId;
 
-    private Integer albumId;
+    @Id
+    private Integer historyId;
 
     private Short year;
 

@@ -1,2 +1,0 @@
-SELECT * FROM ALBUM
-WHERE ALBUM_ID = /*albumId*/0

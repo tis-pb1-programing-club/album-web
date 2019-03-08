@@ -1,10 +1,11 @@
 INSERT INTO HELLO ( ID, MESSAGE ) VALUES ( 0, 'HELLO WORLD!' );
 
-INSERT INTO ALBUM (
-    ALBUM_ID
+INSERT INTO PERSONAL (
+    PERSONAL_ID
     , FAMILY_NAME
     , PERSONAL_NAME
     , YEARLY
+    , SEX
     , BLOOD_TYPE
     , TEAM
     , CUSTOMER
@@ -18,6 +19,7 @@ VALUES (
     , 'にゃんこ'
     , 2
     , 0
+    , 0
     , '長毛'
     , '人間'
     , 'おなか見せ'
@@ -28,7 +30,8 @@ VALUES (
     , 'クー1'
     , 'にゃんこ1'
     , 2
-    , 0
+    , 1
+    , 1
     , '長毛1'
     , '人間1'
     , 'おなか見せ1'
@@ -37,8 +40,8 @@ VALUES (
 );
 
 INSERT INTO HISTORY (
-    HISTORY_ID
-    , ALBUM_ID
+    PERSONAL_ID
+    , HISTORY_ID
     , YEAR
     , MONTH
     , EVENT
@@ -51,8 +54,8 @@ VALUES (
     , '産まれる'
 )
 ,(
-    1
-    , 0
+    0
+    , 1
     , 2018
     , 6
     , '飼われる'
