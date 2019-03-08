@@ -14,8 +14,8 @@ INSERT INTO EMPLOYEE_ALBUM (
 )
 VALUES (
     0
-    , 'にゃん'
     , 'クー'
+    , 'にゃんこ'
     , 2
     , 0
     , '長毛'
