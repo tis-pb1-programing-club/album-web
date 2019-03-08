@@ -11,7 +11,8 @@
     <table class="table table-bordered">
         <tr>
             <th class="table-title" colspan="2">プロフィール</th>
-            <td rowspan="8"><img class="album" src="../../static/image/neko.jpg" th:src="@{/image/neko.jpg}"></td>
+            <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
+            <td rowspan="8"><img class="album" src="../../static/image/neko.jpg" th:src="@{'/image/' + ${employeeAlbum.employeeId} + '.jpg'}"></td>
         </tr>
         <tr>
             <th>氏名</th>

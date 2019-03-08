@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/album")
@@ -16,8 +17,8 @@ public class AlbumViewController {
     private AlbumViewService albumViewService;
 
     @GetMapping(path = "/album")
-    public String getHello(Model model) {
-        AlbumPage albumPage = albumViewService.getAlbumPageById(0);
+    public String getHello(@RequestParam("employeeId") Integer employeeId,  Model model) {
+        AlbumPage albumPage = albumViewService.getAlbumPageById(employeeId); // employeeIdがないとエラー
         model.addAttribute("employeeAlbum", albumPage.getEmployeeAlbum());
         model.addAttribute("histories", albumPage.getHistories());
         return "album/album";
