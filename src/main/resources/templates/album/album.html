@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{commons/layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${album.familyName} + 'さんのアルバム'">首藤のアルバム</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table class="table table-bordered">
+        <tr>
+            <th class="table-title" colspan="2">プロフィール</th>
+            <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
+            <td rowspan="8"><img class="album" src="../../static/image/0.jpg" th:src="@{'/image/' + ${album.albumId} + '.jpg'}"></td>
+        </tr>
+        <tr>
+            <th>氏名</th>
+            <td><p th:text="${album.familyName} + ' ' + ${album.personalName}">首藤 優志</p></td>
+        </tr>
+        <tr>
+            <th>社員番号</th>
+            <td><p th:text="${album.albumId}">305575</p></td>
+        </tr>
+        <tr>
+            <th>年次</th>
+            <td><p th:text="${album.yearly} + '年目'">1年目</p></td>
+        </tr>
+        <tr>
+            <th>血液型</th>
+            <td><p th:text="${album.bloodType} + '型'">O型</p></td>
+        </tr>
+        <tr>
+            <th>所属チーム</th>
+            <td><p th:text="${album.team}">標準化（ED1）</p></td>
+        </tr>
+        <tr>
+            <th>担当顧客</th>
+            <td><p th:text="${album.customer}">なし</p></td>
+        </tr>
+        <tr>
+            <th>担当案件</th>
+            <td><p th:text="${album.project}">デビプリ改善</p></td>
+        </tr>
+        <tr>
+            <th>プライベート</th>
+            <th colspan="2">※自由記述コーナー</th>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <pre th:text="${album.privateSentence}">猫飼ってます</pre>
+            </td>
+        </tr>
+        <tr>
+            <th>経歴</th>
+            <th colspan="2"></th>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <table class="mx-auto" width="80%">
+                    <thead>
+                    <tr>
+                        <th class="table-career" colspan="2" width="15%">時期</th>
+                        <th class="table-career">出来事</th>
+                    </tr>
+                    </thead>
+                    <tbody th:remove="all-but-first" th:each="history : ${histories}">
+                    <tr>
+                        <td><p th:text="${history.year}">2018</p></td>
+                        <td><p th:text="${history.month} + '月'">4月</p></td>
+                        <td><p th:text="${history.event}">入社</p></td>
+                    </tr>
+                    <tr>
+                        <td><p th:text="${history.year}">2018</p></td>
+                        <td><p th:text="${history.month} + '月'">8月</p></td>
+                        <td><p th:text="${history.event}">うんやかんや新人研修終了</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <th>コメント</th>
+            <th colspan="2"></th>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <pre th:text="${album.comment}">よろ</pre>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

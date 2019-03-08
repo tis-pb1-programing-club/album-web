@@ -1,0 +1,33 @@
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>th {
+    /*background-color: #f8f9fa;*/
+    background-color: #a8fba8;
+}
+
+.table-title {
+    background-color: #87cefa !important;
+}
+
+.table-career {
+    background-color: #f08080 !important;
+}
+
+img.album{
+  width: 500px;
+  height: 400px;
+  object-fit: contain;
+  padding: 10px 10px;
+}
+
+main >.container {
+    padding: 60px 15px 0;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
