@@ -1,9 +1,9 @@
 package jp.co.tis.climate.albumweb.service;
 
-import jp.co.tis.climate.albumweb.dao.EmployeeAlbumDao;
+import jp.co.tis.climate.albumweb.dao.AlbumDao;
 import jp.co.tis.climate.albumweb.dao.HistoryDao;
 import jp.co.tis.climate.albumweb.dto.AlbumPage;
-import jp.co.tis.climate.albumweb.model.EmployeeAlbum;
+import jp.co.tis.climate.albumweb.model.Album;
 import jp.co.tis.climate.albumweb.model.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,16 +14,16 @@ import java.util.List;
 public class AlbumViewService {
 
     @Autowired
-    private EmployeeAlbumDao employeeAlbumDao;
+    private AlbumDao albumDao;
 
     @Autowired
     private HistoryDao historyDao;
 
-    public AlbumPage getAlbumPageById(Integer employeeId){
-        EmployeeAlbum employeeAlbum = employeeAlbumDao.findEmployeeAlbum(employeeId);
-        List<History> histories = historyDao.findHistoryByEmployeeId(employeeId);
+    public AlbumPage getAlbumPageById(Integer albumId){
+        Album album = albumDao.findAlbumByAlbumId(albumId);
+        List<History> histories = historyDao.findHistoryByAlbumId(albumId);
         AlbumPage albumPage = new AlbumPage();
-        albumPage.setEmployeeAlbum(employeeAlbum);
+        albumPage.setAlbum(album);
         albumPage.setHistories(histories);
         return albumPage;
     }

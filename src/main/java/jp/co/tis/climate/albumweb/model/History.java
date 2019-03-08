@@ -14,7 +14,7 @@ public class History {
     @Id
     private Integer historyId;
 
-    private Integer employeeId;
+    private Integer albumId;
 
     private Short year;
 

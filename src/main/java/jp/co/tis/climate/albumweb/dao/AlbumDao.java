@@ -1,6 +1,6 @@
 package jp.co.tis.climate.albumweb.dao;
 
-import jp.co.tis.climate.albumweb.model.EmployeeAlbum;
+import jp.co.tis.climate.albumweb.model.Album;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
@@ -9,11 +9,11 @@ import java.util.List;
 
 @Dao
 @ConfigAutowireable
-public interface EmployeeAlbumDao {
+public interface AlbumDao {
 
     @Select
-    List<EmployeeAlbum> findAll();
+    List<Album> findAll();
 
     @Select
-    EmployeeAlbum findEmployeeAlbum(Integer employeeId);
+    Album findAlbumByAlbumId(Integer albumId);
 }

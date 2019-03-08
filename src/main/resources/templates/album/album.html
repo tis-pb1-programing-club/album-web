@@ -4,7 +4,7 @@
       layout:decorate="~{commons/layout}">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="${employeeAlbum.familyName} + 'さんのアルバム'">首藤のアルバム</title>
+    <title th:text="${album.familyName} + 'さんのアルバム'">首藤のアルバム</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -12,35 +12,35 @@
         <tr>
             <th class="table-title" colspan="2">プロフィール</th>
             <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
-            <td rowspan="8"><img class="album" src="../../static/image/neko.jpg" th:src="@{'/image/' + ${employeeAlbum.employeeId} + '.jpg'}"></td>
+            <td rowspan="8"><img class="album" src="../../static/image/0.jpg" th:src="@{'/image/' + ${album.albumId} + '.jpg'}"></td>
         </tr>
         <tr>
             <th>氏名</th>
-            <td><p th:text="${employeeAlbum.familyName} + ' ' + ${employeeAlbum.personalName}">首藤 優志</p></td>
+            <td><p th:text="${album.familyName} + ' ' + ${album.personalName}">首藤 優志</p></td>
         </tr>
         <tr>
             <th>社員番号</th>
-            <td><p th:text="${employeeAlbum.employeeId}">305575</p></td>
+            <td><p th:text="${album.albumId}">305575</p></td>
         </tr>
         <tr>
             <th>年次</th>
-            <td><p th:text="${employeeAlbum.yearly} + '年目'">1年目</p></td>
+            <td><p th:text="${album.yearly} + '年目'">1年目</p></td>
         </tr>
         <tr>
             <th>血液型</th>
-            <td><p th:text="${employeeAlbum.bloodType} + '型'">O型</p></td>
+            <td><p th:text="${album.bloodType} + '型'">O型</p></td>
         </tr>
         <tr>
             <th>所属チーム</th>
-            <td><p th:text="${employeeAlbum.team}">標準化（ED1）</p></td>
+            <td><p th:text="${album.team}">標準化（ED1）</p></td>
         </tr>
         <tr>
             <th>担当顧客</th>
-            <td><p th:text="${employeeAlbum.customer}">なし</p></td>
+            <td><p th:text="${album.customer}">なし</p></td>
         </tr>
         <tr>
             <th>担当案件</th>
-            <td><p th:text="${employeeAlbum.project}">デビプリ改善</p></td>
+            <td><p th:text="${album.project}">デビプリ改善</p></td>
         </tr>
         <tr>
             <th>プライベート</th>
@@ -48,7 +48,7 @@
         </tr>
         <tr>
             <td colspan="3">
-                <pre th:text="${employeeAlbum.privateSentence}">猫飼ってます</pre>
+                <pre th:text="${album.privateSentence}">猫飼ってます</pre>
             </td>
         </tr>
         <tr>
@@ -85,7 +85,7 @@
         </tr>
         <tr>
             <td colspan="3">
-                <pre th:text="${employeeAlbum.comment}">よろ</pre>
+                <pre th:text="${album.comment}">よろ</pre>
             </td>
         </tr>
     </table>

@@ -17,9 +17,9 @@ public class AlbumViewController {
     private AlbumViewService albumViewService;
 
     @GetMapping(path = "/album")
-    public String getHello(@RequestParam("employeeId") Integer employeeId,  Model model) {
-        AlbumPage albumPage = albumViewService.getAlbumPageById(employeeId); // employeeIdがないとエラー
-        model.addAttribute("employeeAlbum", albumPage.getEmployeeAlbum());
+    public String getHello(@RequestParam("albumId") Integer albumId,  Model model) {
+        AlbumPage albumPage = albumViewService.getAlbumPageById(albumId); // employeeIdがないとエラー
+        model.addAttribute("album", albumPage.getAlbum());
         model.addAttribute("histories", albumPage.getHistories());
         return "album/album";
     }

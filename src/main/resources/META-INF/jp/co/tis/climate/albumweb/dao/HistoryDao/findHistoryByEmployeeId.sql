@@ -1,2 +1,0 @@
-SELECT * FROM HISTORY
-WHERE EMPLOYEE_ID = /*employeeId*/0
