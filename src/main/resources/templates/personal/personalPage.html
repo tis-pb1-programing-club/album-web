@@ -4,7 +4,7 @@
       layout:decorate="~{commons/layout}">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="${personal.familyName} + 'さんのアルバム'">首藤のアルバム</title>
+    <title th:text="${personal.lastName} + 'さんのアルバム'">首藤のアルバム</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <th>氏名</th>
-            <td><p th:text="${personal.familyName} + ' ' + ${personal.personalName}">首藤 優志</p></td>
+            <td><p th:text="${personal.lastName} + ' ' + ${personal.firstName}">首藤 優志</p></td>
         </tr>
         <tr>
             <th>社員番号</th>

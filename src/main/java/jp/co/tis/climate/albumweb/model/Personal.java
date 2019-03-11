@@ -16,9 +16,9 @@ public class Personal implements Serializable {
     @Id
     private Integer personalId;
 
-    private String familyName;
+    private String lastName;
 
-    private String personalName;
+    private String firstName;
 
     private Byte yearly;
 
