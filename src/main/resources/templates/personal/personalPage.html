@@ -28,11 +28,21 @@
         </tr>
         <tr>
             <th>性別</th>
-            <td><p th:text="${personal.sex}">男</p></td>
+            <td th:switch="${personal.sex}">
+                <p th:case="0">男性</p>
+                <p th:case="1">女性</p>
+                <p th:case="*">非公開</p>
+            </td>
         </tr>
         <tr>
             <th>血液型</th>
-            <td><p th:text="${personal.bloodType} + '型'">O型</p></td>
+            <td th:switch="${personal.bloodType}">
+                <p th:case="0">A型</p>
+                <p th:case="1">B型</p>
+                <p th:case="2">O型</p>
+                <p th:case="3">AB型</p>
+                <p th:case="*">非公開</p>
+            </td>
         </tr>
         <tr>
             <th>所属チーム</th>
