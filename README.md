@@ -4,10 +4,10 @@
 利用者は画面上からCRUDができる。
 
 ## 環境
-Maven
-SpringBoot
-Tymeleaf
-h2
+Maven  
+SpringBoot  
+Tymeleaf  
+h2  
 
 ## 
 
