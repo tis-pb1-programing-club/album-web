@@ -16,11 +16,13 @@ public class PersonalController {
     @Autowired
     private PersonalService personalService;
 
-    @GetMapping(path = "/personalPage")
-    public String getHello(@RequestParam("personalId") Integer albumId,  Model model) {
+    @GetMapping(path = "/view")
+    public String view(@RequestParam("personalId") Integer albumId,  Model model) {
         PersonalPage personalPage = personalService.getPersonalPageByPersonalId(albumId); // albumIdがないとエラー
         model.addAttribute("personal", personalPage.getPersonal());
         model.addAttribute("histories", personalPage.getHistories());
-        return "personal/personalPage";
+        return "personal/view";
     }
+
+
 }
