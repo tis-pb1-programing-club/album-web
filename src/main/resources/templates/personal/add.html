@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{commons/layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="アルバム追加">アルバム追加</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form name="PersonalForm" th:action="@{/personal/submit}" method="post">
+    <table class="table table-bordered">
+        <tr>
+            <th class="table-title" colspan="2">プロフィール</th>
+            <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
+            <td rowspan="9"><img class="personal" src="../../static/image/0.jpg"></td>
+        </tr>
+        <tr>
+            <th>氏名</th>
+            <td><input type="text" name="lastName"/></td>
+        </tr>
+        <tr>
+            <th>社員番号</th>
+            <td><input type="text" name="personalId"/></td>
+        </tr>
+        <tr>
+            <th>年次</th>
+            <td><input type="text" name="yearly"/></td>
+        </tr>
+        <tr>
+            <th>性別</th>
+            <td>
+                <select name="sex">
+                    <option value="0">男性</option>
+                    <option value="1">女性</option>
+                    <option value="*">非公開</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>血液型</th>
+            <td>
+                <select name="bloodType">
+                    <option value="0">A型</option>
+                    <option value="1">B型</option>
+                    <option value="2">O型</option>
+                    <option value="3">AB型</option>
+                    <option value="*">非公開</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>所属チーム</th>
+            <td><input type="text" name="team"/></td>
+        </tr>
+        <tr>
+            <th>担当顧客</th>
+            <td><input type="text" name="customer"/></td>
+        </tr>
+        <tr>
+            <th>担当案件</th>
+            <td><input type="text" name="project"/></td>
+        </tr>
+        <tr>
+            <th>プライベート</th>
+            <th colspan="2">※自由記述コーナー</th>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <textarea type="text" name="privateSentence" ></textarea>
+            </td>
+        </tr>
+    </table>
+    <button type="submit">ユーザー登録</button>
+    </form>
+</div>
+</body>
+</html>

@@ -27,4 +27,8 @@ public class PersonalService {
         personalPage.setHistories(histories);
         return personalPage;
     }
+
+    public void register(Personal personal){
+        personalDao.insert(personal);
+    }
 }
