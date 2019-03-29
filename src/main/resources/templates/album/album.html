@@ -51,8 +51,8 @@
     <div class="album py-5 bg-light">
         <div class="container">
 
-            <div class="row" th:remove="all-but-first" th:each="part : ${personalParts}">
-                <div class="col-md-4">
+            <div class="row" th:remove="all-but-first">
+                <div class="col-md-4" th:each="part : ${personalParts}">
                     <div class="card mb-4 shadow-sm">
                         <img class="part" src="../../static/image/0.jpg" th:src="@{'/image/' + ${part.personalId} + '.jpg'}">
                         <div class="card-body">
