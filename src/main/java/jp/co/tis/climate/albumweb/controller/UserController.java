@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-public class PersonalController {
+public class UserController {
 
     @Autowired
     private PersonalService personalService;
@@ -30,7 +30,7 @@ public class PersonalController {
         return "user/view";
     }
 
-    @GetMapping(path="add")
+    @GetMapping(path="edit")
     public String add(Model model){
         List<CareerForm> histories = new ArrayList<>();
         for(int i =0 ; i <5;i++){
@@ -39,7 +39,7 @@ public class PersonalController {
         }
 
         model.addAttribute("histories", histories);
-        return "user/add";
+        return "user/edit";
     }
 
     @PostMapping(path="submit")
