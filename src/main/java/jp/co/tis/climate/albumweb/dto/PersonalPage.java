@@ -1,7 +1,7 @@
 package jp.co.tis.climate.albumweb.dto;
 
-import jp.co.tis.climate.albumweb.model.Personal;
-import jp.co.tis.climate.albumweb.model.History;
+import jp.co.tis.climate.albumweb.model.User;
+import jp.co.tis.climate.albumweb.model.Career;
 import lombok.Data;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class PersonalPage {
 
-    private Personal personal;
+    private User user;
 
-    private List<History> histories;
+    private List<Career> histories;
 }

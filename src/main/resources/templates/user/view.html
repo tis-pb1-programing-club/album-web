@@ -4,7 +4,7 @@
       layout:decorate="~{commons/layout}">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="${personal.lastName} + 'さんのアルバム'">首藤のアルバム</title>
+    <title th:text="${user.lastName} + 'さんのアルバム'">首藤のアルバム</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -12,23 +12,23 @@
         <tr>
             <th class="table-title" colspan="2">プロフィール</th>
             <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
-            <td rowspan="9"><img class="personal" src="../../static/image/0.jpg" th:src="@{'/image/' + ${personal.personalId} + '.jpg'}"></td>
+            <td rowspan="9"><img class="user" src="../../static/image/0.jpg" th:src="@{'/image/' + ${user.userId} + '.jpg'}"></td>
         </tr>
         <tr>
             <th>氏名</th>
-            <td><p th:text="${personal.lastName} + ' ' + ${personal.firstName}">首藤 優志</p></td>
+            <td><p th:text="${user.lastName} + ' ' + ${user.firstName}">首藤 優志</p></td>
         </tr>
         <tr>
             <th>社員番号</th>
-            <td><p th:text="${personal.personalId}">305575</p></td>
+            <td><p th:text="${user.userId}">305575</p></td>
         </tr>
         <tr>
             <th>年次</th>
-            <td><p th:text="${personal.yearly} + '年目'">1年目</p></td>
+            <td><p th:text="${user.yearly} + '年目'">1年目</p></td>
         </tr>
         <tr>
             <th>性別</th>
-            <td th:switch="${personal.sex}">
+            <td th:switch="${user.sex}">
                 <p th:case="0">男性</p>
                 <p th:case="1">女性</p>
                 <p th:case="*">非公開</p>
@@ -36,7 +36,7 @@
         </tr>
         <tr>
             <th>血液型</th>
-            <td th:switch="${personal.bloodType}">
+            <td th:switch="${user.bloodType}">
                 <p th:case="0">A型</p>
                 <p th:case="1">B型</p>
                 <p th:case="2">O型</p>
@@ -46,15 +46,15 @@
         </tr>
         <tr>
             <th>所属チーム</th>
-            <td><p th:text="${personal.team}">標準化（ED1）</p></td>
+            <td><p th:text="${user.team}">標準化（ED1）</p></td>
         </tr>
         <tr>
             <th>担当顧客</th>
-            <td><p th:text="${personal.customer}">なし</p></td>
+            <td><p th:text="${user.customer}">なし</p></td>
         </tr>
         <tr>
             <th>担当案件</th>
-            <td><p th:text="${personal.project}">デビプリ改善</p></td>
+            <td><p th:text="${user.project}">デビプリ改善</p></td>
         </tr>
         <tr>
             <th>プライベート</th>
@@ -62,7 +62,7 @@
         </tr>
         <tr>
             <td colspan="3">
-                <pre th:text="${personal.privateSentence}">猫飼ってます</pre>
+                <pre th:text="${user.privateSentence}">猫飼ってます</pre>
             </td>
         </tr>
         <tr>
@@ -78,16 +78,16 @@
                         <th class="table-career">出来事</th>
                     </tr>
                     </thead>
-                    <tbody th:remove="all-but-first" th:each="history : ${histories}">
+                    <tbody th:remove="all-but-first" th:each="career : ${histories}">
                     <tr>
-                        <td><p th:text="${history.year}">2018</p></td>
-                        <td><p th:text="${history.month} + '月'">4月</p></td>
-                        <td><p th:text="${history.event}">入社</p></td>
+                        <td><p th:text="${career.year}">2018</p></td>
+                        <td><p th:text="${career.month} + '月'">4月</p></td>
+                        <td><p th:text="${career.event}">入社</p></td>
                     </tr>
                     <tr>
-                        <td><p th:text="${history.year}">2018</p></td>
-                        <td><p th:text="${history.month} + '月'">8月</p></td>
-                        <td><p th:text="${history.event}">うんやかんや新人研修終了</p></td>
+                        <td><p th:text="${career.year}">2018</p></td>
+                        <td><p th:text="${career.month} + '月'">8月</p></td>
+                        <td><p th:text="${career.event}">うんやかんや新人研修終了</p></td>
                     </tr>
                     </tbody>
                 </table>
@@ -99,7 +99,7 @@
         </tr>
         <tr>
             <td colspan="3">
-                <pre th:text="${personal.comment}">よろ</pre>
+                <pre th:text="${user.comment}">よろ</pre>
             </td>
         </tr>
     </table>

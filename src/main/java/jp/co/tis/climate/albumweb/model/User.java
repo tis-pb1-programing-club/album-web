@@ -9,12 +9,12 @@ import org.seasar.doma.jdbc.entity.NamingType;
 import java.io.Serializable;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE)
-@Table(name="PERSONAL")
+@Table(name="USER")
 @Data
-public class Personal implements Serializable {
+public class User implements Serializable {
 
     @Id
-    private Integer personalId;
+    private Integer userId;
 
     private String lastName;
 

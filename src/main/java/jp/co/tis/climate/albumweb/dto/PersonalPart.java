@@ -11,7 +11,7 @@ import org.seasar.doma.jdbc.entity.NamingType;
 @Data
 public class PersonalPart {
 
-    private Integer personalId;
+    private Integer userId;
 
     private String lastName;
 

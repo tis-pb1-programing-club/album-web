@@ -1,17 +1,17 @@
 package jp.co.tis.climate.albumweb.form;
 
-import jp.co.tis.climate.albumweb.model.History;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Setter
 @Getter
-public class PersonalForm {
+public class UserForm {
     @NotEmpty
-    private Integer personalId;
+    private Integer userId;
 
     @NotEmpty
     private String lastName;
@@ -35,5 +35,6 @@ public class PersonalForm {
 
     private String comment;
 
-    private List<History> histories;
+    @Valid
+    private List<CareerForm> histories;
 }
