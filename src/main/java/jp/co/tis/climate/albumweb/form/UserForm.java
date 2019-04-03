@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 public class UserForm {
     @NotEmpty
-    private Integer userId;
+    private String userId;
 
     @NotEmpty
     private String lastName;
@@ -19,11 +19,11 @@ public class UserForm {
     @NotEmpty
     private String firstName;
 
-    private Byte yearly;
+    private String yearly;
 
-    private Byte sex;
+    private String sex;
 
-    private Byte bloodType;
+    private String bloodType;
 
     private String team;
 

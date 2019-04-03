@@ -9,10 +9,10 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 public class CareerForm {
     @NotEmpty
-    Integer userId;
+    String userId;
 
     @NotEmpty
-    Integer careerId;
+    String careerId;
 
     Short year;
 
