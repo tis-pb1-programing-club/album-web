@@ -1,6 +1,6 @@
 package jp.co.tis.climate.albumweb.dao;
 
-import jp.co.tis.climate.albumweb.dto.PersonalPart;
+import jp.co.tis.climate.albumweb.dto.UserPart;
 import jp.co.tis.climate.albumweb.model.User;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
@@ -20,7 +20,7 @@ public interface UserDao {
     User findPersonalByPersonalId(Integer userId);
 
     @Select
-    List<PersonalPart> findPersonalPartByPersonal(/*User user,*/ /*SelectOptions options*/);
+    List<UserPart> findPersonalPartByPersonal(/*User user,*/ /*SelectOptions options*/);
 
     @Insert
     int insert(User user);

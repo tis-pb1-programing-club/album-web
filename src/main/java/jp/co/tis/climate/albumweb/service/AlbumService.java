@@ -1,7 +1,7 @@
 package jp.co.tis.climate.albumweb.service;
 
 import jp.co.tis.climate.albumweb.dao.UserDao;
-import jp.co.tis.climate.albumweb.dto.PersonalPart;
+import jp.co.tis.climate.albumweb.dto.UserPart;
 import jp.co.tis.climate.albumweb.model.User;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class AlbumService {
      * @param pageNumber 表示するページ。1~
      * @return 検索結果
      */
-    public List<PersonalPart> getPersonalParts(User user, int pageNumber){
+    public List<UserPart> getPersonalParts(User user, int pageNumber){
         int offset = (pageNumber-1) * PERSONAL_PART_NUMBER + 1;
         SelectOptions options = SelectOptions.get().offset(offset).limit(offset + PERSONAL_PART_NUMBER -1).count();
         return userDao.findPersonalPartByPersonal(/*user,*/ /*options*/);

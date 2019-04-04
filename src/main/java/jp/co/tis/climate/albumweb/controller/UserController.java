@@ -1,11 +1,11 @@
 package jp.co.tis.climate.albumweb.controller;
 
-import jp.co.tis.climate.albumweb.dto.PersonalPage;
+import jp.co.tis.climate.albumweb.dto.UserPage;
 import jp.co.tis.climate.albumweb.form.CareerForm;
 import jp.co.tis.climate.albumweb.form.UserForm;
 import jp.co.tis.climate.albumweb.model.Career;
 import jp.co.tis.climate.albumweb.model.User;
-import jp.co.tis.climate.albumweb.service.PersonalService;
+import jp.co.tis.climate.albumweb.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +23,13 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private PersonalService personalService;
+    private UserService userService;
 
     @GetMapping(path = "/view")
     public String view(@RequestParam("userId") Integer albumId,  Model model) {
-        PersonalPage personalPage = personalService.getPersonalPageByPersonalId(albumId); // albumIdがないとエラー
-        model.addAttribute("user", personalPage.getUser());
-        model.addAttribute("histories", personalPage.getHistories());
+        UserPage userPage = userService.getPersonalPageByPersonalId(albumId); // albumIdがないとエラー
+        model.addAttribute("user", userPage.getUser());
+        model.addAttribute("histories", userPage.getHistories());
         return "user/view";
     }
 
@@ -90,7 +90,7 @@ public class UserController {
             }
         }
 
-        personalService.register(user,histories);
+        userService.register(user,histories);
         return "forward:/";
     }
 }

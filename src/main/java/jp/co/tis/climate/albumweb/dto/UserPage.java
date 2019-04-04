@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PersonalPage {
+public class UserPage {
 
     private User user;
 

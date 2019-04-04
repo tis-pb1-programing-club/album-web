@@ -2,7 +2,7 @@ package jp.co.tis.climate.albumweb.service;
 
 import jp.co.tis.climate.albumweb.dao.UserDao;
 import jp.co.tis.climate.albumweb.dao.CareerDao;
-import jp.co.tis.climate.albumweb.dto.PersonalPage;
+import jp.co.tis.climate.albumweb.dto.UserPage;
 import jp.co.tis.climate.albumweb.model.Career;
 import jp.co.tis.climate.albumweb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PersonalService {
+public class UserService {
 
     @Autowired
     private UserDao userDao;
@@ -19,13 +19,13 @@ public class PersonalService {
     @Autowired
     private CareerDao careerDao;
 
-    public PersonalPage getPersonalPageByPersonalId(Integer personalId){
+    public UserPage getPersonalPageByPersonalId(Integer personalId){
         User user = userDao.findPersonalByPersonalId(personalId);
         List<Career> histories = careerDao.findHistoryAllByPersonalId(personalId);
-        PersonalPage personalPage = new PersonalPage();
-        personalPage.setUser(user);
-        personalPage.setHistories(histories);
-        return personalPage;
+        UserPage userPage = new UserPage();
+        userPage.setUser(user);
+        userPage.setHistories(histories);
+        return userPage;
     }
 
     public void register(User user, List<Career> histories){

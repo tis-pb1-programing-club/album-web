@@ -1,2 +1,0 @@
-SELECT * FROM CAREER
-WHERE USER_ID = /*userId*/0
