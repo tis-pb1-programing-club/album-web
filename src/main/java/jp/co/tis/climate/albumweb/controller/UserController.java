@@ -22,6 +22,11 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    /**
+     * 経歴番号の初期値
+     */
+    static final String FIRST_CAREER_ID = "1";
+
     @Autowired
     private UserService userService;
 
@@ -40,7 +45,7 @@ public class UserController {
 
         List<CareerForm> histories = new ArrayList<>();
         CareerForm career = new CareerForm();
-        career.setCareerId("1");
+        career.setCareerId(FIRST_CAREER_ID);
         histories.add(career);
         userForm.setHistories(histories);
 
