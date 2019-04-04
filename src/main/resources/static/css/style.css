@@ -38,3 +38,7 @@ main >.container {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+.hasError {
+    background-color: pink;
+}
