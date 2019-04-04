@@ -30,6 +30,10 @@ img.part{
   background: #eee;
 }
 
+td.user-img{
+    width: 60%;
+}
+
 main >.container {
     padding: 60px 15px 0;
 }
@@ -41,4 +45,8 @@ main >.container {
 
 .hasError {
     background-color: pink;
+}
+
+td textarea {
+    width: 100%;
 }
