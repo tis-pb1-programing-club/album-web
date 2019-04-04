@@ -10,6 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,35 +32,57 @@ public class UserController {
         return "user/view";
     }
 
-    @GetMapping(path="edit")
+    @ModelAttribute
+    @GetMapping(path="/edit")
     public String add(Model model){
-        List<CareerForm> histories = new ArrayList<>();
-        for(int i =0 ; i <5;i++){
-            CareerForm careerForm = new CareerForm();
-            histories.add(careerForm);
-        }
+        UserForm userForm = new UserForm();
 
-        model.addAttribute("histories", histories);
+        List<CareerForm> histories = new ArrayList<>();
+        CareerForm career = new CareerForm();
+        career.setCareerId("1");
+        histories.add(career);
+        userForm.setHistories(histories);
+
+        model.addAttribute("userForm",userForm);
+
         return "user/edit";
     }
 
-    @PostMapping(path="submit")
-    public String submit(@ModelAttribute("UserForm") UserForm userForm, Model model){
+    @RequestMapping(value = "edit", params = "addCareer", method = RequestMethod.POST)
+    public String addCareer(@ModelAttribute("userForm") UserForm userForm, Model model){
+        List<CareerForm> histories = userForm.getHistories();
+        String careerId =String.valueOf(histories.size() + 1);
+
+        CareerForm career = new CareerForm();
+        career.setCareerId(careerId);
+        histories.add(career);
+        userForm.setHistories(histories);
+
+        model.addAttribute("userForm",userForm);
+
+        return "user/edit";
+    }
+
+    @RequestMapping(value = "edit", params = "submit", method = RequestMethod.POST)
+    public String submit(@ModelAttribute("userForm") @Validated UserForm userForm, BindingResult result, Model model){
         ModelMapper modelMapper = new ModelMapper();
 
         User user = new User();
         modelMapper.map(userForm, user);
 
         List<Career> histories = new ArrayList<>();
+
         for(CareerForm careerForm : userForm.getHistories()){
-            Career career = new Career();
-            modelMapper.map(careerForm, career);
-            histories.add(career);
+            // 経歴の内容に記入がない行はDB登録しない。
+            if(careerForm.getEvent() != null) {
+                Career career = new Career();
+                modelMapper.map(careerForm, career);
+                career.setUserId(userForm.getUserId());
+                histories.add(career);
+            }
         }
 
         personalService.register(user,histories);
-        return "user/add";
+        return "forward:/";
     }
-
-
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <form th:action="@{/user/submit}" method="post">
+    <form th:action="@{edit}" method="post" th:object="${userForm}">
     <table class="table table-bordered">
         <tr>
             <th class="table-title" colspan="2">プロフィール</th>
@@ -17,20 +17,23 @@
         </tr>
         <tr>
             <th>氏名</th>
-            <td><input type="text" name="lastName" /><input type="text" name="firstName"/></td>
+            <td>
+                <input type="text" name="lastName" th:field="*{lastName}" />
+                <input type="text" name="firstName" th:field="*{firstName}" />
+            </td>
         </tr>
         <tr>
             <th>社員番号</th>
-            <td><input type="text" name="userId"/></td>
+            <td><input type="text" name="userId" th:field="*{userId}" /></td>
         </tr>
         <tr>
             <th>年次</th>
-            <td><input type="text" name="yearly"/></td>
+            <td><input type="text" name="yearly" th:field="*{yearly}" /></td>
         </tr>
         <tr>
             <th>性別</th>
             <td>
-                <select name="sex">
+                <select name="sex" th:field="*{sex}" >
                     <option value="0">男性</option>
                     <option value="1">女性</option>
                     <option value="*">非公開</option>
@@ -40,7 +43,7 @@
         <tr>
             <th>血液型</th>
             <td>
-                <select name="bloodType">
+                <select name="bloodType" th:field="*{bloodType}" >
                     <option value="0">A型</option>
                     <option value="1">B型</option>
                     <option value="2">O型</option>
@@ -51,15 +54,15 @@
         </tr>
         <tr>
             <th>所属チーム</th>
-            <td><input type="text" name="team"/></td>
+            <td><input type="text" name="team" th:field="*{team}" /></td>
         </tr>
         <tr>
             <th>担当顧客</th>
-            <td><input type="text" name="customer"/></td>
+            <td><input type="text" name="customer" th:field="*{customer}" /></td>
         </tr>
         <tr>
             <th>担当案件</th>
-            <td><input type="text" name="project"/></td>
+            <td><input type="text" name="project" th:field="*{project}" /></td>
         </tr>
         <tr>
             <th>プライベート</th>
@@ -67,12 +70,12 @@
         </tr>
         <tr>
             <td colspan="3">
-                <textarea type="text" name="privateSentence" ></textarea>
+                <textarea type="text" name="privateSentence" th:field="*{privateSentence}" ></textarea>
             </td>
         </tr>
         <tr>
             <th>経歴</th>
-            <th colspan="2"></th>
+            <th colspan="2"><button type="submit" name="addCareer" >行追加</button></th>
         </tr>
         <tr>
             <td colspan="3">
@@ -83,11 +86,12 @@
                         <th class="table-career">出来事</th>
                     </tr>
                     </thead>
-                    <tbody  class="form-group" th:each="career : ${histories}" th:object="${career}">
+                    <tbody  class="form-group" th:each="career,stat : *{histories}" >
                     <tr>
-                        <td><input type="text" th:name="${year}" name="year"></td>
-                        <td><input type="text" th:name="${month}" name="month"></td>
-                        <td><input type="text" th:name="${event}" name="event"></td>
+                        <input type="hidden" th:field="*{histories[__${stat.index}__].careerId}" />
+                        <td><input type="text" th:field="*{histories[__${stat.index}__].year}" ></td>
+                        <td><input type="text" th:field="*{histories[__${stat.index}__].month}" ></td>
+                        <td><input type="text" th:field="*{histories[__${stat.index}__].event}" ></td>
                     </tr>
                     </tbody>
                 </table>
@@ -99,11 +103,11 @@
         </tr>
         <tr>
             <td colspan="3">
-                <textarea type="text" name="comment" ></textarea>
+                <textarea type="text" name="comment" th:field="*{comment}" ></textarea>
             </td>
         </tr>
     </table>
-    <button type="submit">ユーザー登録</button>
+    <button type="submit" name="submit">ユーザー登録</button>
     </form>
 </div>
 </body>
