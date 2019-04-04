@@ -5,19 +5,19 @@ import org.seasar.doma.*;
 import org.seasar.doma.jdbc.entity.NamingType;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE)
-@Table(name="HISTORY")
+@Table(name="CAREER")
 @Data
 public class Career {
 
     @Id
-    private Integer userId;
+    private String userId;
 
     @Id
-    private Integer careerId;
+    private String careerId;
 
-    private Short year;
+    private String year;
 
-    private Byte month;
+    private String month;
 
     private String event;
 }

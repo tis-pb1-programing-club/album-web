@@ -17,11 +17,11 @@ public class PersonalService {
     private UserDao userDao;
 
     @Autowired
-    private CareerDao historyDao;
+    private CareerDao careerDao;
 
     public PersonalPage getPersonalPageByPersonalId(Integer personalId){
         User user = userDao.findPersonalByPersonalId(personalId);
-        List<Career> histories = historyDao.findHistoryAllByPersonalId(personalId);
+        List<Career> histories = careerDao.findHistoryAllByPersonalId(personalId);
         PersonalPage personalPage = new PersonalPage();
         personalPage.setUser(user);
         personalPage.setHistories(histories);
@@ -31,7 +31,7 @@ public class PersonalService {
     public void register(User user, List<Career> histories){
         userDao.insert(user);
         for(Career career :histories){
-            historyDao.insert(career);
+            careerDao.insert(career);
         }
     }
 }

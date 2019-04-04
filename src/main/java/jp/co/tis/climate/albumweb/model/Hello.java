@@ -13,7 +13,7 @@ public class Hello {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    private String id;
 
     private String message;
 }

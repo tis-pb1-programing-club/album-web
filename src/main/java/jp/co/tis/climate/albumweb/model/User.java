@@ -14,17 +14,17 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     @Id
-    private Integer userId;
+    private String userId;
 
     private String lastName;
 
     private String firstName;
 
-    private Byte yearly;
+    private String yearly;
 
-    private Byte sex;
+    private String sex;
 
-    private Byte bloodType;
+    private String bloodType;
 
     private String team;
 

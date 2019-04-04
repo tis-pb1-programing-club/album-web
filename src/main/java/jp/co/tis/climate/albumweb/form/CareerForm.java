@@ -14,9 +14,9 @@ public class CareerForm {
     @NotEmpty
     String careerId;
 
-    Short year;
+    String year;
 
-    Byte month;
+    String month;
 
     String event;
 }
