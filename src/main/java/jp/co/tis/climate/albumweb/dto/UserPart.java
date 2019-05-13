@@ -12,6 +12,8 @@ import org.seasar.doma.jdbc.entity.NamingType;
 public class UserPart {
 
     private Integer userId;
+    
+    private String profileImageFilename;
 
     private String lastName;
 
