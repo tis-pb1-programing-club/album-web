@@ -21,7 +21,7 @@ public class UserService {
 
     public UserPage getPersonalPageByPersonalId(Integer personalId){
         User user = userDao.findPersonalByPersonalId(personalId);
-        List<Career> histories = careerDao.findHistoryAllByPersonalId(personalId);
+        List<Career> histories = careerDao.findHistoryAllByUserId(personalId);
         UserPage userPage = new UserPage();
         userPage.setUser(user);
         userPage.setHistories(histories);

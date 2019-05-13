@@ -14,9 +14,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
@@ -68,6 +74,33 @@ public class UserController {
 
         return "user/edit";
     }
+    
+    @RequestMapping(value = "edit", params = "addImage", method = RequestMethod.POST)
+    public String addProfileImage(@ModelAttribute("userForm") UserForm userForm, @RequestParam("profileImage") MultipartFile mpf, Model model){
+    	if(mpf.isEmpty()) {
+    		model.addAttribute("userForm",userForm);
+    		return "user/edit";
+    	}
+        String uploadFilename = "testfilename.jpg";
+
+        try {
+        	File uploadFile = new File("/static/image/" + uploadFilename);
+        	byte[] bytes = mpf.getBytes();
+        	BufferedOutputStream uploadFileStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
+        	uploadFileStream.write(bytes);
+        	uploadFileStream.close();
+        } catch (IOException e) {
+    		model.addAttribute("userForm",userForm);
+    		return "user/edit";
+        }
+
+        model.addAttribute("uploadFilename",uploadFilename);
+        model.addAttribute("userForm",userForm);
+
+        return "user/edit";
+    }
+   
+
 
     @RequestMapping(value = "edit", params = "submit", method = RequestMethod.POST)
     public String submit(@ModelAttribute("userForm") @Validated UserForm userForm, BindingResult result, Model model){
@@ -80,20 +113,15 @@ public class UserController {
 
         ModelMapper modelMapper = new ModelMapper();
 
-        User user = new User();
-        modelMapper.map(userForm, user);
+        User user = modelMapper.map(userForm, User.class);
 
-        List<Career> histories = new ArrayList<>();
-
-        for(CareerForm careerForm : userForm.getHistories()){
-            // 経歴の内容に記入がない行はDB登録しない。
-            if(careerForm.getEvent() != null) {
-                Career career = new Career();
-                modelMapper.map(careerForm, career);
-                career.setUserId(userForm.getUserId());
-                histories.add(career);
-            }
-        }
+        List<Career> histories = userForm.getHistories().stream()
+        		.filter(h -> h.getEvent() != null)
+        		.map(h -> {
+        			Career career = modelMapper.map(h, Career.class);
+        			career.setUserId(userForm.getUserId());
+        			return career;
+        		}).collect(Collectors.toList());
 
         userService.register(user,histories);
         return "forward:/";

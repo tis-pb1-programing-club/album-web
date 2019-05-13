@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <form th:action="@{edit}" method="post" th:object="${userForm}">
+    <form th:action="@{edit}" enctype="multipart/form-data" method="post" th:object="${userForm}">
     <ui>
         <li th:each="error : ${#fields.detailedErrors()}" >
             <span th:text="${error.message}">Error message</span>
@@ -18,7 +18,15 @@
         <tr>
             <th class="table-title" colspan="2">プロフィール</th>
             <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
-            <td class="user-img" rowspan="9"><img src="../../static/image/0.jpg"></td>
+            <td class="user-img" rowspan="9">
+            	<div th:unless="${#strings.isEmpty(uploadFilename)}">
+            		<img th:src="@{/image/{uf}(uf=${uploadFilename})}" />
+            	</div>
+            	<br>
+            	<input type="file" name="profileImage" />
+            	<br>
+				<button type="submit" name="addImage" >画像を追加</button>
+            </td>
         </tr>
         <tr>
             <th>氏名</th>
