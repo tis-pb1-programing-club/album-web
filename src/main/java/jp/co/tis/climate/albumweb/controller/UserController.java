@@ -138,6 +138,6 @@ public class UserController {
         		}).collect(Collectors.toList());
 
         userService.register(user,histories);
-        return "forward:/";
+        return "redirect:/";
     }
 }
