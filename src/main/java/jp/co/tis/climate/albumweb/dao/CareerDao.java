@@ -13,7 +13,7 @@ import java.util.List;
 public interface CareerDao {
 
     @Select
-    List<Career> findHistoryAllByUserId(Integer userId);
+    List<Career> findHistoryAllByUserId(String userId);
 
     @Insert
     int insert(Career career);

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -19,7 +20,7 @@ public class UserService {
     @Autowired
     private CareerDao careerDao;
 
-    public UserPage getPersonalPageByPersonalId(Integer personalId){
+    public UserPage getPersonalPageByPersonalId(String personalId){
         User user = userDao.findPersonalByPersonalId(personalId);
         List<Career> histories = careerDao.findHistoryAllByUserId(personalId);
         UserPage userPage = new UserPage();
@@ -28,6 +29,12 @@ public class UserService {
         return userPage;
     }
 
+    public boolean isRegisteredUser(String personalId) {
+    	User user = userDao.findPersonalByPersonalId(personalId);
+    	return Objects.nonNull(user);
+    }
+    
+    
     public void register(User user, List<Career> histories){
         userDao.insert(user);
         for(Career career :histories){

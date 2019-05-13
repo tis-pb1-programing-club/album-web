@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -39,7 +41,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(path = "/view")
-    public String view(@RequestParam("userId") Integer albumId,  Model model) {
+    public String view(@RequestParam("userId") String albumId,  Model model) {
         UserPage userPage = userService.getPersonalPageByPersonalId(albumId); // albumIdがないとエラー
         model.addAttribute("user", userPage.getUser());
         model.addAttribute("histories", userPage.getHistories());
@@ -129,6 +131,12 @@ public class UserController {
         ModelMapper modelMapper = new ModelMapper();
 
         User user = modelMapper.map(userForm, User.class);
+        String userId = user.getUserId();
+        if (userService.isRegisteredUser(userId)) {
+        	String errorMessage = "userId \"" + userId + "\" already exists.";
+        	model.addAttribute("alreadyExistUserError",errorMessage);
+        	return "user/edit";
+        }
 
         List<Career> histories = userForm.getHistories().stream()
         		.filter(h -> h.getEvent() != null)

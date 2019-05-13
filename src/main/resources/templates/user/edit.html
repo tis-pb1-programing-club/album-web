@@ -13,13 +13,13 @@
         <li th:each="error : ${#fields.detailedErrors()}" >
             <span th:text="${error.message}">Error message</span>
         </li>
+       	<span th:text="${alreadyExistUserError}">ExistUserError</span>
     </ui>
     <table class="table table-bordered">
         <tr>
             <th class="table-title" colspan="2">プロフィール</th>
             <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
             <td class="user-img" rowspan="9">
-				<p th:text="@{/image/{uf}(uf=*{profileImageFilename})}"> text<p/>
             	<div th:unless="${#strings.isEmpty(userForm.profileImageFilename)}">
             		<img th:src="@{/image/{uf}(uf=*{profileImageFilename})}" />
 					<input type="hidden" name="profileImageFilename" th:value="*{profileImageFilename}" />

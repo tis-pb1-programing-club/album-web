@@ -17,7 +17,7 @@ public interface UserDao {
     List<User> findAll();
 
     @Select
-    User findPersonalByPersonalId(Integer userId);
+    User findPersonalByPersonalId(String userId);
 
     @Select
     List<UserPart> findPersonalPartByPersonal(/*User user,*/ /*SelectOptions options*/);
