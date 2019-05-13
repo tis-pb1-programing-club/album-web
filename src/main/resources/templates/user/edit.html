@@ -22,6 +22,10 @@
 				<p th:text="@{/image/{uf}(uf=*{profileImageFilename})}"> text<p/>
             	<div th:unless="${#strings.isEmpty(userForm.profileImageFilename)}">
             		<img th:src="@{/image/{uf}(uf=*{profileImageFilename})}" />
+					<input type="hidden" name="profileImageFilename" th:value="*{profileImageFilename}" />
+            	</div>
+            	<div th:if="${#strings.isEmpty(userForm.profileImageFilename)}">
+					<input type="hidden" name="profileImageFilename" value="" />
             	</div>
             	<br>
             	<input type="file" name="profileImage" />

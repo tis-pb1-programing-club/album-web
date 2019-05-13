@@ -7,6 +7,8 @@ import org.seasar.doma.Table;
 import org.seasar.doma.jdbc.entity.NamingType;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE)
@@ -18,12 +20,18 @@ public class User implements Serializable {
     @NotEmpty
     private String userId;
 
+    @NotNull
+    private String profileImageFilename;
+
+    @NotEmpty
     private String lastName;
 
+    @NotEmpty
     private String firstName;
 
     private String yearly;
 
+    @NotEmpty
     private String sex;
 
     private String bloodType;

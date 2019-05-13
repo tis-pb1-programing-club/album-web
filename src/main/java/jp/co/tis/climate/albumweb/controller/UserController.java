@@ -20,6 +20,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,10 +83,21 @@ public class UserController {
     		model.addAttribute("userForm",userForm);
     		return "user/edit";
     	}
-        String uploadFilename = "testfilename.jpg";
+
+    	String profileImageFilename = userForm.getProfileImageFilename();
+    	System.out.println(profileImageFilename);
+        if(profileImageFilename.isEmpty()) {
+        	//d初回の追加時はIDも不明なので、一意なファイル名を付けるために時刻を採用
+        	//dこのファイル名で、各々のプロフィール画像を識別する
+        	//TODO: 時刻ではなく、別のID採番方法？でファイル名を付けたい
+        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_nnnnnnnnn");
+        	String uploadedDateTimeStr = LocalDateTime.now().format(formatter);
+        	profileImageFilename = uploadedDateTimeStr + ".jpg";
+        }
 
         try {
-        	File uploadFile = new File("/static/image/" + uploadFilename);
+        	//TODO: 画像の保存先をapplication.ymlに外だしする
+        	File uploadFile = new File("/static/image/" + profileImageFilename);
         	byte[] bytes = mpf.getBytes();
         	BufferedOutputStream uploadFileStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
         	uploadFileStream.write(bytes);
@@ -94,7 +107,7 @@ public class UserController {
     		return "user/edit";
         }
 
-        userForm.setProfileImageFilename(uploadFilename);
+        userForm.setProfileImageFilename(profileImageFilename);
 
         model.addAttribute("userForm",userForm);
 

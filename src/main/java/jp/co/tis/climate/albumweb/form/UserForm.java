@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -17,37 +18,34 @@ public class UserForm {
     @Pattern(regexp="[kK0-9][0-9]{5}")
     private String userId;
 
-    @NotEmpty
+    @NotNull
+    @Size(min=1,max=50)
     private String profileImageFilename;
     
     @NotEmpty
+    @Size(min=1,max=20)
     private String lastName;
 
     @NotEmpty
+    @Size(min=1,max=20)
     private String firstName;
 
-    @NotEmpty
     @Size(min=1,max=2)
     private String yearly;
 
     @NotEmpty
     private String sex;
 
-    @NotEmpty
     private String bloodType;
 
-    @NotEmpty
     private String team;
 
-    @NotEmpty
     private String customer;
 
-    @NotEmpty
     private String project;
 
     private String privateSentence;
 
-    @NotEmpty
     private String comment;
 
     @Valid
