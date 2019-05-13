@@ -18,6 +18,9 @@ public class UserForm {
     private String userId;
 
     @NotEmpty
+    private String profileImageFilename;
+    
+    @NotEmpty
     private String lastName;
 
     @NotEmpty

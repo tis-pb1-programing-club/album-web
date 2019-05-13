@@ -19,8 +19,9 @@
             <th class="table-title" colspan="2">プロフィール</th>
             <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
             <td class="user-img" rowspan="9">
-            	<div th:unless="${#strings.isEmpty(uploadFilename)}">
-            		<img th:src="@{/image/{uf}(uf=${uploadFilename})}" />
+				<p th:text="@{/image/{uf}(uf=*{profileImageFilename})}"> text<p/>
+            	<div th:unless="${#strings.isEmpty(userForm.profileImageFilename)}">
+            		<img th:src="@{/image/{uf}(uf=*{profileImageFilename})}" />
             	</div>
             	<br>
             	<input type="file" name="profileImage" />

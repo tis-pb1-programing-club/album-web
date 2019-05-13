@@ -94,7 +94,8 @@ public class UserController {
     		return "user/edit";
         }
 
-        model.addAttribute("uploadFilename",uploadFilename);
+        userForm.setProfileImageFilename(uploadFilename);
+
         model.addAttribute("userForm",userForm);
 
         return "user/edit";
