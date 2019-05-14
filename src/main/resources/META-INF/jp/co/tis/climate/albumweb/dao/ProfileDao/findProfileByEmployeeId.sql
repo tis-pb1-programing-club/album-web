@@ -1,0 +1,2 @@
+SELECT * FROM PROFILE
+WHERE EMPLOYEE_ID = /*employeeId*/0

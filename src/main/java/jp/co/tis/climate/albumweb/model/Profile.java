@@ -12,13 +12,13 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE)
-@Table(name="USER")
+@Table(name="PROFILE")
 @Data
-public class User implements Serializable {
+public class Profile implements Serializable {
 
     @Id
     @NotEmpty
-    private String userId;
+    private String employeeId;
 
     @NotNull
     private String profileImageFilename;

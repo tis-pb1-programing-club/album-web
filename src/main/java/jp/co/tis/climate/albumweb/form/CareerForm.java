@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 public class CareerForm {
     @NotEmpty
-    @Pattern(regexp="[0-9]*")
+    @Pattern(regexp="[1-9][0-9]?")
     String careerId;
 
     String year;

@@ -8,23 +8,23 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <form th:action="@{edit}" enctype="multipart/form-data" method="post" th:object="${userForm}">
+    <form th:action="@{/album/newpage}" enctype="multipart/form-data" method="post" th:object="${profileForm}">
     <ui>
         <li th:each="error : ${#fields.detailedErrors()}" >
             <span th:text="${error.message}">Error message</span>
         </li>
-       	<span th:text="${alreadyExistUserError}">ExistUserError</span>
+       	<span th:text="${profileAlreadyExistError}">ExistUserError</span>
     </ui>
     <table class="table table-bordered">
         <tr>
             <th class="table-title" colspan="2">プロフィール</th>
             <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
             <td class="user-img" rowspan="9">
-            	<div th:unless="${#strings.isEmpty(userForm.profileImageFilename)}">
+            	<div th:unless="${#strings.isEmpty(profileForm.profileImageFilename)}">
             		<img th:src="@{/image/{uf}(uf=*{profileImageFilename})}" />
 					<input type="hidden" name="profileImageFilename" th:value="*{profileImageFilename}" />
             	</div>
-            	<div th:if="${#strings.isEmpty(userForm.profileImageFilename)}">
+            	<div th:if="${#strings.isEmpty(profileForm.profileImageFilename)}">
 					<input type="hidden" name="profileImageFilename" value="" />
             	</div>
             	<br>
@@ -42,7 +42,7 @@
         </tr>
         <tr>
             <th>社員番号</th>
-            <td><input type="text" name="userId" th:field="*{userId}" th:errorclass="hasError" /></td>
+            <td><input type="text" name="employeeId" th:field="*{employeeId}" th:errorclass="hasError" /></td>
         </tr>
         <tr>
             <th>年次</th>
@@ -104,12 +104,12 @@
                         <th class="table-career">出来事</th>
                     </tr>
                     </thead>
-                    <tbody  class="form-group" th:each="career,stat : *{histories}" >
+                    <tbody  class="form-group" th:each="career,stat : *{allCareers}" >
                     <tr>
-                        <input type="hidden" th:field="*{histories[__${stat.index}__].careerId}" th:errorclass="hasError" />
-                        <td><input type="text" th:field="*{histories[__${stat.index}__].year}" th:errorclass="hasError" ></td>
-                        <td><input type="text" th:field="*{histories[__${stat.index}__].month}" th:errorclass="hasError" ></td>
-                        <td><input style="width:100%" type="text" th:field="*{histories[__${stat.index}__].event}" th:errorclass="hasError" ></td>
+                        <input type="hidden" th:field="*{allCareers[__${stat.index}__].careerId}" th:errorclass="hasError" />
+                        <td><input type="text" th:field="*{allCareers[__${stat.index}__].year}" th:errorclass="hasError" ></td>
+                        <td><input type="text" th:field="*{allCareers[__${stat.index}__].month}" th:errorclass="hasError" ></td>
+                        <td><input style="width:100%" type="text" th:field="*{allCareers[__${stat.index}__].event}" th:errorclass="hasError" ></td>
                     </tr>
                     </tbody>
                 </table>

@@ -8,6 +8,10 @@ spring:
     username: sa
     password:
     sqlScriptEncoding: UTF-8
+  messages:
+    basename: messages
+    encoding: UTF-8
+  
   resources:
     static-locations:
     - classpath:/META-INF/resources/
@@ -15,3 +19,7 @@ spring:
     - classpath:/static/
     - classpath:/public/
     - file:/static
+    
+fuudoapp:
+  album:
+    imageDirectory: C:\static\image\

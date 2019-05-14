@@ -1,2 +1,0 @@
-SELECT * FROM USER
-WHERE USER_ID = /*userId*/0

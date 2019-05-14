@@ -52,7 +52,7 @@
         <div class="container">
 
             <div class="row" th:remove="all-but-first">
-                <div class="col-md-4" th:each="part : ${userParts}">
+                <div class="col-md-4" th:each="part : ${profileCards}">
                     <div class="card mb-4 shadow-sm">
                         <img class="part" src="../../static/image/0.jpg" th:src="@{'/image/' + ${part.profileImageFilename}}">
                         <div class="card-body">
@@ -60,7 +60,7 @@
                             <p th:text="${part.comment}">よろしくお願いしますニャン</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a th:href="@{/user/view(userId=${part.userId})}">
+                                    <a th:href="@{/user/view(employeeId=${part.employeeId})}">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" >View</button>
                                     </a>
                                 </div>

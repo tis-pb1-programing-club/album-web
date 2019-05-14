@@ -13,12 +13,12 @@ import java.util.List;
 
 @Setter
 @Getter
-public class UserForm {
+public class ProfileForm {
 	//TODO: パートナさんにも対応できるようにする。現状、数値以外が入るとdomaで変換エラーが発生
 	//@Pattern(regexp="[kK\\d]\\d{5}")
     @NotEmpty
     @Pattern(regexp="\\d{6}")
-    private String userId;
+    private String employeeId;
 
     @NotNull
     @Size(min=0,max=50)
@@ -58,5 +58,5 @@ public class UserForm {
     private String comment;
 
     @Valid
-    private List<CareerForm> histories;
+    private List<CareerForm> allCareers;
 }

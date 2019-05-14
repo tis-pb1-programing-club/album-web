@@ -1,15 +1,15 @@
 package jp.co.tis.climate.albumweb.dto;
 
-import jp.co.tis.climate.albumweb.model.User;
+import jp.co.tis.climate.albumweb.model.Profile;
 import jp.co.tis.climate.albumweb.model.Career;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class UserPage {
+public class PageContent {
 
-    private User user;
+    private Profile profile;
 
-    private List<Career> histories;
+    private List<Career> allCareers;
 }

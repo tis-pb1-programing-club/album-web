@@ -14,7 +14,7 @@ import org.seasar.doma.jdbc.entity.NamingType;
 public class Career {
 
     @Id
-    private String userId;
+    private String employeeId;
 
     @Id
     private String careerId;
