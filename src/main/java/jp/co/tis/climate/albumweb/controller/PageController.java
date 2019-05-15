@@ -6,6 +6,7 @@ import jp.co.tis.climate.albumweb.form.CareerForm;
 import jp.co.tis.climate.albumweb.form.ProfileForm;
 import jp.co.tis.climate.albumweb.model.Career;
 import jp.co.tis.climate.albumweb.model.Profile;
+import jp.co.tis.climate.albumweb.service.AlbumService;
 import jp.co.tis.climate.albumweb.service.PageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class PageController {
     static final String FIRST_CAREER_ID = "1";
 
     @Autowired
+    private AlbumService albumService;
+
+    @Autowired
     private PageService pageService;
     
     @Autowired
@@ -46,6 +50,12 @@ public class PageController {
     @Autowired
     private MessageSource msg;
 
+    @GetMapping
+    public String getAlbum(Model model){
+        model.addAttribute("profileCards", albumService.getProfileCards(new Profile(), 1));
+        return "album/list";
+    }
+    
     @GetMapping("/{employeeId}")
     public String view(@PathVariable String employeeId,  Model model) throws Exception {
         if(! pageService.isRegisteredProfile(employeeId)) {
@@ -54,7 +64,7 @@ public class PageController {
         PageContent pageContent = pageService.getPageContentByEmployeeId(employeeId);
         model.addAttribute("profile", pageContent.getProfile());
        	model.addAttribute("allCareers", pageContent.getAllCareers());
-        return "user/view";
+        return "album/view";
     }
 
     @ModelAttribute
@@ -70,7 +80,7 @@ public class PageController {
 
         model.addAttribute("profileForm",profileForm);
 
-        return "user/edit";
+        return "album/newpage";
     }
 
     @PostMapping(value = "/newpage", params = "addCareer")
@@ -85,14 +95,14 @@ public class PageController {
 
         model.addAttribute("profileForm",profileForm);
 
-        return "user/edit";
+        return "album/newpage";
     }
     
     @PostMapping(value = "/newpage", params = "addImage")
     public String addProfileImage(@ModelAttribute("profileForm") ProfileForm profileForm, @RequestParam("profileImage") MultipartFile mpf, Model model){
     	if(mpf.isEmpty()) {
     		model.addAttribute("profileForm",profileForm);
-    		return "user/edit";
+    		return "album/newpage";
     	}
 
     	String profileImageFilename = profileForm.getProfileImageFilename();
@@ -111,14 +121,14 @@ public class PageController {
         } catch (IOException e) {
         	//TODO: IOException発生時の挙動を実装する
     		model.addAttribute("profileForm",profileForm);
-    		return "user/edit";
+    		return "album/newpage";
         }
 
         profileForm.setProfileImageFilename(profileImageFilename);
 
         model.addAttribute("profileForm",profileForm);
 
-        return "user/edit";
+        return "album/newpage";
     }
 
     @PostMapping(value = "/newpage", params = "submit")
@@ -127,7 +137,7 @@ public class PageController {
             for(FieldError error:result.getFieldErrors()){
                 System.out.println(error.getField() + " : " + error.getDefaultMessage());
             }
-            return "user/edit";
+            return "album/newpage";
         }
 
         ModelMapper modelMapper = new ModelMapper();
@@ -138,7 +148,7 @@ public class PageController {
         	String[] phAry = new String[] {employeeId.toString()};
         	String errorMsg = msg.getMessage("profileAlreadyExistMsg", phAry, Locale.JAPANESE);
         	model.addAttribute("profileAlreadyExistError",errorMsg);
-        	return "user/edit";
+        	return "album/newpage";
         }
 
         List<Career> allCareers = profileForm.getAllCareers().stream()
@@ -150,7 +160,7 @@ public class PageController {
         		}).collect(Collectors.toList());
 
         pageService.register(profile,allCareers);
-        return "redirect:/";
+        return "redirect:/album";
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

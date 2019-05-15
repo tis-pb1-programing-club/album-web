@@ -60,7 +60,7 @@
                             <p th:text="${part.comment}">よろしくお願いしますニャン</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a th:href="@{/user/view(employeeId=${part.employeeId})}">
+                                    <a th:href="@{/album/{employeeId}(employeeId=${part.employeeId})}">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" >View</button>
                                     </a>
                                 </div>
