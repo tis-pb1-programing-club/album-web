@@ -6,7 +6,6 @@ import jp.co.tis.climate.albumweb.form.CareerForm;
 import jp.co.tis.climate.albumweb.form.ProfileForm;
 import jp.co.tis.climate.albumweb.model.Career;
 import jp.co.tis.climate.albumweb.model.Profile;
-import jp.co.tis.climate.albumweb.service.AlbumService;
 import jp.co.tis.climate.albumweb.service.PageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
