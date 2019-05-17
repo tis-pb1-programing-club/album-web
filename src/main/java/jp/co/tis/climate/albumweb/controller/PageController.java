@@ -38,8 +38,6 @@ public class PageController {
      */
     static final String FIRST_CAREER_ID = "1";
 
-    @Autowired
-    private AlbumService albumService;
 
     @Autowired
     private PageService pageService;
@@ -50,12 +48,6 @@ public class PageController {
     @Autowired
     private MessageSource msg;
 
-    @GetMapping
-    public String getAlbum(Model model){
-        model.addAttribute("profileCards", albumService.getProfileCards(new Profile(), 1));
-        return "album/list";
-    }
-    
     @GetMapping("/{employeeId}")
     public String view(@PathVariable String employeeId,  Model model) throws Exception {
         if(! pageService.isRegisteredProfile(employeeId)) {

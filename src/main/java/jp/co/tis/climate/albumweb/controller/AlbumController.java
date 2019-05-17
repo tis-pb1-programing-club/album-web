@@ -10,4 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AlbumController {
 
+    @Autowired
+    private AlbumService albumService;
+
+    @GetMapping
+    public String getAlbum(Model model){
+        model.addAttribute("profileCards", albumService.getProfileCards(new Profile(), 1));
+        return "album/list";
+    }
+    
 }
