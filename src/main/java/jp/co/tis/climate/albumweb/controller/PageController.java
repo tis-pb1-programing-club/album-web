@@ -14,9 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -48,9 +48,9 @@ public class PageController {
     private MessageSource msg;
 
     @GetMapping("/{employeeId}")
-    public String view(@PathVariable String employeeId,  Model model) throws Exception {
-        if(! pageService.isRegisteredProfile(employeeId)) {
-        	throw new Exception();
+    public String view(@PathVariable String employeeId,  Model model) throws HttpClientErrorException.NotFound {
+    	if(!pageService.isRegisteredProfile(employeeId)) {
+        	throw HttpClientErrorException.create(HttpStatus.NOT_FOUND, null, null, null, null);
         }
         PageContent pageContent = pageService.getPageContentByEmployeeId(employeeId);
         model.addAttribute("profile", pageContent.getProfile());
@@ -75,9 +75,9 @@ public class PageController {
     }
 
     @PostMapping(value = "/newpage", params = "addCareer")
-    public String addCareer(@ModelAttribute("profileForm") ProfileForm profileForm, Model model){
+    public String addCareer(@ModelAttribute ProfileForm profileForm, Model model){
         List<CareerForm> allCareers = profileForm.getAllCareers();
-        String careerId =String.valueOf(allCareers.size() + 1);
+        String careerId = String.valueOf(allCareers.size() + 1);
 
         CareerForm career = new CareerForm();
         career.setCareerId(careerId);
@@ -90,7 +90,7 @@ public class PageController {
     }
     
     @PostMapping(value = "/newpage", params = "addImage")
-    public String addProfileImage(@ModelAttribute("profileForm") ProfileForm profileForm, @RequestParam("profileImage") MultipartFile mpf, Model model){
+    public String addProfileImage(@ModelAttribute ProfileForm profileForm, @RequestParam("profileImage") MultipartFile mpf, Model model){
     	if(mpf.isEmpty()) {
     		model.addAttribute("profileForm",profileForm);
     		return "album/newpage";
@@ -99,7 +99,7 @@ public class PageController {
     	String profileImageFilename = profileForm.getProfileImageFilename();
         if(profileImageFilename.isEmpty()) {
         	//d初回の追加時はIDも不明なので、一意なファイル名を付けるために時刻を採用
-        	//dこのファイル名で、各々のプロフィール画像を識別する
+        	//このファイル名で、各々のプロフィール画像を識別する
         	//TODO: 時刻ではなく、別のID採番方法？でファイル名を付けたい
         	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_nnnnnnnnn");
         	String uploadedDateTimeStr = LocalDateTime.now().format(formatter);
@@ -123,11 +123,8 @@ public class PageController {
     }
 
     @PostMapping(value = "/newpage", params = "submit")
-    public String submit(@ModelAttribute("profileForm") @Validated ProfileForm profileForm, BindingResult result, Model model){
+    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result, Model model){
         if(result.hasErrors()){
-            for(FieldError error:result.getFieldErrors()){
-                System.out.println(error.getField() + " : " + error.getDefaultMessage());
-            }
             return "album/newpage";
         }
 
@@ -152,13 +149,6 @@ public class PageController {
 
         pageService.register(profile,allCareers);
         return "redirect:/album";
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(Exception.class)
-    public String NotFoundHandler() {
-    	//TODO: ちゃんとExceptionクラス作る。
-    	return "404 not found!!!!!!!!!!!!!";
     }
 
 }

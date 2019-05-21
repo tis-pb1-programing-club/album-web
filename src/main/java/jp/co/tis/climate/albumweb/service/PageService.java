@@ -37,8 +37,6 @@ public class PageService {
     
     public void register(Profile profile, List<Career> allCareers){
         profileDao.insert(profile);
-        for(Career career :allCareers){
-            careerDao.insert(career);
-        }
+        careerDao.batchInsert(allCareers);
     }
 }
