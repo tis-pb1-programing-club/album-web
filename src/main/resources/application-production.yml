@@ -10,13 +10,6 @@ spring:
   messages:
     basename: messages
     encoding: UTF-8
-  resources:
-    static-locations:
-    - classpath:/META-INF/resources/
-    - classpath:/resources/
-    - classpath:/static/
-    - classpath:/public/
-    - file:/static
 
 doma:
   dialect: postgres
