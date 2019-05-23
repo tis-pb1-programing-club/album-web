@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,123 +33,121 @@ import java.util.stream.Collectors;
 @RequestMapping("album")
 public class PageController {
 
-    /**
-     * 経歴番号の初期値
-     */
-    static final String FIRST_CAREER_ID = "1";
+	/**
+	 * 経歴番号の初期値
+	 */
+	static final String FIRST_CAREER_ID = "1";
 
+	@Autowired
+	private PageService pageService;
 
-    @Autowired
-    private PageService pageService;
-    
-    @Autowired
-    private AlbumConfig albumConfig;
-    
-    @Autowired
-    private MessageSource msg;
+	@Autowired
+	private AlbumConfig albumConfig;
 
-    @GetMapping("/{employeeId}")
-    public String view(@PathVariable String employeeId,  Model model) throws HttpClientErrorException.NotFound {
-    	if(!pageService.isRegisteredProfile(employeeId)) {
-        	throw HttpClientErrorException.create(HttpStatus.NOT_FOUND, null, null, null, null);
-        }
-        PageContent pageContent = pageService.getPageContentByEmployeeId(employeeId);
-        model.addAttribute("profile", pageContent.getProfile());
-       	model.addAttribute("allCareers", pageContent.getAllCareers());
-        return "album/view";
-    }
+	@Autowired
+	private MessageSource msg;
 
-    @ModelAttribute
-    @GetMapping("/newpage")
-    public String add(Model model){
-        ProfileForm profileForm = new ProfileForm();
+	@GetMapping("/{employeeId}")
+	public String view(@PathVariable String employeeId, Model model) throws HttpClientErrorException.NotFound {
+		if (!pageService.isRegisteredProfile(employeeId)) {
+			throw HttpClientErrorException.create(HttpStatus.NOT_FOUND, null, null, null, null);
+		}
+		PageContent pageContent = pageService.getPageContentByEmployeeId(employeeId);
+		model.addAttribute("profile", pageContent.getProfile());
+		model.addAttribute("allCareers", pageContent.getAllCareers());
+		return "album/view";
+	}
 
-        List<CareerForm> allCareers = new ArrayList<>();
-        CareerForm career = new CareerForm();
-        career.setCareerId(FIRST_CAREER_ID);
-        allCareers.add(career);
-        profileForm.setAllCareers(allCareers);
+	@ModelAttribute
+	@GetMapping("/newpage")
+	public String add(Model model) {
+		ProfileForm profileForm = new ProfileForm();
 
-        model.addAttribute("profileForm",profileForm);
+		List<CareerForm> allCareers = new ArrayList<>();
+		CareerForm career = new CareerForm();
+		career.setCareerId(FIRST_CAREER_ID);
+		allCareers.add(career);
+		profileForm.setAllCareers(allCareers);
 
-        return "album/newpage";
-    }
+		model.addAttribute("profileForm", profileForm);
 
-    @PostMapping(value = "/newpage", params = "addCareer")
-    public String addCareer(@ModelAttribute ProfileForm profileForm, Model model){
-        List<CareerForm> allCareers = profileForm.getAllCareers();
-        String careerId = String.valueOf(allCareers.size() + 1);
+		return "album/newpage";
+	}
 
-        CareerForm career = new CareerForm();
-        career.setCareerId(careerId);
-        allCareers.add(career);
-        profileForm.setAllCareers(allCareers);
+	@PostMapping(value = "/newpage", params = "addCareer")
+	public String addCareer(@ModelAttribute ProfileForm profileForm, Model model) {
+		List<CareerForm> allCareers = profileForm.getAllCareers();
+		String careerId = String.valueOf(allCareers.size() + 1);
 
-        model.addAttribute("profileForm",profileForm);
+		CareerForm career = new CareerForm();
+		career.setCareerId(careerId);
+		allCareers.add(career);
+		profileForm.setAllCareers(allCareers);
 
-        return "album/newpage";
-    }
-    
-    @PostMapping(value = "/newpage", params = "addImage")
-    public String addProfileImage(@ModelAttribute ProfileForm profileForm, @RequestParam("profileImage") MultipartFile mpf, Model model){
-    	if(mpf.isEmpty()) {
-    		model.addAttribute("profileForm",profileForm);
-    		return "album/newpage";
-    	}
+		model.addAttribute("profileForm", profileForm);
 
-    	String profileImageFilename = profileForm.getProfileImageFilename();
-        if(profileImageFilename.isEmpty()) {
-        	//d初回の追加時はIDも不明なので、一意なファイル名を付けるために時刻を採用
-        	//このファイル名で、各々のプロフィール画像を識別する
-        	//TODO: 時刻ではなく、別のID採番方法？でファイル名を付けたい
-        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_nnnnnnnnn");
-        	String uploadedDateTimeStr = LocalDateTime.now().format(formatter);
-        	profileImageFilename = uploadedDateTimeStr + ".jpg";
-        }
+		return "album/newpage";
+	}
 
-        try {
-        	File uploadFile = new File(albumConfig.getImageDirectory() + profileImageFilename);
-        	mpf.transferTo(uploadFile);
-        } catch (IOException e) {
-        	//TODO: IOException発生時の挙動を実装する
-    		model.addAttribute("profileForm",profileForm);
-    		return "album/newpage";
-        }
+	@PostMapping(value = "/newpage", params = "addImage")
+	public String addProfileImage(@ModelAttribute ProfileForm profileForm,
+			@RequestParam("profileImage") MultipartFile mpf, Model model) {
+		if (mpf.isEmpty()) {
+			model.addAttribute("profileForm", profileForm);
+			return "album/newpage";
+		}
 
-        profileForm.setProfileImageFilename(profileImageFilename);
+		String profileImageFilename = profileForm.getProfileImageFilename();
+		if (profileImageFilename.isEmpty()) {
+			// d初回の追加時はIDも不明なので、一意なファイル名を付けるために時刻を採用
+			// このファイル名で、各々のプロフィール画像を識別する
+			// TODO: 時刻ではなく、別のID採番方法？でファイル名を付けたい
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_nnnnnnnnn");
+			String uploadedDateTimeStr = LocalDateTime.now().format(formatter);
+			profileImageFilename = uploadedDateTimeStr + ".jpg";
+		}
 
-        model.addAttribute("profileForm",profileForm);
+		try {
+			Path uploadFile = Paths.get(albumConfig.getImageDirectory(), profileImageFilename);
+			mpf.transferTo(uploadFile.toFile());
+		} catch (IOException e) {
+			// TODO: IOException発生時の挙動を実装する
+			model.addAttribute("profileForm", profileForm);
+			return "album/newpage";
+		}
 
-        return "album/newpage";
-    }
+		profileForm.setProfileImageFilename(profileImageFilename);
 
-    @PostMapping(value = "/newpage", params = "submit")
-    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result, Model model){
-        if(result.hasErrors()){
-            return "album/newpage";
-        }
+		model.addAttribute("profileForm", profileForm);
 
-        ModelMapper modelMapper = new ModelMapper();
+		return "album/newpage";
+	}
 
-        Profile profile = modelMapper.map(profileForm, Profile.class);
-        String employeeId = profile.getEmployeeId();
-        if (pageService.isRegisteredProfile(employeeId)) {
-        	String[] phAry = new String[] {employeeId.toString()};
-        	String errorMsg = msg.getMessage("profileAlreadyExistMsg", phAry, Locale.JAPANESE);
-        	model.addAttribute("profileAlreadyExistError",errorMsg);
-        	return "album/newpage";
-        }
+	@PostMapping(value = "/newpage", params = "submit")
+	public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "album/newpage";
+		}
 
-        List<Career> allCareers = profileForm.getAllCareers().stream()
-        		.filter(h -> h.getEvent() != null)
-        		.map(h -> {
-        			Career career = modelMapper.map(h, Career.class);
-        			career.setEmployeeId(profileForm.getEmployeeId());
-        			return career;
-        		}).collect(Collectors.toList());
+		ModelMapper modelMapper = new ModelMapper();
 
-        pageService.register(profile,allCareers);
-        return "redirect:/album";
-    }
+		Profile profile = modelMapper.map(profileForm, Profile.class);
+		String employeeId = profile.getEmployeeId();
+		if (pageService.isRegisteredProfile(employeeId)) {
+			String[] phAry = new String[] { employeeId.toString() };
+			String errorMsg = msg.getMessage("profileAlreadyExistMsg", phAry, Locale.JAPANESE);
+			model.addAttribute("profileAlreadyExistError", errorMsg);
+			return "album/newpage";
+		}
+
+		List<Career> allCareers = profileForm.getAllCareers().stream().filter(h -> h.getEvent() != null).map(h -> {
+			Career career = modelMapper.map(h, Career.class);
+			career.setEmployeeId(profileForm.getEmployeeId());
+			return career;
+		}).collect(Collectors.toList());
+
+		pageService.register(profile, allCareers);
+		return "redirect:/album";
+	}
 
 }
