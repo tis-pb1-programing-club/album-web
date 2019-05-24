@@ -1,9 +1,9 @@
 package jp.co.tis.climate.albumweb.controller;
 
-import jp.co.tis.climate.albumweb.config.AlbumConfig;
 import jp.co.tis.climate.albumweb.dto.PageContent;
 import jp.co.tis.climate.albumweb.form.CareerForm;
 import jp.co.tis.climate.albumweb.form.ProfileForm;
+import jp.co.tis.climate.albumweb.manager.ImageFileManager;
 import jp.co.tis.climate.albumweb.model.Career;
 import jp.co.tis.climate.albumweb.model.Profile;
 import jp.co.tis.climate.albumweb.service.PageService;
@@ -21,9 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -42,7 +39,7 @@ public class PageController {
 	private PageService pageService;
 
 	@Autowired
-	private AlbumConfig albumConfig;
+	private ImageFileManager imageFileManager;
 
 	@Autowired
 	private MessageSource msg;
@@ -98,18 +95,15 @@ public class PageController {
 		}
 
 		String profileImageFilename = profileForm.getProfileImageFilename();
-		if (profileImageFilename.isEmpty()) {
-			// d初回の追加時はIDも不明なので、一意なファイル名を付けるために時刻を採用
-			// このファイル名で、各々のプロフィール画像を識別する
-			// TODO: 時刻ではなく、別のID採番方法？でファイル名を付けたい
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_nnnnnnnnn");
-			String uploadedDateTimeStr = LocalDateTime.now().format(formatter);
-			profileImageFilename = uploadedDateTimeStr + ".jpg";
-		}
-
 		try {
-			Path uploadFile = Paths.get(albumConfig.getImageDirectory(), profileImageFilename);
-			mpf.transferTo(uploadFile.toFile());
+			Path uploadFile;
+			if (profileImageFilename.isEmpty()) {
+				uploadFile = imageFileManager.create();
+				profileImageFilename = uploadFile.getFileName().toString();
+			} else {
+				uploadFile = imageFileManager.get(profileImageFilename).get();
+			}
+			mpf.transferTo(uploadFile);
 		} catch (IOException e) {
 			// TODO: IOException発生時の挙動を実装する
 			model.addAttribute("profileForm", profileForm);

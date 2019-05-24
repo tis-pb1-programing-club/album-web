@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,22 +15,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import jp.co.tis.climate.albumweb.config.AlbumConfig;
+import jp.co.tis.climate.albumweb.manager.ImageFileManager;
 
 @Controller
 public class ResourceController {
 	
 	@Autowired
-	private AlbumConfig albumConfig;
+	private ImageFileManager imageFileManager;
 	
 	
 	@GetMapping("/image/{filename}")
 	public void image(@PathVariable String filename, HttpServletResponse res) {
-		Path path = Paths.get(albumConfig.getImageDirectory(), filename);
+		Optional<Path> path = imageFileManager.get(filename);
 		
 		try(ByteArrayOutputStream bos = new ByteArrayOutputStream();) {
 			res.setContentType(MediaType.IMAGE_JPEG_VALUE);
-			Files.copy(path, bos);
+			Files.copy(path.get(), bos);
 			res.setContentLength(bos.size());
 			res.getOutputStream().write(bos.toByteArray());
 		} catch (IOException e) {
@@ -38,7 +38,4 @@ public class ResourceController {
 			throw new UncheckedIOException(e);
 		}
 	}
-	
-	
-
 }
