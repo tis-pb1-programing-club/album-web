@@ -54,7 +54,7 @@
             <div class="row" th:remove="all-but-first">
                 <div class="col-md-4" th:each="part : ${profileCards}">
                     <div class="card mb-4 shadow-sm">
-                        <img class="part" src="../../static/image/0.jpg" th:src="@{'/image/' + ${part.profileImageFilename}}">
+                        <img class="part" src="../../static/image/0.jpg" th:src="@{'/album/image/' + ${part.profileImageFilename}}">
                         <div class="card-body">
                             <h5 th:text="${part.lastName} + ' ' + ${part.firstName}">なん　んたんあ</h5>
                             <p th:text="${part.comment}">よろしくお願いしますニャン</p>

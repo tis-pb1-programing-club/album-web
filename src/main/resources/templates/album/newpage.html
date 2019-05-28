@@ -21,7 +21,7 @@
             <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
             <td class="user-img" rowspan="9">
             	<div th:unless="${#strings.isEmpty(profileForm.profileImageFilename)}">
-            		<img th:src="@{/image/{uf}(uf=*{profileImageFilename})}" />
+            		<img th:src="@{/album/image/{uf}(uf=*{profileImageFilename})}" />
 					<input type="hidden" name="profileImageFilename" th:value="*{profileImageFilename}" />
             	</div>
             	<div th:if="${#strings.isEmpty(profileForm.profileImageFilename)}">

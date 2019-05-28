@@ -21,7 +21,6 @@ public class ImageFileManager {
 
     public ImageFileManager(AlbumConfig albumConfig) {
         this.imgRoot = Paths.get(albumConfig.getImageDirectory()).toAbsolutePath();
-        System.out.println(this.imgRoot.toString());
     }
 
     public Optional<Path> get(String filename) {
