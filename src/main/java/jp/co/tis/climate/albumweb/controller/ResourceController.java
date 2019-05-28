@@ -4,7 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,17 +18,17 @@ import jp.co.tis.climate.albumweb.manager.ImageFileManager;
 
 @Controller
 public class ResourceController {
-	
-	@Autowired
-	private ImageFileManager imageFileManager;
 
+    @Autowired
+    private ImageFileManager imageFileManager;
 
-	@GetMapping("/image/{filename}")
-	public ResponseEntity<StreamingResponseBody> image(@PathVariable String filename) {
-		Optional<Path> path = imageFileManager.get(filename);
-		
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.set("Content-Type", MediaType.IMAGE_JPEG_VALUE);
-		return new ResponseEntity<>(outputStream -> Files.copy(path.get(),outputStream), responseHeaders, HttpStatus.OK);
-	}
+    @GetMapping("/image/{filename}")
+    public ResponseEntity<StreamingResponseBody> image(@PathVariable String filename) {
+        Optional<Path> path = imageFileManager.get(filename);
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Type", MediaType.IMAGE_JPEG_VALUE);
+        return new ResponseEntity<>(outputStream -> Files.copy(path.get(), outputStream), responseHeaders,
+                HttpStatus.OK);
+    }
 }

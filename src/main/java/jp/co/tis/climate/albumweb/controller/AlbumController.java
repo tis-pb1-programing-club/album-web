@@ -16,9 +16,9 @@ public class AlbumController {
     private AlbumService albumService;
 
     @GetMapping
-    public String getAlbum(Model model){
+    public String getAlbum(Model model) {
         model.addAttribute("profileCards", albumService.getProfileCards(new Profile(), 1));
         return "album/list";
     }
-    
+
 }

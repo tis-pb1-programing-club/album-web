@@ -8,7 +8,7 @@ import org.seasar.doma.Table;
 import org.seasar.doma.jdbc.entity.NamingType;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE)
-@Table(name="CAREER")
+@Table(name = "CAREER")
 @Data
 public class Career {
 

@@ -10,12 +10,11 @@ import org.springframework.web.client.HttpClientErrorException;
 @ControllerAdvice
 public class AppExceptionHandler {
 
-	@ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(HttpClientErrorException.NotFound.class)
     @ResponseBody
     public String HttpClientErrorHandler() {
-    	return "404 not found!!!!!!!!!!!!!";
+        return "404 not found!!!!!!!!!!!!!";
     }
-
 
 }

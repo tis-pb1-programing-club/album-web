@@ -10,7 +10,7 @@ import org.seasar.doma.jdbc.entity.NamingType;
 import java.io.Serializable;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE)
-@Table(name="PROFILE")
+@Table(name = "PROFILE")
 @Data
 public class Profile implements Serializable {
 

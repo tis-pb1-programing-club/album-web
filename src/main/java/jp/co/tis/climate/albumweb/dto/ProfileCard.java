@@ -12,7 +12,7 @@ import org.seasar.doma.jdbc.entity.NamingType;
 public class ProfileCard {
 
     private Integer employeeId;
-    
+
     private String profileImageFilename;
 
     private String lastName;

@@ -20,7 +20,7 @@ public class PageService {
     @Autowired
     private CareerDao careerDao;
 
-    public PageContent getPageContentByEmployeeId(String employeeId){
+    public PageContent getPageContentByEmployeeId(String employeeId) {
         Profile profile = profileDao.findProfileByEmployeeId(employeeId);
         List<Career> allCareers = careerDao.findCareerAllByEmployeeId(employeeId);
         PageContent pageContent = new PageContent();
@@ -30,12 +30,11 @@ public class PageService {
     }
 
     public boolean isRegisteredProfile(String employeeId) {
-    	Profile profile = profileDao.findProfileByEmployeeId(employeeId);
-    	return Objects.nonNull(profile);
+        Profile profile = profileDao.findProfileByEmployeeId(employeeId);
+        return Objects.nonNull(profile);
     }
-    
-    
-    public void register(Profile profile, List<Career> allCareers){
+
+    public void register(Profile profile, List<Career> allCareers) {
         profileDao.insert(profile);
         careerDao.batchInsert(allCareers);
     }

@@ -11,6 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AlbumConfig {
-	private String imageDirectory;
+    private String imageDirectory;
 
 }
