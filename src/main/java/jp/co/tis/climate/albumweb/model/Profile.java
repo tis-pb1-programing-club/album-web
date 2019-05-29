@@ -1,6 +1,7 @@
 package jp.co.tis.climate.albumweb.model;
 
 import lombok.Data;
+
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
@@ -9,22 +10,24 @@ import org.seasar.doma.jdbc.entity.NamingType;
 import java.io.Serializable;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE)
-@Table(name="PERSONAL")
+@Table(name = "PROFILE")
 @Data
-public class Personal implements Serializable {
+public class Profile implements Serializable {
 
     @Id
-    private Integer personalId;
+    private String employeeId;
 
-    private String familyName;
+    private String profileImageFilename;
 
-    private String personalName;
+    private String lastName;
 
-    private Byte yearly;
+    private String firstName;
 
-    private Byte sex;
+    private String yearly;
 
-    private Byte bloodType;
+    private String sex;
+
+    private String bloodType;
 
     private String team;
 

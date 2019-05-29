@@ -14,4 +14,4 @@ spring:
   
 fuudoapp:
   album:
-    imageDirectory: C:\static\image\
+    imageDirectory: /static/image/

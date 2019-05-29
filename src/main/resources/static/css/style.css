@@ -16,11 +16,22 @@
     background-color: #f08080 !important;
 }
 
-img.album{
+img.personal{
   width: 500px;
   height: 400px;
   object-fit: contain;
   padding: 10px 10px;
+}
+
+img.part{
+  width: 100%;
+  height: 225px;
+  object-fit: contain;
+  background: #eee;
+}
+
+td.user-img{
+    width: 60%;
 }
 
 main >.container {
@@ -30,4 +41,12 @@ main >.container {
 .footer > .container {
     padding-right: 15px;
     padding-left: 15px;
+}
+
+.hasError {
+    background-color: pink;
+}
+
+td textarea {
+    width: 100%;
 }

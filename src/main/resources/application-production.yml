@@ -1,0 +1,19 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  messages:
+    basename: messages
+    encoding: UTF-8
+
+doma:
+  dialect: postgres
+
+fuudoapp:
+  album:
+    imageDirectory: /static/image/
