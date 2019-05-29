@@ -21,6 +21,10 @@ public class ImageFileManager {
 
     public ImageFileManager(AlbumConfig albumConfig) {
         this.imgRoot = Paths.get(albumConfig.getImageDirectory()).toAbsolutePath();
+        if (Files.notExists(imgRoot)) {
+            this.imgRoot = Paths.get(System.getProperty("java.io.tmpdir")).toAbsolutePath();
+            log.warn(String.format("Image directory does not exist. Use the system temporary directory. tmpdir=[%s]", imgRoot.toString()));
+        }
     }
 
     public Optional<Path> get(String filename) {

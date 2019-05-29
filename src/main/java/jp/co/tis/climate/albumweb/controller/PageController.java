@@ -101,7 +101,7 @@ public class PageController {
                 uploadFile = imageFileManager.create();
                 profileImageFilename = uploadFile.getFileName().toString();
             } else {
-                uploadFile = imageFileManager.get(profileImageFilename).get();
+                uploadFile = imageFileManager.get(profileImageFilename).orElseThrow(() -> HttpClientErrorException.create(HttpStatus.NOT_FOUND, null, null, null, null));
             }
             mpf.transferTo(uploadFile);
         } catch (IOException e) {
