@@ -55,6 +55,13 @@ public class PageController {
         return "album/view";
     }
 
+    @PostMapping("/{employeeId}")
+    public String delete(@PathVariable String employeeId, Model model) {
+        PageContent pageContent = pageService.getPageContentByEmployeeId(employeeId);
+        pageService.delete(pageContent.getProfile(), pageContent.getAllCareers());
+        return "redirect:/album";
+    }
+
     @ModelAttribute
     @GetMapping("/newpage")
     public String add(Model model) {

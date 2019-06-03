@@ -38,4 +38,9 @@ public class PageService {
         profileDao.insert(profile);
         careerDao.batchInsert(allCareers);
     }
+    
+    public void delete(Profile profile, List<Career> allCareers){
+        profileDao.delete(profile);
+        careerDao.batchDelete(allCareers);
+    }
 }
