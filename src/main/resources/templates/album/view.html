@@ -103,6 +103,9 @@
             </td>
         </tr>
     </table>
+    <form th:action="@{/album/{employeeId}(employeeId=${profile.employeeId})}" enctype="multipart/form-data" method="post" th:object="${profileForm}">
+        <button type="submit" name="delete" class="btn btn-sm btn-outline-secondary" >Delete Page</button>
+    </form>
 </div>
 </body>
 </html>
