@@ -2,6 +2,7 @@ package jp.co.tis.climate.albumweb.dao;
 
 import jp.co.tis.climate.albumweb.model.Career;
 
+import org.seasar.doma.BatchDelete;
 import org.seasar.doma.BatchInsert;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
@@ -22,4 +23,7 @@ public interface CareerDao {
 
     @Insert
     int insert(Career career);
+    
+    @BatchDelete
+    int[] batchDelete(List<Career> careers);
 }

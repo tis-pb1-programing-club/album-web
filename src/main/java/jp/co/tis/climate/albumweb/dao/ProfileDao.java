@@ -3,6 +3,7 @@ package jp.co.tis.climate.albumweb.dao;
 import jp.co.tis.climate.albumweb.dto.ProfileCard;
 import jp.co.tis.climate.albumweb.model.Profile;
 import org.seasar.doma.Dao;
+import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
@@ -24,4 +25,7 @@ public interface ProfileDao {
 
     @Insert
     int insert(Profile profile);
+    
+    @Delete
+    int delete(Profile profile);
 }
