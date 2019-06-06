@@ -3,6 +3,7 @@ package jp.co.tis.climate.albumweb.service;
 import jp.co.tis.climate.albumweb.dao.ProfileDao;
 import jp.co.tis.climate.albumweb.dao.CareerDao;
 import jp.co.tis.climate.albumweb.dto.PageContent;
+import jp.co.tis.climate.albumweb.manager.ImageFileManager;
 import jp.co.tis.climate.albumweb.model.Career;
 import jp.co.tis.climate.albumweb.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class PageService {
 
     @Autowired
     private CareerDao careerDao;
+
+    @Autowired
+    private ImageFileManager imageFileManager;
 
     public PageContent getPageContentByEmployeeId(String employeeId) {
         Profile profile = profileDao.findProfileByEmployeeId(employeeId);
@@ -40,7 +44,9 @@ public class PageService {
     }
     
     public void delete(Profile profile, List<Career> allCareers){
+        String filename = profile.getProfileImageFilename();
         profileDao.delete(profile);
         careerDao.batchDelete(allCareers);
+        imageFileManager.delete(filename);
     }
 }
