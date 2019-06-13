@@ -12,5 +12,4 @@ h2
 ## 
 
 mvn spring-boot:runで実行  
-http://localhost:9000/personal/personalPage?personalId=0 でテストページ閲覧
-後日加筆
+URL: http://localhost:9000/album/ 
