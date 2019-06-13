@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.tis.climate.albumweb.config.AlbumConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 
 @Slf4j
 @Component
@@ -27,8 +28,11 @@ public class ImageFileManager {
         }
     }
 
-    public Optional<Path> get(String filename) {
-        Path target = Paths.get(imgRoot.toString(), filename);
+    public Optional<Path> get(String name) {
+        if (StringUtils.isEmpty(name)) {
+            return Optional.empty();
+        }
+        Path target = Paths.get(imgRoot.toString(), name);
         if (Files.notExists(target)) {
             return Optional.empty();
         }
