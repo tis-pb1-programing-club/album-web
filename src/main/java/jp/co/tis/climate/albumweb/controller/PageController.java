@@ -33,21 +33,30 @@ public class PageController {
     /**
      * 経歴番号の初期値
      */
-    static final String FIRST_CAREER_ID = "1";
+    private static final String FIRST_CAREER_ID = "1";
 
-    @Autowired
     private PageService pageService;
 
-    @Autowired
     private ImageFileManager imageFileManager;
 
-    @Autowired
     private MessageSource msg;
+
+    private ModelMapper modelMapper;
+
+    public PageController(PageService pageService,
+                          ImageFileManager imageFileManager,
+                          MessageSource msg,
+                          ModelMapper modelMapper) {
+        this.pageService = pageService;
+        this.imageFileManager = imageFileManager;
+        this.msg = msg;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping("/{employeeId}")
     public String view(@PathVariable String employeeId, Model model) throws HttpClientErrorException.NotFound {
         if (!pageService.isRegisteredProfile(employeeId)) {
-            throw HttpClientErrorException.create(HttpStatus.NOT_FOUND, null, null, null, null);
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         PageContent pageContent = pageService.getPageContentByEmployeeId(employeeId);
         model.addAttribute("profile", pageContent.getProfile());
@@ -108,7 +117,8 @@ public class PageController {
                 uploadFile = imageFileManager.create();
                 profileImageFilename = uploadFile.getFileName().toString();
             } else {
-                uploadFile = imageFileManager.get(profileImageFilename).orElseThrow(() -> HttpClientErrorException.create(HttpStatus.NOT_FOUND, null, null, null, null));
+                uploadFile = imageFileManager.get(profileImageFilename)
+                        .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
             }
             mpf.transferTo(uploadFile);
         } catch (IOException e) {
@@ -130,12 +140,10 @@ public class PageController {
             return "album/newpage";
         }
 
-        ModelMapper modelMapper = new ModelMapper();
-
         Profile profile = modelMapper.map(profileForm, Profile.class);
         String employeeId = profile.getEmployeeId();
         if (pageService.isRegisteredProfile(employeeId)) {
-            String[] phAry = new String[] { employeeId.toString() };
+            String[] phAry = new String[] { employeeId };
             String errorMsg = msg.getMessage("profileAlreadyExistMsg", phAry, Locale.JAPANESE);
             model.addAttribute("profileAlreadyExistError", errorMsg);
             return "album/newpage";
