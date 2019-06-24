@@ -1,14 +1,13 @@
-package jp.co.tis.climate.albumweb.controller;
+package jp.co.tis.climate.albumweb.presentation.controller.profile;
 
-import jp.co.tis.climate.albumweb.dto.PageContent;
-import jp.co.tis.climate.albumweb.form.CareerForm;
-import jp.co.tis.climate.albumweb.form.ProfileForm;
-import jp.co.tis.climate.albumweb.manager.ImageFileManager;
-import jp.co.tis.climate.albumweb.model.Career;
-import jp.co.tis.climate.albumweb.model.Profile;
-import jp.co.tis.climate.albumweb.service.PageService;
+import jp.co.tis.climate.albumweb.presentation.dto.PageContent;
+import jp.co.tis.climate.albumweb.presentation.form.CareerForm;
+import jp.co.tis.climate.albumweb.presentation.form.ProfileForm;
+import jp.co.tis.climate.albumweb.infrastructure.manager.ImageFileManager;
+import jp.co.tis.climate.albumweb.domain.model.profile.Career;
+import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
+import jp.co.tis.climate.albumweb.application.service.profile.PageService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

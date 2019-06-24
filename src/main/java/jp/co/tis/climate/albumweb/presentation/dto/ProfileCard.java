@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.dto;
+package jp.co.tis.climate.albumweb.presentation.dto;
 
 import lombok.Data;
 import org.seasar.doma.Entity;

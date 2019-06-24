@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.config;
+package jp.co.tis.climate.albumweb;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,7 +12,7 @@ import lombok.Setter;
 @ConfigurationProperties(prefix = "fuudoapp.album")
 @Getter
 @Setter
-public class AlbumConfig {
+public class ApplicationConfig {
     private String imageDirectory;
 
     @Bean

@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.controller;
+package jp.co.tis.climate.albumweb.presentation.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

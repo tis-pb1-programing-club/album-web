@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.manager;
+package jp.co.tis.climate.albumweb.infrastructure.manager;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
-import jp.co.tis.climate.albumweb.config.AlbumConfig;
+import jp.co.tis.climate.albumweb.ApplicationConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
@@ -20,7 +20,7 @@ public class ImageFileManager {
 
     private Path imgRoot;
 
-    public ImageFileManager(AlbumConfig albumConfig) {
+    public ImageFileManager(ApplicationConfig albumConfig) {
         this.imgRoot = Paths.get(albumConfig.getImageDirectory()).toAbsolutePath();
         if (Files.notExists(imgRoot)) {
             this.imgRoot = Paths.get(System.getProperty("java.io.tmpdir")).toAbsolutePath();
