@@ -4,8 +4,8 @@ import jp.co.tis.climate.albumweb.infrastructure.dao.ProfileDao;
 import jp.co.tis.climate.albumweb.infrastructure.dao.CareerDao;
 import jp.co.tis.climate.albumweb.presentation.dto.PageContent;
 import jp.co.tis.climate.albumweb.infrastructure.manager.ImageFileManager;
-import jp.co.tis.climate.albumweb.domain.model.Career;
-import jp.co.tis.climate.albumweb.domain.model.Profile;
+import jp.co.tis.climate.albumweb.domain.model.profile.Career;
+import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

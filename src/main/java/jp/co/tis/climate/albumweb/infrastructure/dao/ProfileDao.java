@@ -1,7 +1,7 @@
 package jp.co.tis.climate.albumweb.infrastructure.dao;
 
 import jp.co.tis.climate.albumweb.presentation.dto.ProfileCard;
-import jp.co.tis.climate.albumweb.domain.model.Profile;
+import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;

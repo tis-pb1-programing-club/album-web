@@ -1,6 +1,6 @@
 package jp.co.tis.climate.albumweb.presentation.controller;
 
-import jp.co.tis.climate.albumweb.domain.model.Profile;
+import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
 import jp.co.tis.climate.albumweb.application.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

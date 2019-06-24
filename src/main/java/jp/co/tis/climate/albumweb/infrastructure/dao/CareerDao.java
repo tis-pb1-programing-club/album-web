@@ -1,6 +1,6 @@
 package jp.co.tis.climate.albumweb.infrastructure.dao;
 
-import jp.co.tis.climate.albumweb.domain.model.Career;
+import jp.co.tis.climate.albumweb.domain.model.profile.Career;
 
 import org.seasar.doma.BatchDelete;
 import org.seasar.doma.BatchInsert;
