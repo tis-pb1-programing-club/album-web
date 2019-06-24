@@ -1,11 +1,11 @@
-package jp.co.tis.climate.albumweb.service;
+package jp.co.tis.climate.albumweb.application.service;
 
-import jp.co.tis.climate.albumweb.dao.ProfileDao;
-import jp.co.tis.climate.albumweb.dao.CareerDao;
-import jp.co.tis.climate.albumweb.dto.PageContent;
-import jp.co.tis.climate.albumweb.manager.ImageFileManager;
-import jp.co.tis.climate.albumweb.model.Career;
-import jp.co.tis.climate.albumweb.model.Profile;
+import jp.co.tis.climate.albumweb.infrastructure.dao.ProfileDao;
+import jp.co.tis.climate.albumweb.infrastructure.dao.CareerDao;
+import jp.co.tis.climate.albumweb.presentation.dto.PageContent;
+import jp.co.tis.climate.albumweb.infrastructure.manager.ImageFileManager;
+import jp.co.tis.climate.albumweb.domain.model.Career;
+import jp.co.tis.climate.albumweb.domain.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

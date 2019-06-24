@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.config;
+package jp.co.tis.climate.albumweb.application.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.context.properties.ConfigurationProperties;

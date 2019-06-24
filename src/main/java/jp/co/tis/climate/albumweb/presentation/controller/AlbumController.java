@@ -1,7 +1,7 @@
-package jp.co.tis.climate.albumweb.controller;
+package jp.co.tis.climate.albumweb.presentation.controller;
 
-import jp.co.tis.climate.albumweb.model.Profile;
-import jp.co.tis.climate.albumweb.service.AlbumService;
+import jp.co.tis.climate.albumweb.domain.model.Profile;
+import jp.co.tis.climate.albumweb.application.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

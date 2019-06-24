@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.model;
+package jp.co.tis.climate.albumweb.domain.model;
 
 import lombok.Data;
 

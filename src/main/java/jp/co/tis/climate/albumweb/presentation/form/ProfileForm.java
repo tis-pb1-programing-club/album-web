@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.form;
+package jp.co.tis.climate.albumweb.presentation.form;
 
 import lombok.Getter;
 import lombok.Setter;

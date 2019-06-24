@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.controller;
+package jp.co.tis.climate.albumweb.presentation.controller;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
-import jp.co.tis.climate.albumweb.manager.ImageFileManager;
+import jp.co.tis.climate.albumweb.infrastructure.manager.ImageFileManager;
 
 @Controller
 @RequestMapping("album")
