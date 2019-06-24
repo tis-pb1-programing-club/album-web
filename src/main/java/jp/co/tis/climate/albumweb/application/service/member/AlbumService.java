@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.application.service;
+package jp.co.tis.climate.albumweb.application.service.member;
 
 import jp.co.tis.climate.albumweb.infrastructure.dao.ProfileDao;
 import jp.co.tis.climate.albumweb.presentation.dto.ProfileCard;

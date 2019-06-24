@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.presentation.controller;
+package jp.co.tis.climate.albumweb.presentation.controller.profile;
 
 import jp.co.tis.climate.albumweb.presentation.dto.PageContent;
 import jp.co.tis.climate.albumweb.presentation.form.CareerForm;
@@ -6,7 +6,7 @@ import jp.co.tis.climate.albumweb.presentation.form.ProfileForm;
 import jp.co.tis.climate.albumweb.infrastructure.manager.ImageFileManager;
 import jp.co.tis.climate.albumweb.domain.model.profile.Career;
 import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
-import jp.co.tis.climate.albumweb.application.service.PageService;
+import jp.co.tis.climate.albumweb.application.service.profile.PageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.presentation.controller;
+package jp.co.tis.climate.albumweb.presentation.controller.profile;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
