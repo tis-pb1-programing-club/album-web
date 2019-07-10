@@ -27,10 +27,7 @@
             	<div th:if="${#strings.isEmpty(profileForm.profileImageFilename)}">
 					<input type="hidden" name="profileImageFilename" value="" />
             	</div>
-            	<br>
             	<input type="file" name="profileImage" />
-            	<br>
-				<button type="submit" name="addImage" >画像を追加</button>
             </td>
         </tr>
         <tr>
@@ -93,7 +90,6 @@
         </tr>
         <tr>
             <th>経歴</th>
-            <th colspan="2"><button type="submit" name="addCareer" >行追加</button></th>
         </tr>
         <tr>
             <td colspan="3">
