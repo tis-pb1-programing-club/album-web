@@ -19,6 +19,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,58 +86,23 @@ public class PageController {
 
         return "album/newpage";
     }
+        // TODO Controllerなので分岐などの処理は下の層に任せること。
+        // TODO 画像をプレビューする機能はバックログに追加
+        // TODO 一旦一度にアップロードすることにして、このメソッドは削除
 
-    @PostMapping(value = "/newpage", params = "addCareer")
-    public String addCareer(@ModelAttribute ProfileForm profileForm, Model model) {
-        List<CareerForm> allCareers = profileForm.getAllCareers();
-        String careerId = String.valueOf(allCareers.size() + 1);
-
-        CareerForm career = new CareerForm();
-        career.setCareerId(careerId);
-        allCareers.add(career);
-        profileForm.setAllCareers(allCareers);
-
-        model.addAttribute("profileForm", profileForm);
-
-        return "album/newpage";
-    }
-
-    @PostMapping(value = "/newpage", params = "addImage")
-    public String addProfileImage(@ModelAttribute ProfileForm profileForm,
-            @RequestParam("profileImage") MultipartFile mpf, Model model) {
-        if (mpf.isEmpty()) {
-            model.addAttribute("profileForm", profileForm);
-            return "album/newpage";
-        }
-
-        String profileImageFilename = profileForm.getProfileImageFilename();
-        try {
-            Path uploadFile;
-            if (profileImageFilename.isEmpty()) {
-                uploadFile = imageFileManager.create();
-                profileImageFilename = uploadFile.getFileName().toString();
-            } else {
-                uploadFile = imageFileManager.get(profileImageFilename)
-                        .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-            }
-            mpf.transferTo(uploadFile);
-        } catch (IOException e) {
-            // TODO: IOException発生時の挙動を実装する
-            model.addAttribute("profileForm", profileForm);
-            return "album/newpage";
-        }
-
-        profileForm.setProfileImageFilename(profileImageFilename);
-
-        model.addAttribute("profileForm", profileForm);
-
-        return "album/newpage";
-    }
-
-    @PostMapping(value = "/newpage", params = "submit")
-    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result, Model model) {
+    @PostMapping(value = "/newpage")
+    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result, @RequestParam("profileImage") MultipartFile mpf, Model model) {
+        
         if (result.hasErrors()) {
             return "album/newpage";
+        }
+
+        Path path = imageFileManager.create();
+
+        try {
+            mpf.transferTo(path);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
         }
 
         Profile profile = modelMapper.map(profileForm, Profile.class);
@@ -153,6 +119,8 @@ public class PageController {
             career.setEmployeeId(profileForm.getEmployeeId());
             return career;
         }).collect(Collectors.toList());
+
+        profile.setProfileImageFilename(path.getFileName().toString());
 
         pageService.register(profile, allCareers);
         return "redirect:/album";
