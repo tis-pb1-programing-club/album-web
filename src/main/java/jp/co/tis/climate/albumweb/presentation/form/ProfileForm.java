@@ -2,10 +2,10 @@ package jp.co.tis.climate.albumweb.presentation.form;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -20,9 +20,11 @@ public class ProfileForm {
     @Pattern(regexp = "\\d{6}")
     private String employeeId;
 
-    @NotNull
-    @Size(min = 0, max = 50)
-    private String profileImageFilename;
+    /** TODO
+     *  Validation を追加する。
+     *  http://terasolunaorg.github.io/guideline/5.5.1.RELEASE/ja/ArchitectureInDetail/WebApplicationDetail/FileUpload.html#bean-validation
+     */
+    private MultipartFile profileImage;
 
     @NotEmpty
     @Size(min = 1, max = 20)

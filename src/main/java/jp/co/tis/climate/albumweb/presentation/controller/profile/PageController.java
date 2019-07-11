@@ -16,32 +16,26 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("album")
 public class PageController {
 
-    /**
-     * 経歴番号の初期値
-     */
-    private static final String FIRST_CAREER_ID = "1";
+    private final PageService pageService;
 
-    private PageService pageService;
+    private final ImageFileManager imageFileManager;
 
-    private ImageFileManager imageFileManager;
+    private final MessageSource msg;
 
-    private MessageSource msg;
-
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public PageController(PageService pageService,
                           ImageFileManager imageFileManager,
@@ -75,23 +69,22 @@ public class PageController {
     @GetMapping("/newpage")
     public String add(Model model) {
         ProfileForm profileForm = new ProfileForm();
-
-        List<CareerForm> allCareers = new ArrayList<>();
-        CareerForm career = new CareerForm();
-        career.setCareerId(FIRST_CAREER_ID);
-        allCareers.add(career);
-        profileForm.setAllCareers(allCareers);
+        profileForm.setAllCareers(IntStream.range(1, 11).mapToObj(i -> {
+            CareerForm career = new CareerForm();
+            career.setCareerId(String.valueOf(i));
+            return career;
+        }).collect(Collectors.toList()));
 
         model.addAttribute("profileForm", profileForm);
 
         return "album/newpage";
     }
-        // TODO Controllerなので分岐などの処理は下の層に任せること。
-        // TODO 画像をプレビューする機能はバックログに追加
-        // TODO 一旦一度にアップロードすることにして、このメソッドは削除
+
+    // TODO 画像をプレビューする機能はバックログに追加
+    // TODO 一旦一度にアップロードすることにして、このメソッドは削除
 
     @PostMapping(value = "/newpage")
-    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result, @RequestParam("profileImage") MultipartFile mpf, Model model) {
+    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result, Model model) {
         
         if (result.hasErrors()) {
             return "album/newpage";
@@ -100,7 +93,7 @@ public class PageController {
         Path path = imageFileManager.create();
 
         try {
-            mpf.transferTo(path);
+            profileForm.getProfileImage().transferTo(path);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
