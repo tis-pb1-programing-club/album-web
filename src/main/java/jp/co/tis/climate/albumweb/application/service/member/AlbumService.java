@@ -4,7 +4,6 @@ import jp.co.tis.climate.albumweb.infrastructure.dao.ProfileDao;
 import jp.co.tis.climate.albumweb.presentation.dto.ProfileCard;
 import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
 //import org.seasar.doma.jdbc.SelectOptions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +15,11 @@ public class AlbumService {
     // こちらは実装に必要なのでとっておく
     // private static final Integer PERSONAL_PART_NUMBER=12;
 
-    @Autowired
-    private ProfileDao profileDao;
+    private final ProfileDao profileDao;
+
+    public AlbumService(ProfileDao profileDao) {
+        this.profileDao = profileDao;
+    }
 
     /**
      *

@@ -6,7 +6,6 @@ import jp.co.tis.climate.albumweb.presentation.dto.PageContent;
 import jp.co.tis.climate.albumweb.infrastructure.manager.ImageFileManager;
 import jp.co.tis.climate.albumweb.domain.model.profile.Career;
 import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +14,17 @@ import java.util.Objects;
 @Service
 public class PageService {
 
-    @Autowired
-    private ProfileDao profileDao;
+    private final ProfileDao profileDao;
 
-    @Autowired
-    private CareerDao careerDao;
+    private final CareerDao careerDao;
 
-    @Autowired
-    private ImageFileManager imageFileManager;
+    private final ImageFileManager imageFileManager;
+
+    public PageService(ProfileDao profileDao, CareerDao careerDao, ImageFileManager imageFileManager) {
+        this.profileDao = profileDao;
+        this.careerDao = careerDao;
+        this.imageFileManager = imageFileManager;
+    }
 
     public PageContent getPageContentByEmployeeId(String employeeId) {
         Profile profile = profileDao.findProfileByEmployeeId(employeeId);
