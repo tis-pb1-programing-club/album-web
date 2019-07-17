@@ -12,6 +12,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -107,11 +108,17 @@ public class PageController {
             return "album/newpage";
         }
 
-        List<Career> allCareers = profileForm.getAllCareers().stream().filter(h -> h.getEvent() != null).map(h -> {
-            Career career = modelMapper.map(h, Career.class);
-            career.setEmployeeId(profileForm.getEmployeeId());
-            return career;
-        }).collect(Collectors.toList());
+        List<Career> allCareers = profileForm.getAllCareers()
+                .stream()
+                .filter(c -> StringUtils.hasText(c.getEvent())
+                        && StringUtils.hasText(c.getYear())
+                        && StringUtils.hasText(c.getMonth()))
+                .map(h -> {
+                    Career career = modelMapper.map(h, Career.class);
+                    career.setEmployeeId(profileForm.getEmployeeId());
+                    return career;
+                })
+                .collect(Collectors.toList());
 
         profile.setProfileImageFilename(path.getFileName().toString());
 
