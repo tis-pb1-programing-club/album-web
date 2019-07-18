@@ -8,7 +8,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h2>基本情報</h2>
+    <h1>プロフィール</h1>
+    <h3>基本情報</h3>
     <div class="card mb-3">
         <div class="row no-gutters">
             <div class="col-md-4">
@@ -61,27 +62,24 @@
             </div>
         </div>
     </div>
-    <h2>経歴</h2>
+    <h3>経歴</h3>
     <table class="table table-bordered" width="80%">
         <thead class="thead-light">
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">年</th>
-            <th scope="col">月</th>
-            <th scope="col">出来事</th>
+            <th scope="col" style="width: 5%">#</th>
+            <th scope="col" style="width: 10%">年月</th>
+            <th scope="col" style="width: 85%">出来事</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first" th:each="career,stat : ${allCareers}">
         <tr>
             <th scope="row" th:text="${stat.count}">1</th>
-            <td th:text="${career.year}">2018</td>
-            <td th:text="${career.month}">4月</td>
+            <td th:text="${#dates.format(#dates.create(career.year, career.month, 1), 'yyyy/MM')}">2018/04</td>
             <td th:text="${career.event}">入社</td>
         </tr>
         <tr>
             <th scope="row" th:text="${stat.count}">1</th>
-            <td th:text="${career.year}">2018</td>
-            <td th:text="${career.month}">8月</td>
+            <td th:text="${#dates.format(#dates.create(career.year, career.month, 1), 'yyyy/MM')}">2018/08</td>
             <td th:text="${career.event}">うんやかんや新人研修終了</td>
         </tr>
         </tbody>
