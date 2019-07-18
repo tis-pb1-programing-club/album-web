@@ -23,6 +23,7 @@ import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -91,10 +92,13 @@ public class PageController {
             return "album/newpage";
         }
 
-        Path path = imageFileManager.create();
+        Path path = null;
 
         try {
-            profileForm.getProfileImage().transferTo(path);
+            if (!profileForm.getProfileImage().isEmpty()) {
+                path = imageFileManager.create();
+                profileForm.getProfileImage().transferTo(path);
+            }
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
@@ -120,7 +124,10 @@ public class PageController {
                 })
                 .collect(Collectors.toList());
 
-        profile.setProfileImageFilename(path.getFileName().toString());
+        profile.setProfileImageFilename(Optional.ofNullable(path)
+                .map(Path::getFileName)
+                .map(Path::toString)
+                .orElse(null));
 
         pageService.register(profile, allCareers);
         return "redirect:/album";

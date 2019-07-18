@@ -13,7 +13,8 @@
     <div class="card mb-3">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img class="card-img" src="../../static/image/0.jpg" th:src="@{'/album/image/' + ${profile.profileImageFilename}}">
+                <img class="card-img" src="../../static/image/0.jpg" th:if="${not #strings.isEmpty(profile.profileImageFilename)}" th:src="@{'/album/image/' + ${profile.profileImageFilename}}">
+                <img class="card-img" src="/image/no-image.png" th:if="${#strings.isEmpty(profile.profileImageFilename)}">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
@@ -63,7 +64,7 @@
         </div>
     </div>
     <h3>経歴</h3>
-    <table class="table table-bordered" width="80%">
+    <table class="table table-bordered" th:if="${not #lists.isEmpty(allCareers)}">
         <thead class="thead-light">
         <tr>
             <th scope="col" style="width: 5%">#</th>
@@ -84,6 +85,9 @@
         </tr>
         </tbody>
     </table>
+    <div th:if="${#lists.isEmpty(allCareers)}">
+        <p>経歴が登録されていません。</p>
+    </div>
     <div class="float-right mb-3">
         <form th:action="@{/album/{employeeId}(employeeId=${profile.employeeId})}" enctype="multipart/form-data" method="post" th:object="${profileForm}">
             <button type="submit" name="delete" class="btn btn-danger" >削除</button>
