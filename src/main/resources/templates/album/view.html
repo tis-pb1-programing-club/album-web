@@ -21,7 +21,7 @@
                     <h5 class="card-title">
                         <p>
                             <span th:text="${profile.lastName} + ' ' + ${profile.firstName}">首藤 優志</span>
-                            <div th:if="${#strings.isEmpty(profile.yearly) == false}" th:remove="tag">
+                            <div th:if="${not #strings.isEmpty(profile.yearly)}" th:remove="tag">
                                 <span class="badge badge-pill badge-info ml-1" th:text="${profile.yearly} + '年目'">1年目</span>
                             </div>
                             <div th:switch="${profile.sex}" th:remove="tag">
@@ -79,9 +79,9 @@
             <td th:text="${career.event}">入社</td>
         </tr>
         <tr>
-            <th scope="row" th:text="${stat.count}">1</th>
-            <td th:text="${#dates.format(#dates.create(career.year, career.month, 1), 'yyyy/MM')}">2018/08</td>
-            <td th:text="${career.event}">うんやかんや新人研修終了</td>
+            <th scope="row">1</th>
+            <td>2018/08</td>
+            <td>うんやかんや新人研修終了</td>
         </tr>
         </tbody>
     </table>
