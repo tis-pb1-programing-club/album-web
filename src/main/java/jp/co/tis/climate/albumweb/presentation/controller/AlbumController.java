@@ -2,7 +2,6 @@ package jp.co.tis.climate.albumweb.presentation.controller;
 
 import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
 import jp.co.tis.climate.albumweb.application.service.member.AlbumService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("album")
 public class AlbumController {
 
-    @Autowired
-    private AlbumService albumService;
+    private final AlbumService albumService;
+
+    public AlbumController(AlbumService albumService) {
+        this.albumService = albumService;
+    }
 
     @GetMapping
     public String getAlbum(Model model) {

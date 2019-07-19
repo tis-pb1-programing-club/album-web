@@ -3,7 +3,6 @@ package jp.co.tis.climate.albumweb.presentation.controller.profile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,8 +20,11 @@ import jp.co.tis.climate.albumweb.infrastructure.manager.ImageFileManager;
 @RequestMapping("album")
 public class ResourceController {
 
-    @Autowired
-    private ImageFileManager imageFileManager;
+    private final ImageFileManager imageFileManager;
+
+    public ResourceController(ImageFileManager imageFileManager) {
+        this.imageFileManager = imageFileManager;
+    }
 
     @GetMapping("/image/{filename}")
     public ResponseEntity<StreamingResponseBody> image(@PathVariable String filename) {
