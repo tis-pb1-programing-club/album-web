@@ -11,7 +11,13 @@ spring:
   messages:
     basename: messages
     encoding: UTF-8
-  
+  thymeleaf:
+    cache: false
+
+doma:
+  dialect: h2
+  sql-file-repository: no_cache
+
 fuudoapp:
   album:
     imageDirectory: C:\static\image\
