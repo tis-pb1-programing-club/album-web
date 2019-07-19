@@ -1,8 +1,12 @@
 package jp.co.tis.climate.albumweb.presentation.controller.profile;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.function.Supplier;
 
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,17 +26,30 @@ public class ResourceController {
 
     private final ImageFileManager imageFileManager;
 
-    public ResourceController(ImageFileManager imageFileManager) {
+    private final ResourceLoader resourceLoader;
+
+    public ResourceController(ImageFileManager imageFileManager, ResourceLoader resourceLoader) {
         this.imageFileManager = imageFileManager;
+        this.resourceLoader = resourceLoader;
     }
 
     @GetMapping("/image/{filename}")
     public ResponseEntity<StreamingResponseBody> image(@PathVariable String filename) {
-        Path path = imageFileManager.get(filename).orElseThrow(() -> HttpClientErrorException.create(HttpStatus.NOT_FOUND, null, null, null, null));
+        Path path = imageFileManager.get(filename).orElseGet(getNoImagePath());
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type", MediaType.IMAGE_JPEG_VALUE);
         return new ResponseEntity<>(outputStream -> Files.copy(path, outputStream), responseHeaders,
                 HttpStatus.OK);
+    }
+
+    private Supplier<Path> getNoImagePath() {
+        return () -> {
+            try {
+                return resourceLoader.getResource("classpath:static/image/no-image.jpg").getFile().toPath();
+            } catch (IOException e) {
+                throw new UncheckedIOException(e);
+            }
+        };
     }
 }
