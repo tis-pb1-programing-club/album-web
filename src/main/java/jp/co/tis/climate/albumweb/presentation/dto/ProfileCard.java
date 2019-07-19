@@ -19,5 +19,11 @@ public class ProfileCard {
 
     private String firstName;
 
+    private String yearly;
+
+    private String sex;
+
+    private String bloodType;
+
     private String comment;
 }
