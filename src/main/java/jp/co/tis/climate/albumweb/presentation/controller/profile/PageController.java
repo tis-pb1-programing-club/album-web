@@ -130,7 +130,7 @@ public class PageController {
                 .orElse(null));
 
         pageService.register(profile, allCareers);
-        return "redirect:/album";
+        return "redirect:/album/" + profile.getEmployeeId();
     }
 
 }

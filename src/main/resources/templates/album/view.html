@@ -88,11 +88,12 @@
     <div th:if="${#lists.isEmpty(allCareers)}">
         <p>経歴が登録されていません。</p>
     </div>
-    <div class="float-right mb-3">
-        <form th:action="@{/album/{employeeId}(employeeId=${profile.employeeId})}" enctype="multipart/form-data" method="post" th:object="${profileForm}">
-            <button type="submit" name="delete" class="btn btn-danger" >削除</button>
-        </form>
-    </div>
+    <form th:action="@{/album/{employeeId}(employeeId=${profile.employeeId})}" method="post">
+        <div class="float-right mb-3">
+            <a th:href="@{/album/}" href="#" class="btn btn-secondary" role="button" aria-pressed="true">Topへ</a>
+            <button type="submit" name="delete" class="btn btn-danger">削除</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>
