@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label for="profileImage">顔写真<span class="badge badge-pill badge-danger ml-3">必須</span></label>
-                    <input type="file" class="form-control-file" name="profileImage" id="profileImage"/>
+                    <input type="file" class="form-control-file" name="profileImage" id="profileImage" th:errorclass="hasError" />
                 </div>
                 <div class="form-group">
                     <label for="yearly">年次</label>

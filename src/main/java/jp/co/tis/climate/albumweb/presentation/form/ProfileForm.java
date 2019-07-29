@@ -1,5 +1,8 @@
 package jp.co.tis.climate.albumweb.presentation.form;
 
+import jp.co.tis.climate.albumweb.presentation.validation.UploadFileMaxSize;
+import jp.co.tis.climate.albumweb.presentation.validation.UploadFileNotEmpty;
+import jp.co.tis.climate.albumweb.presentation.validation.UploadFileRequired;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,10 +23,9 @@ public class ProfileForm {
     @Pattern(regexp = "\\d{6}", message = "6桁の社員番号を入力してください。")
     private String employeeId;
 
-    /** TODO
-     *  Validation を追加する。
-     *  http://terasolunaorg.github.io/guideline/5.5.1.RELEASE/ja/ArchitectureInDetail/WebApplicationDetail/FileUpload.html#bean-validation
-     */
+    @UploadFileRequired
+    @UploadFileNotEmpty
+    @UploadFileMaxSize
     private MultipartFile profileImage;
 
     @NotEmpty
