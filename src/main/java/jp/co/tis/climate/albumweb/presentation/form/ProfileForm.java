@@ -20,7 +20,7 @@ public class ProfileForm {
     // TODO: パートナさんにも対応できるようにする。現状、数値以外が入るとdomaで変換エラーが発生
     // @Pattern(regexp="[kK\\d]\\d{5}")
     @NotEmpty
-    @Pattern(regexp = "\\d{6}", message = "6桁の社員番号を入力してください。")
+    @Pattern(regexp = "|\\d{6}", message = "6桁の社員番号を入力してください。")
     private String employeeId;
 
     @UploadFileRequired
@@ -29,11 +29,11 @@ public class ProfileForm {
     private MultipartFile profileImage;
 
     @NotEmpty
-    @Size(min = 1, max = 20)
+    @Size(max = 20)
     private String lastName;
 
     @NotEmpty
-    @Size(min = 1, max = 20)
+    @Size(max = 20)
     private String firstName;
 
     @Size(min = 0, max = 2)

@@ -21,6 +21,7 @@ public class CareerForm {
     @Pattern(regexp = "(|(1|2|3|4|5|6|7|8|9|10|11|12))", message = "経歴月は1～12で指定してください。")
     String month;
 
-    @Size(min = 0, max = 50)
+    // TODO: プロパティファイルで項目名を指定できるようにする。
+    @Size(min = 0, max = 50, message = "経歴の出来事 は {min} 文字以上 {max} 文字以内で入力してください。")
     String event;
 }
