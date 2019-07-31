@@ -1,11 +1,11 @@
 package jp.co.tis.climate.albumweb.presentation.controller.profile;
 
+import jp.co.tis.climate.albumweb.domain.model.member.Profile;
 import jp.co.tis.climate.albumweb.presentation.dto.PageContent;
 import jp.co.tis.climate.albumweb.presentation.form.CareerForm;
 import jp.co.tis.climate.albumweb.presentation.form.ProfileForm;
 import jp.co.tis.climate.albumweb.infrastructure.manager.ImageFileManager;
-import jp.co.tis.climate.albumweb.domain.model.profile.Career;
-import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
+import jp.co.tis.climate.albumweb.domain.model.member.Career;
 import jp.co.tis.climate.albumweb.application.service.profile.PageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
@@ -56,8 +56,11 @@ public class PageController {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         PageContent pageContent = pageService.getPageContentByEmployeeId(employeeId);
-        model.addAttribute("profile", pageContent.getProfile());
+        Profile profile = pageContent.getProfile();
+        model.addAttribute("profile", profile);
         model.addAttribute("allCareers", pageContent.getAllCareers());
+        Optional.ofNullable(profile.getJoiningYear())
+                .ifPresent(year -> model.addAttribute("yearly", Year.now().getValue() - Integer.parseInt(year) + 1));
         return "album/view";
     }
 
@@ -129,9 +132,6 @@ public class PageController {
                 .map(Path::getFileName)
                 .map(Path::toString)
                 .orElse(null));
-        Year thisYear = Year.now();
-        int yearly = thisYear.getValue() - Integer.parseInt(profileForm.getJoiningYear()) + 1;
-        profile.setYearly(String.valueOf(yearly));
 
         pageService.register(profile, allCareers);
         return "redirect:/album/" + profile.getEmployeeId();
