@@ -1,5 +1,7 @@
 package jp.co.tis.climate.albumweb.presentation.form;
 
+import jp.co.tis.climate.albumweb.presentation.validation.AllowMimeType;
+import jp.co.tis.climate.albumweb.presentation.validation.MimeType;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileMaxSize;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileNotEmpty;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileRequired;
@@ -26,6 +28,7 @@ public class ProfileForm {
     @UploadFileRequired
     @UploadFileNotEmpty
     @UploadFileMaxSize
+    @AllowMimeType(allowTypes = {MimeType.JPEG})
     private MultipartFile profileImage;
 
     @NotEmpty
