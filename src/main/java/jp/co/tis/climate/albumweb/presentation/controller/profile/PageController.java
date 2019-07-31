@@ -21,6 +21,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
+import java.time.Year;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -128,6 +129,9 @@ public class PageController {
                 .map(Path::getFileName)
                 .map(Path::toString)
                 .orElse(null));
+        Year thisYear = Year.now();
+        int yearly = thisYear.getValue() - Integer.parseInt(profileForm.getJoiningYear()) + 1;
+        profile.setYearly(String.valueOf(yearly));
 
         pageService.register(profile, allCareers);
         return "redirect:/album/" + profile.getEmployeeId();
