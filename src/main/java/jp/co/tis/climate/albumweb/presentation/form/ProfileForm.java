@@ -3,6 +3,7 @@ package jp.co.tis.climate.albumweb.presentation.form;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileMaxSize;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileNotEmpty;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileRequired;
+import jp.co.tis.climate.albumweb.presentation.validation.PastYear;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +21,7 @@ public class ProfileForm {
     // TODO: パートナさんにも対応できるようにする。現状、数値以外が入るとdomaで変換エラーが発生
     // @Pattern(regexp="[kK\\d]\\d{5}")
     @NotEmpty
-    @Pattern(regexp = "|\\d{6}", message = "6桁の社員番号を入力してください。")
+    @Pattern(regexp = "\\d{6}", message = "6桁の社員番号を入力してください。")
     private String employeeId;
 
     @UploadFileRequired
@@ -29,15 +30,15 @@ public class ProfileForm {
     private MultipartFile profileImage;
 
     @NotEmpty
-    @Size(max = 20)
+    @Size(min = 1, max = 20)
     private String lastName;
 
     @NotEmpty
-    @Size(max = 20)
+    @Size(min = 1, max = 20)
     private String firstName;
 
-    @Size(min = 0, max = 2)
-    private String yearly;
+    @PastYear
+    private String joiningYear;
 
     @NotEmpty
     @Size(min = 1, max = 1)
