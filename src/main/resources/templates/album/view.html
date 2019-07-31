@@ -21,8 +21,8 @@
                     <h5 class="card-title">
                         <p>
                             <span th:text="${profile.lastName} + ' ' + ${profile.firstName}">首藤 優志</span>
-                            <div th:if="${not #strings.isEmpty(profile.yearly)}" th:remove="tag">
-                                <span class="badge badge-pill badge-info ml-1" th:text="${profile.yearly} + '年目'">1年目</span>
+                            <div th:if="${not #strings.isEmpty(yearly)}" th:remove="tag">
+                                <span class="badge badge-pill badge-info ml-1" th:text="${yearly} + '年目'">1年目</span>
                             </div>
                             <div th:switch="${profile.sex}" th:remove="tag">
                                 <span th:case="0" class="badge badge-pill badge-primary ml-1">男</span>

@@ -1,8 +1,8 @@
 package jp.co.tis.climate.albumweb.application.service.member;
 
+import jp.co.tis.climate.albumweb.domain.model.member.Profile;
 import jp.co.tis.climate.albumweb.infrastructure.dao.ProfileDao;
 import jp.co.tis.climate.albumweb.presentation.dto.ProfileCard;
-import jp.co.tis.climate.albumweb.domain.model.profile.Profile;
 //import org.seasar.doma.jdbc.SelectOptions;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class AlbumService {
 
     /**
      *
-     * @param user       検索条件 クラス及び属性がnullは無視
+     * @param profile    検索条件 クラス及び属性がnullは無視
      * @param pageNumber 表示するページ。1~
      * @return 検索結果
      */

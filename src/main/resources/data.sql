@@ -4,7 +4,7 @@ INSERT INTO PROFILE (
     EMPLOYEE_ID
     , LAST_NAME
     , FIRST_NAME
-    , YEARLY
+    , JOINING_YEAR
     , SEX
     , BLOOD_TYPE
     , TEAM
@@ -17,7 +17,7 @@ VALUES (
     0
     , 'クー'
     , 'にゃんこ'
-    , 2
+    , 2017
     , 0
     , 0
     , '長毛'
@@ -29,7 +29,7 @@ VALUES (
     1
     , 'クー1'
     , 'にゃんこ1'
-    , 2
+    , 2018
     , 1
     , 1
     , '長毛1'

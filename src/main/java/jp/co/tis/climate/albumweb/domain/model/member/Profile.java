@@ -1,4 +1,4 @@
-package jp.co.tis.climate.albumweb.domain.model.profile;
+package jp.co.tis.climate.albumweb.domain.model.member;
 
 import lombok.Data;
 
@@ -23,7 +23,7 @@ public class Profile implements Serializable {
 
     private String firstName;
 
-    private String yearly;
+    private String joiningYear;
 
     private String sex;
 
