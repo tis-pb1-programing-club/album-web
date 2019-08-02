@@ -5,7 +5,7 @@ import jp.co.tis.climate.albumweb.presentation.validation.MimeType;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileMaxSize;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileNotEmpty;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileRequired;
-import jp.co.tis.climate.albumweb.presentation.validation.PastYear;
+import jp.co.tis.climate.albumweb.presentation.validation.BeforeYear;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,7 +40,7 @@ public class ProfileForm {
     @Size(min = 1, max = 20)
     private String firstName;
 
-    @PastYear
+    @BeforeYear
     private String joiningYear;
 
     @NotEmpty

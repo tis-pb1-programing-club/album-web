@@ -1,5 +1,6 @@
 package jp.co.tis.climate.albumweb.presentation.validation;
 
+import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext;
 import org.springframework.util.StringUtils;
 
 import javax.validation.Constraint;
@@ -12,6 +13,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import java.time.DateTimeException;
 import java.time.Year;
+import java.util.Arrays;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
@@ -23,11 +25,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = PastYear.UploadFileRequiredValidator.class)
-@Repeatable(PastYear.List.class)
-public @interface PastYear {
+@Constraint(validatedBy = BeforeYear.BeforeYearValidator.class)
+@Repeatable(BeforeYear.List.class)
+public @interface BeforeYear {
 
-    String message() default "{jp.co.tis.climate.albumweb.presentation.validation.PastYear.message}";
+    String message() default "{jp.co.tis.climate.albumweb.presentation.validation.BeforeYear.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
@@ -35,14 +37,14 @@ public @interface PastYear {
     @Retention(RUNTIME)
     @Documented
     @interface List {
-        PastYear[] value();
+        BeforeYear[] value();
     }
 
-    class UploadFileRequiredValidator implements
-            ConstraintValidator<PastYear, String> {
+    class BeforeYearValidator implements
+            ConstraintValidator<BeforeYear, String> {
 
         @Override
-        public void initialize(PastYear constraint) {
+        public void initialize(BeforeYear constraint) {
         }
 
         @Override
@@ -51,9 +53,12 @@ public @interface PastYear {
             if (StringUtils.isEmpty(year)) {
                 return true;
             }
+            Year thisYear = Year.now();
+            context.unwrap(HibernateConstraintValidatorContext.class)
+                    .addExpressionVariable("thisYear", thisYear);
             try {
                 Year y = Year.of(Integer.parseInt(year));
-                return y.getValue() <= Year.now().getValue();
+                return y.getValue() <= thisYear.getValue();
             } catch (NumberFormatException | DateTimeException e) {
                 return false;
             }

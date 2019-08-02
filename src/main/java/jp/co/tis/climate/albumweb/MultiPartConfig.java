@@ -9,6 +9,7 @@ import javax.servlet.MultipartConfigElement;
 
 @Configuration
 public class MultiPartConfig {
+
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
@@ -16,4 +17,5 @@ public class MultiPartConfig {
         factory.setMaxRequestSize(DataSize.ofMegabytes(10));
         return factory.createMultipartConfig();
     }
+
 }
