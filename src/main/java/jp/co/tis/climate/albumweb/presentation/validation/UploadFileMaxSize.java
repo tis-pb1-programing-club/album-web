@@ -1,5 +1,6 @@
 package jp.co.tis.climate.albumweb.presentation.validation;
 
+import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Constraint;
@@ -53,6 +54,10 @@ public @interface UploadFileMaxSize {
             if (constraint.value() < 0 || multipartFile == null) {
                 return true;
             }
+            HibernateConstraintValidatorContext hcon = context.unwrap(HibernateConstraintValidatorContext.class);
+            hcon.addExpressionVariable("kb", constraint.value() + "B" );
+            hcon.addExpressionVariable("kb", (constraint.value() / 1024) + "KB" );
+            hcon.addExpressionVariable("mb", (constraint.value() / (1024 * 1024)) + "MB");
             return multipartFile.getSize() <= constraint.value();
         }
 
