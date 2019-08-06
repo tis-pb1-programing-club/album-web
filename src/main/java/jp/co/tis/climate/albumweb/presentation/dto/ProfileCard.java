@@ -33,7 +33,7 @@ public class ProfileCard {
 
     public Integer getYearly() {
         return Optional.ofNullable(joiningYear)
-                .filter(s -> !StringUtils.isEmpty(joiningYear.trim()))
+                .filter(StringUtils::hasText)
                 .map(year -> Year.now().getValue() - Integer.parseInt(year) + 1)
                 .orElse(null);
     }

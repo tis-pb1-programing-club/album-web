@@ -36,17 +36,13 @@ public class PageController {
 
     private final ImageFileManager imageFileManager;
 
-    private final MessageSource msg;
-
     private final ModelMapper modelMapper;
 
     public PageController(PageService pageService,
                           ImageFileManager imageFileManager,
-                          MessageSource msg,
                           ModelMapper modelMapper) {
         this.pageService = pageService;
         this.imageFileManager = imageFileManager;
-        this.msg = msg;
         this.modelMapper = modelMapper;
     }
 
@@ -60,7 +56,7 @@ public class PageController {
         model.addAttribute("profile", profile);
         model.addAttribute("allCareers", pageContent.getAllCareers());
         Optional.ofNullable(profile.getJoiningYear())
-                .filter(s -> !StringUtils.isEmpty(s.trim()))
+                .filter(StringUtils::hasText)
                 .ifPresent(year -> model.addAttribute("yearly", Year.now().getValue() - Integer.parseInt(year) + 1));
         return "album/view";
     }
