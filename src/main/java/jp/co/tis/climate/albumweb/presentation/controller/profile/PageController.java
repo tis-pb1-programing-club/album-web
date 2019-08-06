@@ -8,7 +8,6 @@ import jp.co.tis.climate.albumweb.infrastructure.manager.ImageFileManager;
 import jp.co.tis.climate.albumweb.domain.model.member.Career;
 import jp.co.tis.climate.albumweb.application.service.profile.PageService;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +22,6 @@ import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.time.Year;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -47,7 +45,7 @@ public class PageController {
     }
 
     @GetMapping("/{employeeId}")
-    public String view(@PathVariable String employeeId, Model model) throws HttpClientErrorException.NotFound {
+    public String view(@PathVariable String employeeId, Model model) {
         if (!pageService.isRegisteredProfile(employeeId)) {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
@@ -87,7 +85,7 @@ public class PageController {
     // TODO 一旦一度にアップロードすることにして、このメソッドは削除
 
     @PostMapping(value = "/newpage")
-    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result, Model model) {
+    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result) {
         
         if (result.hasErrors()) {
             return "album/newpage";
