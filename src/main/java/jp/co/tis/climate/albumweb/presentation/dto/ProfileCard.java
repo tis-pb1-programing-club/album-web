@@ -3,8 +3,10 @@ package jp.co.tis.climate.albumweb.presentation.dto;
 import lombok.Data;
 import org.seasar.doma.Entity;
 import org.seasar.doma.jdbc.entity.NamingType;
+import org.springframework.util.StringUtils;
 
 import java.time.Year;
+import java.util.Optional;
 
 /**
  * albumページに表示される部分的なpersonalの情報
@@ -30,9 +32,9 @@ public class ProfileCard {
     private String comment;
 
     public Integer getYearly() {
-        if (joiningYear == null) {
-            return null;
-        }
-        return Year.now().getValue() - Integer.parseInt(joiningYear) + 1;
+        return Optional.ofNullable(joiningYear)
+                .filter(s -> !StringUtils.isEmpty(joiningYear.trim()))
+                .map(year -> Year.now().getValue() - Integer.parseInt(year) + 1)
+                .orElse(null);
     }
 }

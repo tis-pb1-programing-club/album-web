@@ -60,6 +60,7 @@ public class PageController {
         model.addAttribute("profile", profile);
         model.addAttribute("allCareers", pageContent.getAllCareers());
         Optional.ofNullable(profile.getJoiningYear())
+                .filter(s -> !StringUtils.isEmpty(s.trim()))
                 .ifPresent(year -> model.addAttribute("yearly", Year.now().getValue() - Integer.parseInt(year) + 1));
         return "album/view";
     }
@@ -111,8 +112,7 @@ public class PageController {
         String employeeId = profile.getEmployeeId();
         if (pageService.isRegisteredProfile(employeeId)) {
             String[] phAry = new String[] { employeeId };
-            String errorMsg = msg.getMessage("profileAlreadyExistMsg", phAry, Locale.JAPANESE);
-            model.addAttribute("profileAlreadyExistError", errorMsg);
+            result.rejectValue("employeeId", "profileAlreadyExistMsg", phAry, "");
             return "album/newpage";
         }
 

@@ -10,12 +10,11 @@
 <div layout:fragment="content">
     <form th:action="@{/album/newpage}" enctype="multipart/form-data" method="post" th:object="${profileForm}">
         <h1>プロフィール</h1>
-        <div class="alert alert-light" role="alert" th:if="!${#lists.isEmpty(#fields.detailedErrors())}">
+        <div class="alert alert-light" role="alert" th:if="${not #lists.isEmpty(#fields.detailedErrors())}">
             <ui class="list-group list-group-flush">
                 <li th:each="error : ${#fields.detailedErrors()}" class="list-group-item list-group-item-danger">
                     <span th:text="${error.message}">Error message</span>
                 </li>
-                <span th:text="${profileAlreadyExistError}">ExistUserError</span>
             </ui>
         </div>
         <div class="card bg-light mb-3">
