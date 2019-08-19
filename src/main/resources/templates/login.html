@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{commons/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>ログインページ</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <form method="post" th:action="@{/login}">
+    <div>
+      <label for="username">ユーザ名</label>
+      <input type="text" name="username" id="username"/>
+    </div>
+    <div>
+      <label for="password">パスワード</label>
+      <input type="password" name="password" id="password"/>
+    </div>
+    <button type="submit">ログイン</button>
+
+    <div th:if="${param.error}" style="color: red">
+      ログインできませんでした。
+    </div>
+    <div th:if="${param.logout}" style="color: blue">
+      ログアウトしました。
+    </div>
+  </form>
+</div>
+</body>
+</html>
