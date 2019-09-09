@@ -6,7 +6,7 @@ import org.seasar.doma.Table;
 import org.seasar.doma.jdbc.entity.NamingType;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE, immutable = true)
-@Table(name = "USER")
+@Table(name = "USERS")
 @Data
 public class User {
 

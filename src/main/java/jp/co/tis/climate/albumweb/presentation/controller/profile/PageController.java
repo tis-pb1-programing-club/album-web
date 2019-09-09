@@ -1,6 +1,7 @@
 package jp.co.tis.climate.albumweb.presentation.controller.profile;
 
 import jp.co.tis.climate.albumweb.domain.model.member.Profile;
+import jp.co.tis.climate.albumweb.domain.model.member.User;
 import jp.co.tis.climate.albumweb.presentation.dto.PageContent;
 import jp.co.tis.climate.albumweb.presentation.form.CareerForm;
 import jp.co.tis.climate.albumweb.presentation.form.ProfileForm;
@@ -78,7 +79,7 @@ public class PageController {
 
         model.addAttribute("profileForm", profileForm);
 
-        return "album/newpage";
+        return "login";
     }
 
     // TODO 画像をプレビューする機能はバックログに追加
@@ -127,7 +128,7 @@ public class PageController {
                 .map(Path::toString)
                 .orElse(null));
 
-        pageService.register(profile, allCareers);
+        pageService.register(profile, allCareers, profileForm.getPassword());
         return "redirect:/album/" + profile.getEmployeeId();
     }
 

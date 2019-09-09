@@ -26,6 +26,9 @@ public class ProfileForm {
     @NotEmpty
     @EmployeeId
     private String employeeId;
+    
+    @NotEmpty
+    private String password;
 
     @UploadFileRequired
     @UploadFileNotEmpty
