@@ -1,7 +1,6 @@
 package jp.co.tis.climate.albumweb.presentation.controller.profile;
 
 import jp.co.tis.climate.albumweb.domain.model.member.Profile;
-import jp.co.tis.climate.albumweb.domain.model.member.User;
 import jp.co.tis.climate.albumweb.presentation.dto.PageContent;
 import jp.co.tis.climate.albumweb.presentation.form.CareerForm;
 import jp.co.tis.climate.albumweb.presentation.form.ProfileForm;
@@ -18,6 +17,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
@@ -86,7 +87,7 @@ public class PageController {
     // TODO 一旦一度にアップロードすることにして、このメソッドは削除
 
     @PostMapping(value = "/newpage")
-    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result) {
+    public String submit(@ModelAttribute @Validated ProfileForm profileForm, BindingResult result, HttpServletRequest request) throws ServletException {
         
         if (result.hasErrors()) {
             return "album/newpage";
@@ -129,6 +130,8 @@ public class PageController {
                 .orElse(null));
 
         pageService.register(profile, allCareers, profileForm.getPassword());
+        request.login(profileForm.getEmployeeId(), profileForm.getPassword());
+
         return "redirect:/album/" + profile.getEmployeeId();
     }
 
