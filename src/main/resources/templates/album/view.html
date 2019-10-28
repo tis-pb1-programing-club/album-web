@@ -89,9 +89,12 @@
         <p>経歴が登録されていません。</p>
     </div>
     <form th:action="@{/album/{employeeId}(employeeId=${profile.employeeId})}" method="post">
+        <div class="float-left mb-3">
+            <button type="submit" name="delete" class="btn btn-danger ml-1">削除</button>
+        </div>
         <div class="float-right mb-3">
             <a th:href="@{/album/}" href="#" class="btn btn-secondary" role="button" aria-pressed="true">Topへ</a>
-            <button type="submit" name="delete" class="btn btn-danger ml-1">削除</button>
+            <a th:href="@{/album/edit/{employeeId}(employeeId=${profile.employeeId})}" href="#" class="btn btn-secondary" role="button" aria-pressed="true">編集</a>
         </div>
     </form>
 </div>

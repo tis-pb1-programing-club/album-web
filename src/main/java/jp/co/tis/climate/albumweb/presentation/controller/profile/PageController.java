@@ -135,4 +135,18 @@ public class PageController {
         return "redirect:/album/" + profile.getEmployeeId();
     }
 
+
+    @GetMapping("/edit/{employeeId}")
+    public String editView(@PathVariable String employeeId, Model model) {
+        ProfileForm profileForm = new ProfileForm();
+        profileForm.setAllCareers(IntStream.range(1, 11).mapToObj(i -> {
+            CareerForm career = new CareerForm();
+            career.setCareerId(String.valueOf(i));
+            return career;
+        }).collect(Collectors.toList()));
+
+        model.addAttribute("profileForm", profileForm);
+
+        return "album/edit";
+    }
 }

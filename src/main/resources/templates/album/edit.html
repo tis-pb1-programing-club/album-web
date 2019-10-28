@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{commons/layout_noheader}">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="アルバム編集">アルバム編集</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/album/newpage}" enctype="multipart/form-data" method="post" th:object="${profileForm}">
+        <h1>プロフィール</h1>
+        <div class="alert alert-light" role="alert" th:if="${not #lists.isEmpty(#fields.detailedErrors())}">
+            <ui class="list-group list-group-flush">
+                <li th:each="error : ${#fields.detailedErrors()}" class="list-group-item list-group-item-danger">
+                    <span th:text="${error.message}">Error message</span>
+                </li>
+            </ui>
+        </div>
+        <div class="card bg-light mb-3">
+            <div class="card-header">基本情報</div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="lastName" class="col-form-label">姓<span class="badge badge-pill badge-danger ml-3">必須</span></label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="山田" th:field="*{lastName}" th:errorclass="hasError" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="firstName" class="col-form-label">名<span class="badge badge-pill badge-danger ml-3">必須</span></label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="太郎" th:field="*{firstName}" th:errorclass="hasError" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="employeeId">社員番号<span class="badge badge-pill badge-danger ml-3">必須</span></label>
+                    <input type="text" class="form-control" name="employeeId" id="employeeId" placeholder="123456" th:field="*{employeeId}" th:errorclass="hasError" />
+                </div>
+                <div class="form-group">
+                    <label for="password">パスワード<span class="badge badge-pill badge-danger ml-3">必須</span></label>
+                    <input type="password" class="form-control" name="password" id="password" th:field="*{password}" th:errorclass="hasError" />
+                </div>
+                <div class="form-group">
+                    <label for="profileImage">顔写真<span class="badge badge-pill badge-danger ml-3">必須</span></label>
+                    <input type="file" class="form-control-file" name="profileImage" id="profileImage" th:errorclass="hasError" accept="image/jpeg, image/jpg"/>
+                </div>
+                <div class="form-group">
+                    <label for="joiningYear">入社年度</label>
+                    <input type="text" class="form-control" name="joiningYear" id="joiningYear" placeholder="2019" th:field="*{joiningYear}" th:errorclass="hasError" />
+                </div>
+                <div class="form-group">
+                    <label for="sex">性別</label>
+                    <select class="form-control" name="sex" id="sex" th:field="*{sex}" th:errorclass="hasError" >
+                        <option value="*">非公開</option>
+                        <option value="0">男性</option>
+                        <option value="1">女性</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bloodType">血液型</label>
+                    <select class="form-control" name="bloodType" id="bloodType" th:field="*{bloodType}" th:errorclass="hasError" >
+                        <option value="*">非公開</option>
+                        <option value="0">A型</option>
+                        <option value="1">B型</option>
+                        <option value="2">O型</option>
+                        <option value="3">AB型</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="team">所属チーム</label>
+                    <input type="text" class="form-control" name="team" id="team" placeholder="××チーム" th:field="*{team}" th:errorclass="hasError" />
+                </div>
+                <div class="form-group">
+                    <label for="customer">担当顧客</label>
+                    <input type="text" class="form-control" name="customer" id="customer" placeholder="○○銀行" th:field="*{customer}" th:errorclass="hasError" />
+                </div>
+                <div class="form-group">
+                    <label for="project">担当案件</label>
+                    <input type="text" class="form-control" name="project" id="project" placeholder="プロジェクトX" th:field="*{project}" th:errorclass="hasError" />
+                </div>
+                <div class="form-group">
+                    <label for="privateSentence">プライベート</label>
+                    <textarea type="text" class="form-control" name="privateSentence" id="privateSentence" rows="5"
+                              placeholder="趣味、特技、休日の過ごし方などを記述してください。" th:field="*{privateSentence}" th:errorclass="hasError" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="comment">コメント</label>
+                    <textarea type="text" class="form-control" name="comment" id="comment" rows="5" placeholder="自由記述欄です" th:field="*{comment}" th:errorclass="hasError" ></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-light mb-3">
+            <div class="card-header">経歴</div>
+            <div class="card-body">
+                <div class="form-row" th:each="career,stat : *{allCareers}">
+                    <input type="hidden" th:field="*{allCareers[__${stat.index}__].careerId}" th:errorclass="hasError" />
+                    <div class="form-group col-md-2">
+                        <input type="text" class="form-control" placeholder="yyyy" th:field="*{allCareers[__${stat.index}__].year}" th:errorclass="hasError" >
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="text" class="form-control" placeholder="M" th:field="*{allCareers[__${stat.index}__].month}" th:errorclass="hasError" >
+                    </div>
+                    <div class="form-group col-md-8">
+                        <input type="text" class="form-control" placeholder="○○プロジェクトに××として着任" th:field="*{allCareers[__${stat.index}__].event}" th:errorclass="hasError" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="float-right mb-3">
+            <button type="submit" class="btn btn-primary" name="submit">登録</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
