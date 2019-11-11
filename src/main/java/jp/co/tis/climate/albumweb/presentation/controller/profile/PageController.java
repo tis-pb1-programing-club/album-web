@@ -138,7 +138,11 @@ public class PageController {
 
     @GetMapping("/edit/{employeeId}")
     public String editView(@PathVariable String employeeId, Model model) {
-        ProfileForm profileForm = new ProfileForm();
+        if (!pageService.isRegisteredProfile(employeeId)) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+        }
+        PageContent pageContent = pageService.getPageContentByEmployeeId(employeeId);
+        ProfileForm profileForm = modelMapper.map(pageContent.getProfile(), ProfileForm.class);
         profileForm.setAllCareers(IntStream.range(1, 11).mapToObj(i -> {
             CareerForm career = new CareerForm();
             career.setCareerId(String.valueOf(i));
@@ -146,6 +150,7 @@ public class PageController {
         }).collect(Collectors.toList()));
 
         model.addAttribute("profileForm", profileForm);
+        model.addAttribute("profileImageFilename", pageContent.getProfile().getProfileImageFilename());
 
         return "album/edit";
     }
