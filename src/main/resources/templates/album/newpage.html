@@ -56,12 +56,11 @@
                 </div>
                 <div class="form-group">
                     <label for="bloodType">血液型</label>
-                    <select class="form-control" name="bloodType" id="bloodType" th:field="*{bloodType}" th:errorclass="hasError" >
-                        <option value="*">非公開</option>
-                        <option value="0">A型</option>
-                        <option value="1">B型</option>
-                        <option value="2">O型</option>
-                        <option value="3">AB型</option>
+                    <select name="bloodType" th:field="*{bloodType}" th:errorclass="hasError" >
+                        <option value="">-</option>
+                        <option th:each="bloodType : ${bloodTypeList}"
+                                th:value="${bloodType.value}" th:text="${bloodType.label}">
+                        </option>
                     </select>
                 </div>
                 <div class="form-group">

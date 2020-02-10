@@ -1,5 +1,6 @@
 package jp.co.tis.climate.albumweb.presentation.controller.profile;
 
+import jp.co.tis.climate.albumweb.domain.code.BloodType;
 import jp.co.tis.climate.albumweb.domain.model.member.Profile;
 import jp.co.tis.climate.albumweb.presentation.dto.PageContent;
 import jp.co.tis.climate.albumweb.presentation.form.CareerForm;
@@ -79,6 +80,7 @@ public class PageController {
         }).collect(Collectors.toList()));
 
         model.addAttribute("profileForm", profileForm);
+        model.addAttribute("bloodTypeList", BloodType.values());
 
         return "login";
     }
