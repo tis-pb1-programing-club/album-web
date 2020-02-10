@@ -4,7 +4,7 @@
       layout:decorate="~{commons/layout_noheader}">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="アルバム追加">アルバム追加</title>
+    <title th:text="アルバム編集">アルバム編集</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -31,16 +31,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="employeeId">社員番号<span class="badge badge-pill badge-danger ml-3">必須</span></label>
-                    <input type="text" class="form-control" name="employeeId" id="employeeId" placeholder="123456" th:field="*{employeeId}" th:errorclass="hasError" />
-                </div>
-                <div class="form-group">
-                    <label for="password">パスワード<span class="badge badge-pill badge-danger ml-3">必須</span></label>
-                    <input type="password" class="form-control" name="password" id="password" th:field="*{password}" th:errorclass="hasError" />
+                    <label for="employeeId">社員番号</label>
+                    <span id="employeeId" th:text="*{employeeId}"></span>
                 </div>
                 <div class="form-group">
                     <label for="profileImage">顔写真<span class="badge badge-pill badge-danger ml-3">必須</span></label>
                     <input type="file" class="form-control-file" name="profileImage" id="profileImage" th:errorclass="hasError" accept="image/jpeg, image/jpg"/>
+                    <img class="card-img" src="../../static/image/0.jpg" th:if="${not #strings.isEmpty(profileImageFilename)}" th:src="@{'/album/image/' + ${profileImageFilename}}">
+                    <img class="card-img" src="/image/no-image.jpg" th:if="${#strings.isEmpty(profileImageFilename)}">
                 </div>
                 <div class="form-group">
                     <label for="joiningYear">入社年度</label>

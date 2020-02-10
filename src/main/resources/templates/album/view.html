@@ -8,103 +8,94 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <table class="table table-bordered">
+    <h1>プロフィール</h1>
+    <h3>基本情報</h3>
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img class="card-img" src="../../static/image/0.jpg" th:if="${not #strings.isEmpty(profile.profileImageFilename)}" th:src="@{'/album/image/' + ${profile.profileImageFilename}}">
+                <img class="card-img" src="/image/no-image.jpg" th:if="${#strings.isEmpty(profile.profileImageFilename)}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <p>
+                            <span th:text="${profile.lastName} + ' ' + ${profile.firstName}">首藤 優志</span>
+                            <div th:if="${not #strings.isEmpty(yearly)}" th:remove="tag">
+                                <span class="badge badge-pill badge-info ml-1" th:text="${yearly} + '年目'">1年目</span>
+                            </div>
+                            <div th:switch="${profile.sex}" th:remove="tag">
+                                <span th:case="0" class="badge badge-pill badge-primary ml-1">男</span>
+                                <span th:case="1" class="badge badge-pill badge-danger ml-1">女</span>
+                                <span th:case="*"></span>
+                            </div>
+                            <div th:switch="${profile.bloodType}" th:remove="tag">
+                                <span th:case="0" class="badge badge-pill badge-info ml-1">A型</span>
+                                <span th:case="1" class="badge badge-pill badge-info ml-1">B型</span>
+                                <span th:case="2" class="badge badge-pill badge-info ml-1">O型</span>
+                                <span th:case="3" class="badge badge-pill badge-info ml-1">AB型</span>
+                                <span th:case="*"></span>
+                            </div>
+                        </p>
+                    </h5>
+                    <p class="card-text">
+                        <dl class="row">
+                            <dt class="col-sm-3">社員番号</dt>
+                            <dd class="col-sm-9" th:text="${profile.employeeId}">305575</dd>
+
+                            <dt class="col-sm-3">所属チーム</dt>
+                            <dd class="col-sm-9" th:text="${#strings.defaultString(profile.team,'−')}">標準化（ED1）</dd>
+
+                            <dt class="col-sm-3">担当顧客</dt>
+                            <dd class="col-sm-9" th:text="${#strings.defaultString(profile.customer,'−')}">なし</dd>
+
+                            <dt class="col-sm-3">担当案件</dt>
+                            <dd class="col-sm-9" th:text="${#strings.defaultString(profile.project,'−')}">サービス改善</dd>
+
+                            <dt class="col-sm-3">プライベート</dt>
+                            <dd class="col-sm-9" th:text="${#strings.defaultString(profile.privateSentence,'−')}">猫飼ってます</dd>
+
+                            <dt class="col-sm-3">コメント</dt>
+                            <dd class="col-sm-9" th:text="${#strings.defaultString(profile.comment,'−')}">よろ</dd>
+                        </dl>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3>経歴</h3>
+    <table class="table table-bordered" th:if="${not #lists.isEmpty(allCareers)}">
+        <thead class="thead-light">
         <tr>
-            <th class="table-title" colspan="2">プロフィール</th>
-            <!--/* srcファイルの場所は最終的にはjarの外部になる */-->
-            <td rowspan="9"><img class="user" src="../../static/image/0.jpg" th:src="@{'/album/image/' + ${profile.profileImageFilename}}"></td>
+            <th scope="col" style="width: 5%">#</th>
+            <th scope="col" style="width: 10%">年月</th>
+            <th scope="col" style="width: 85%">出来事</th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first" th:each="career,stat : ${allCareers}">
+        <tr>
+            <th scope="row" th:text="${stat.count}">1</th>
+            <td th:text="${#dates.format(#dates.create(career.year, career.month, 1), 'yyyy/MM')}">2018/04</td>
+            <td th:text="${career.event}">入社</td>
         </tr>
         <tr>
-            <th>氏名</th>
-            <td><p th:text="${profile.lastName} + ' ' + ${profile.firstName}">首藤 優志</p></td>
+            <th scope="row">1</th>
+            <td>2018/08</td>
+            <td>うんやかんや新人研修終了</td>
         </tr>
-        <tr>
-            <th>社員番号</th>
-            <td><p th:text="${profile.employeeId}">305575</p></td>
-        </tr>
-        <tr>
-            <th>年次</th>
-            <td><p th:text="${profile.yearly} + '年目'">1年目</p></td>
-        </tr>
-        <tr>
-            <th>性別</th>
-            <td th:switch="${profile.sex}">
-                <p th:case="0">男性</p>
-                <p th:case="1">女性</p>
-                <p th:case="*">非公開</p>
-            </td>
-        </tr>
-        <tr>
-            <th>血液型</th>
-            <td th:switch="${profile.bloodType}">
-                <p th:case="0">A型</p>
-                <p th:case="1">B型</p>
-                <p th:case="2">O型</p>
-                <p th:case="3">AB型</p>
-                <p th:case="*">非公開</p>
-            </td>
-        </tr>
-        <tr>
-            <th>所属チーム</th>
-            <td><p th:text="${profile.team}">標準化（ED1）</p></td>
-        </tr>
-        <tr>
-            <th>担当顧客</th>
-            <td><p th:text="${profile.customer}">なし</p></td>
-        </tr>
-        <tr>
-            <th>担当案件</th>
-            <td><p th:text="${profile.project}">デビプリ改善</p></td>
-        </tr>
-        <tr>
-            <th>プライベート</th>
-            <th colspan="2">※自由記述コーナー</th>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <pre th:text="${profile.privateSentence}">猫飼ってます</pre>
-            </td>
-        </tr>
-        <tr>
-            <th>経歴</th>
-            <th colspan="2"></th>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <table class="mx-auto" width="80%">
-                    <thead>
-                    <tr>
-                        <th class="table-career" colspan="2" width="15%">時期</th>
-                        <th class="table-career">出来事</th>
-                    </tr>
-                    </thead>
-                    <tbody th:remove="all-but-first" th:each="career : ${allCareers}">
-                    <tr>
-                        <td><p th:text="${career.year}">2018</p></td>
-                        <td><p th:text="${career.month} + '月'">4月</p></td>
-                        <td><p th:text="${career.event}">入社</p></td>
-                    </tr>
-                    <tr>
-                        <td><p th:text="${career.year}">2018</p></td>
-                        <td><p th:text="${career.month} + '月'">8月</p></td>
-                        <td><p th:text="${career.event}">うんやかんや新人研修終了</p></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <th>コメント</th>
-            <th colspan="2"></th>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <pre th:text="${profile.comment}">よろ</pre>
-            </td>
-        </tr>
+        </tbody>
     </table>
-    <form th:action="@{/album/{employeeId}(employeeId=${profile.employeeId})}" enctype="multipart/form-data" method="post" th:object="${profileForm}">
-        <button type="submit" name="delete" class="btn btn-sm btn-outline-secondary" >Delete Page</button>
+    <div th:if="${#lists.isEmpty(allCareers)}">
+        <p>経歴が登録されていません。</p>
+    </div>
+    <form th:action="@{/album/{employeeId}(employeeId=${profile.employeeId})}" method="post">
+        <div class="float-left mb-3">
+            <button type="submit" name="delete" class="btn btn-danger ml-1">削除</button>
+        </div>
+        <div class="float-right mb-3">
+            <a th:href="@{/album/}" href="#" class="btn btn-secondary" role="button" aria-pressed="true">Topへ</a>
+            <a th:href="@{/album/edit/{employeeId}(employeeId=${profile.employeeId})}" href="#" class="btn btn-secondary" role="button" aria-pressed="true">編集</a>
+        </div>
     </form>
 </div>
 </body>
