@@ -1,72 +1,81 @@
---INSERT INTO HELLO ( ID, MESSAGE ) VALUES ( 0, 'HELLO WORLD!' );
---
---INSERT INTO PROFILE (
---    EMPLOYEE_ID
---    , LAST_NAME
---    , FIRST_NAME
---    , JOINING_YEAR
---    , SEX
---    , BLOOD_TYPE
---    , TEAM
---    , CUSTOMER
---    , PROJECT
---    , PRIVATE_SENTENCE
---    , COMMENT
---)
---VALUES (
---    0
---    , 'クー'
---    , 'にゃんこ'
---    , 2017
---    , 0
---    , 0
---    , '長毛'
---    , '人間'
---    , 'おなか見せ'
---    , 'ずっと寝てます。' || CHAR(13) || CHAR(10) || 'Tulleが好きです。' || CHAR(13) || CHAR(10) || 'お風呂は嫌いです。'
---    , 'にゃーお'
---), (
---    1
---    , 'クー1'
---    , 'にゃんこ1'
---    , 2018
---    , 1
---    , 1
---    , '長毛1'
---    , '人間1'
---    , 'おなか見せ1'
---    , 'ずっと寝てます。' || CHAR(13) || CHAR(10) || 'Tulleが好きです。' || CHAR(13) || CHAR(10) || 'お風呂は嫌いです。'
---    , 'にゃーお1'
---);
---
---INSERT INTO CAREER (
---    EMPLOYEE_ID
---    , CAREER_ID
---    , YEAR
---    , MONTH
---    , EVENT
---)
---VALUES (
---    0
---    , 0
---    , 2016
---    , 4
---    , '産まれる'
---)
---,(
---    0
---    , 1
---    , 2018
---    , 6
---    , '飼われる'
---);
+INSERT INTO ACCOUNT VALUES (
+    'tie000000',
+    'pass123-',
+    '1'
+);
 
--- adminユーザを登録する
-insert into users values ('admin', '$2a$10$vTHgo5H7j7ayxcK7M9j4RuSNmiegX.Kng6c08BR/rWFW4U4gxsUO2');
-insert into user_role (username, role)
-values ('admin', 'ROLE_admin');
--- 一般ユーザ
-insert into users
-values ('qoo', '$2a$10$vTHgo5H7j7ayxcK7M9j4RuSNmiegX.Kng6c08BR/rWFW4U4gxsUO2');
-insert into user_role (username, role)
-values ('qoo', 'ROLE_user');
+INSERT INTO BIRTHPLACE VALUES (
+    '1',
+    '東京'
+);
+
+INSERT INTO GENDER VALUES (
+    '0',
+    '男性'
+), (
+    '1',
+    '女性'
+), (
+    '2',
+    '無回答'
+);
+
+INSERT INTO BLOOD_TYPE VALUES (
+    '0',
+    'A型'
+), (
+    '1',
+    'B型'
+), (
+    '2',
+    'O型'
+), (
+    '3',
+    'AB型'
+);
+
+INSERT INTO PROFILE (
+    EMPLOYEE_ID,
+    NAME,
+    HIRE_DATE,
+    IS_NEWCOMER,
+    GENDER_ID,
+    BLOOD_TYPE_ID,
+    SALES_POINT,
+    HOBBY,
+    BIRTHPLACE
+)
+VALUES (
+    'tie000000',
+    'TIS太郎',
+    '201604',
+    '0',
+    '0',
+    '1',
+    'セールスポイント',
+    '趣味',
+    '東京'
+);
+
+INSERT INTO CAREER VALUES (
+    'tie000000',
+    '201604',
+    '201608',
+    'PJ名',
+    '業務内容'
+);
+
+INSERT INTO REGISTRATION_UPDATE VALUES (
+    'tie000000',
+    '2020-2-15 10:23:54'
+);
+
+INSERT INTO TEAM VALUES (
+    '1',
+    'チーム名'
+);
+
+INSERT INTO BELONG VALUES (
+    'tie000000',
+    '1'
+);
