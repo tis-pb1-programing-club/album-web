@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{commons/layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>苗字名前さんのアルバム</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>プロフィール</h1>
+    <h3>基本情報</h3>
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img class="card-img" src="/image/no-image.jpg">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <p>
+                            <span >苗字名前</span>
+                            <div>
+                                <span class="badge badge-pill badge-info ml-1">新卒</span>
+                            </div>
+                            <div>
+                                <span class="badge badge-pill badge-info ml-1">1年目</span>
+                            </div>
+                            <div>
+                                <span class="badge badge-pill badge-info ml-1">男</span>
+                            </div>
+                            <div>
+                                <span class="badge badge-pill badge-info ml-1">A型</span>
+                            </div>
+                        </p>
+                    </h5>
+                    <p class="card-text">
+                        <dl class="row">
+                            <dt class="col-sm-3">社員番号</dt>
+                            <dd class="col-sm-9">123456</dd>
+
+                            <dt class="col-sm-3">所属チーム</dt>
+                            <dd class="col-sm-9">標準化（ED1）</dd>
+
+                            <dt class="col-sm-3">自分のセールスポイント</dt>
+                            <dd class="col-sm-9">なし</dd>
+
+                            <dt class="col-sm-3">趣味</dt>
+                            <dd class="col-sm-9">サービス改善</dd>
+
+                            <dt class="col-sm-3">出身</dt>
+                            <dd class="col-sm-9">猫飼ってます</dd>
+
+                            <dt class="col-sm-3">自己紹介資料</dt>
+                            <dd class="col-sm-9"><a href="#">ダウンロード</a></dd>
+                        </dl>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3>経歴</h3>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col" style="width: 10%">年月</th>
+            <th scope="col" style="width: 20%">担当PJ</th>
+            <th scope="col" style="width: 80%">出来事</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>2018/08</td>
+            <td>サービス改善</td>
+            <td>うんやかんや新人研修終了</td>
+        </tr>
+        </tbody>
+    </table>
+    <form method="get">
+        <div class="float-left mb-3">
+            <button type="submit" class="btn btn-default btn-outline-secondary ml-1">戻る</button>
+        </div>
+        <div class="float-right mb-3">
+            <button type="submit" class="btn btn-primary ml-1">編集</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
