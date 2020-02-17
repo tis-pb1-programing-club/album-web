@@ -2,7 +2,6 @@ package jp.co.tis.climate.albumweb;
 
 import jp.co.tis.climate.albumweb.util.DomainConverter;
 import org.apache.commons.beanutils.BeanUtilsBean;
-import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.context.properties.ConfigurationProperties;
