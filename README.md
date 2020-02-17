@@ -60,3 +60,28 @@ List<Profile> select(Partial<Name> name, Partial<Hobby> hobby);
 ### 実装上の注意点
 
 フィールドの型にはすべてStringクラスを指定すること。
+
+## 実装ガイド
+
+### Beanコピー
+
+Beanコピーには`BeanUtilsBean`クラスをDIして使用してください。Domain<->String型の変換ができます。  
+※ 現在は`valueType = String.class`のDomainにのみ対応してます。左記以外の場合はプロパティの移動は手動で実装してください。
+
+```java
+public class SampleController {
+    private final BeanUtilsBean beanUtilsBean;
+    
+    public PageController(BeanUtilsBean beanUtilsBean) {
+        this.beanUtilsBean = beanUtilsBean;
+    }
+
+    @GetMapping("/test")
+    public String test(@ModelAttribute @Validated TeamForm teamForm, Model model) throws InvocationTargetException, IllegalAccessException {
+        // Formクラスをエンティティクラスにコピー
+        Team team = new Team();
+        beanUtilsBean.copyProperties(team, teamForm);
+        return "login";
+    }
+}
+```
