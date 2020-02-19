@@ -13,4 +13,11 @@ public class TopController {
         return "top";
     }
 
+    @GetMapping("/profile/list")
+    public String list() {
+
+        return "top";
+    }
+
 }
+
