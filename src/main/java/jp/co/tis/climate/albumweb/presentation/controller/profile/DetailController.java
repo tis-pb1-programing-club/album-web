@@ -12,4 +12,10 @@ public class DetailController {
     public String detail(@PathVariable("id") String employeeId){
         return "profile/detail";
     }
+
+    @GetMapping("/back")
+    public String back(){
+        return "top";
+//        return "redirect:top";
+    }
 }
