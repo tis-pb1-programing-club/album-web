@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{commons/layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="チーム一覧">チーム一覧</title>
+</head>
+<body>
+<h1>チーム編集</h1>
+<div layout:fragment="content">
+    <section class="new-sec">
+        <div class="container">
+            <h3><small class="text-muted">チーム登録</small></h3>
+            <form action="top.html" method="get" novalidate="novalidate">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-11 col-md-11 col-sm-12 p-0">
+                                <input type="text" class="form-control search-slt" placeholder="チーム名">
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-12 p-0">
+                                <button type="submit" class="btn btn-primary" name="submit">登録</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <br />
+    <section class="search-edit">
+        <div class="container">
+            <h3><small class="text-muted">チーム一覧</small></h3>
+            <form enctype="multipart/form-data" method="post" action="top.html">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">チーム名</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row"><label>001</label></th>
+                        <td><label>赤チーム</label></td>
+                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label>001</label></th>
+                        <td><label>赤チーム</label></td>
+                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label>001</label></th>
+                        <td><label>赤チーム</label></td>
+                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </section>
+</div>
+</body>
+</html>
