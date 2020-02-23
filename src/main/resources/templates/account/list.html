@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{commons/layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="ユーザー一覧">ユーザー一覧</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>ユーザー一覧</h1>
+    <section class="search-sec">
+        <div class="container">
+            <h3><small class="text-muted">ユーザ検索</small></h3>
+            <form action="top.html" method="get" novalidate="novalidate">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 p-0">
+                                <input type="text" class="form-control search-slt" placeholder="名前（部分一致）">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 p-0">
+                                <input type="text" class="form-control search-slt" placeholder="社員番号">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+                                <select class="form-control search-slt">
+                                    <option></option>
+                                    <option>管理者</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-12 p-0">
+                                <button type="submit" class="btn btn-primary" name="submit">検索</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <br />
+    <section class="search-edit">
+        <div class="container">
+            <h3><small class="text-muted">ユーザ検索結果</small></h3>
+            <form enctype="multipart/form-data" method="post" action="top.html">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">社員番号</th>
+                        <th scope="col">名前</th>
+                        <th scope="col">管理者</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row"><label>123456</label></th>
+                        <td><label>山田太郎</label></td>
+                        <td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success"></td>
+                        <td><a href="#">パスワード変更</a></td>
+                        <td><a href="#" class="text-danger">削除</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label>123456</label></th>
+                        <td><label>山田太郎</label></td>
+                        <td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success"></td>
+                        <td><a href="#">パスワード変更</a></td>
+                        <td><a href="#" class="text-danger">削除</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label>123456</label></th>
+                        <td><label>山田太郎</label></td>
+                        <td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success"></td>
+                        <td><a href="#">パスワード変更</a></td>
+                        <td><a href="#" class="text-danger">削除</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="float-right mb-3">
+                    <button type="submit" class="btn btn-primary" name="submit">管理者情報更新</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+</body>
+</html>
