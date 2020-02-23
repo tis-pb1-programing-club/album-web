@@ -1,41 +1,40 @@
 package jp.co.tis.climate.albumweb.domain.model.member;
 
+import jp.co.tis.climate.albumweb.domain.*;
+import jp.co.tis.climate.albumweb.domain.code.BloodType;
+import jp.co.tis.climate.albumweb.domain.code.City;
+import jp.co.tis.climate.albumweb.domain.code.Gender;
+import jp.co.tis.climate.albumweb.domain.code.Recruit;
 import lombok.Data;
 
 import org.seasar.doma.Entity;
-import org.seasar.doma.Id;
-import org.seasar.doma.Table;
 import org.seasar.doma.jdbc.entity.NamingType;
 
 import java.io.Serializable;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE)
-@Table(name = "PROFILE")
 @Data
 public class Profile implements Serializable {
 
-    @Id
     private String employeeId;
 
-    private String profileImageFilename;
+    private Picture picture;
 
-    private String lastName;
+    private Name name;
 
-    private String firstName;
+    private YearMonth hireDate;
 
-    private String joiningYear;
+    private Recruit recruit;
 
-    private String sex;
+    private Gender genderId;
 
-    private String bloodType;
+    private BloodType bloodTypeId;
 
-    private String team;
+    private SalesPoint salesPoint;
 
-    private String customer;
+    private Hobby hobby;
 
-    private String project;
+    private City birthplace;
 
-    private String privateSentence;
-
-    private String comment;
+    private Presentation presentation;
 }
