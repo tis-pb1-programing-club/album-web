@@ -65,9 +65,9 @@ public class PageService {
     }
     
     public void delete(Profile profile, List<Career> allCareers){
-        String filename = profile.getProfileImageFilename();
+       // String filename = profile.getProfileImageFilename(); //entityを修正したためコメントアウト
         profileDao.delete(profile);
         careerDao.batchDelete(allCareers);
-        imageFileManager.delete(filename);
+        //imageFileManager.delete(filename); //entityを修正したためコメントアウト
     }
 }

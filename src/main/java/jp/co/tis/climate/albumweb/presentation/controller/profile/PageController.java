@@ -56,9 +56,10 @@ public class PageController {
         Profile profile = pageContent.getProfile();
         model.addAttribute("profile", profile);
         model.addAttribute("allCareers", pageContent.getAllCareers());
-        Optional.ofNullable(profile.getJoiningYear())
+        //entityを修正したためコメントアウト
+        /*Optional.ofNullable(profile.getJoiningYear())
                 .filter(StringUtils::hasText)
-                .ifPresent(year -> model.addAttribute("yearly", Year.now().getValue() - Integer.parseInt(year) + 1));
+                .ifPresent(year -> model.addAttribute("yearly", Year.now().getValue() - Integer.parseInt(year) + 1));*/
         return "album/view";
     }
 
@@ -114,7 +115,8 @@ public class PageController {
             return "album/newpage";
         }
 
-        List<Career> allCareers = profileForm.getAllCareers()
+        //entityを修正したためコメントアウト
+        /*List<Career> allCareers = profileForm.getAllCareers()
                 .stream()
                 .filter(c -> StringUtils.hasText(c.getEvent())
                         && StringUtils.hasText(c.getYear())
@@ -124,12 +126,14 @@ public class PageController {
                     career.setEmployeeId(profileForm.getEmployeeId());
                     return career;
                 })
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
+        List<Career> allCareers = null;
 
-        profile.setProfileImageFilename(Optional.ofNullable(path)
+        //entityを修正したためコメントアウト
+        /*profile.setProfileImageFilename(Optional.ofNullable(path)
                 .map(Path::getFileName)
                 .map(Path::toString)
-                .orElse(null));
+                .orElse(null));*/
 
         pageService.register(profile, allCareers, profileForm.getPassword());
         request.login(profileForm.getEmployeeId(), profileForm.getPassword());
@@ -152,7 +156,7 @@ public class PageController {
         }).collect(Collectors.toList()));
 
         model.addAttribute("profileForm", profileForm);
-        model.addAttribute("profileImageFilename", pageContent.getProfile().getProfileImageFilename());
+        //model.addAttribute("profileImageFilename", pageContent.getProfile().getProfileImageFilename()); //entityを修正したためコメントアウト
 
         return "album/edit";
     }
