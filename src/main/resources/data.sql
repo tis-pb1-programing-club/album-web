@@ -38,7 +38,7 @@ INSERT INTO PROFILE (
     EMPLOYEE_ID,
     NAME,
     HIRE_DATE,
-    IS_NEWCOMER,
+    RECRUIT,
     GENDER_ID,
     BLOOD_TYPE_ID,
     SALES_POINT,
@@ -78,4 +78,93 @@ INSERT INTO TEAM VALUES (
 INSERT INTO BELONG VALUES (
     'tie000000',
     '1'
+);
+
+INSERT INTO ACCOUNT VALUES (
+    'tie333333',
+    'pass123-',
+    '0'
+);
+
+INSERT INTO PROFILE (
+    EMPLOYEE_ID,
+    NAME,
+    HIRE_DATE,
+    RECRUIT,
+    GENDER_ID,
+    BLOOD_TYPE_ID,
+    SALES_POINT,
+    HOBBY,
+    BIRTHPLACE
+)
+VALUES (
+    'tie333333',
+    '三郎丸',
+    '201504',
+    '0',
+    '0',
+    '1',
+    'セールスポイント',
+    '趣味',
+    '東京'
+);
+
+
+INSERT INTO ACCOUNT VALUES (
+    'tie222222',
+    'pass123-',
+    '0'
+);
+
+INSERT INTO PROFILE (
+    EMPLOYEE_ID,
+    NAME,
+    HIRE_DATE,
+    RECRUIT,
+    GENDER_ID,
+    BLOOD_TYPE_ID,
+    SALES_POINT,
+    HOBBY,
+    BIRTHPLACE
+)
+VALUES (
+    'tie222222',
+    '次郎丸',
+    '201404',
+    '0',
+    '0',
+    '1',
+    'セールスポイント',
+    '趣味',
+    '東京'
+);
+
+
+INSERT INTO ACCOUNT VALUES (
+    'tie111111',
+    'pass123-',
+    '0'
+);
+
+INSERT INTO PROFILE (
+    EMPLOYEE_ID,
+    NAME,
+    HIRE_DATE,
+    RECRUIT,
+    GENDER_ID,
+    BLOOD_TYPE_ID,
+    SALES_POINT,
+    HOBBY,
+    BIRTHPLACE
+)
+VALUES (
+    'tie111111',
+    '一郎丸',
+    '201304',
+    '0',
+    '0',
+    '1',
+    'セールスポイント',
+    '趣味',
+    '東京'
 );
