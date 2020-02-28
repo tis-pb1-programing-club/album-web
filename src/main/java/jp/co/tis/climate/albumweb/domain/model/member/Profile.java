@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Data
 public class Profile implements Serializable {
 
-    private String employeeId;
+    private EmployeeId employeeId;
 
     private Picture picture;
 
