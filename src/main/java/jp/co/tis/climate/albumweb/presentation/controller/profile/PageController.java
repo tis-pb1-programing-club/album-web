@@ -108,12 +108,12 @@ public class PageController {
         }
 
         Profile profile = modelMapper.map(profileForm, Profile.class);
-        String employeeId = profile.getEmployeeId();
-        if (pageService.isRegisteredProfile(employeeId)) {
-            String[] phAry = new String[] { employeeId };
-            result.rejectValue("employeeId", "profileAlreadyExistMsg", phAry, "");
-            return "album/newpage";
-        }
+//        String employeeId = profile.getEmployeeId();
+//        if (pageService.isRegisteredProfile(employeeId)) {
+//            String[] phAry = new String[] { employeeId };
+//            result.rejectValue("employeeId", "profileAlreadyExistMsg", phAry, "");
+//            return "album/newpage";
+//        }
 
         //entityを修正したためコメントアウト
         /*List<Career> allCareers = profileForm.getAllCareers()
