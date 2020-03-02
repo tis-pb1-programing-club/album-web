@@ -17,24 +17,7 @@ public class ProfileCard {
 
     private String employeeId;
 
-    private String profileImageFilename;
+    private String picture;
 
-    private String lastName;
-
-    private String firstName;
-
-    private String joiningYear;
-
-    private String sex;
-
-    private String bloodType;
-
-    private String comment;
-
-    public Integer getYearly() {
-        return Optional.ofNullable(joiningYear)
-                .filter(StringUtils::hasText)
-                .map(year -> Year.now().getValue() - Integer.parseInt(year) + 1)
-                .orElse(null);
-    }
+    private String Name;
 }

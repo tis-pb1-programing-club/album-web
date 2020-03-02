@@ -23,6 +23,10 @@ public interface ProfileDao {
     @Select
     List<ProfileCard> findProfileCardAll();
 
+    // 実態は名前（部分一致）、趣味（部分一致）、趣味、血液型、のみで検索
+    @Select
+    List<ProfileCard> findProfileCardByProfile(Profile profile);
+
     @Insert
     int insert(Profile profile);
     
