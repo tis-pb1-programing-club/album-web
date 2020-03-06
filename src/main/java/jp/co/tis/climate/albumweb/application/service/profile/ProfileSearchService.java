@@ -2,11 +2,11 @@ package jp.co.tis.climate.albumweb.application.service.profile;
 
 import jp.co.tis.climate.albumweb.domain.model.member.Profile;
 import jp.co.tis.climate.albumweb.infrastructure.dao.ProfileDao;
-import jp.co.tis.climate.albumweb.presentation.dto.ProfileCard;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/** プロフィール一覧検索サービス */
 @Service
 public class ProfileSearchService {
 
@@ -16,9 +16,9 @@ public class ProfileSearchService {
         this.profileDao = profileDao;
     }
 
-    // 検索結果取得
-    public List<ProfileCard> searchProfile(Profile profile){
-        return profileDao.findProfileCardByProfile(profile);
+    /** プロフィールを各要素で検索 */
+    public List<Profile> searchProfile(Profile profile){
+        return profileDao.findProfileByProfile(profile);
     }
 
 }

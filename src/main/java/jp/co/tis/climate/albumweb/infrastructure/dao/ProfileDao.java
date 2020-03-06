@@ -23,9 +23,13 @@ public interface ProfileDao {
     @Select
     List<ProfileCard> findProfileCardAll();
 
-    // 実態は名前（部分一致）、趣味（部分一致）、趣味、血液型、のみで検索
+    /** プロフィールの検索処理。
+     * 実態はプロフィールの要素の内の名前（部分一致）、趣味（部分一致）、出身地、所属チームのみで検索し、
+     * 社員番号、名前、顔写真のみを返す。
+     * これはtop画面の検索/結果表示の仕様に準ずる */
+    // TODO: 現在所属チームでは検索していない
     @Select
-    List<ProfileCard> findProfileCardByProfile(Profile profile);
+    List<Profile> findProfileByProfile(Profile profile);
 
     @Insert
     int insert(Profile profile);

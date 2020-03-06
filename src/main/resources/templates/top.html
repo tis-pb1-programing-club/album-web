@@ -77,16 +77,15 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                 <select class="form-control search-slt">
+                                    <option>都道府県</option>
                                     <option th:each="value : ${cities}"
                                             th:value="${value.getValue()}"
-                                            th:text="${value.getLabel()}">都道府県</option>
+                                            th:text="${value.getLabel()}"></option>
                                 </select>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                 <select class="form-control search-slt">
-                                    <option th:each="value : ${bloodTypeList}"
-                                            th:value="${value.getValue()}"
-                                            th:text="${value.getLabel()}">血液型</option>
+                                    <option>所属チーム</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 p-0 text-right">
@@ -103,14 +102,16 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4" th:each="searchResult: ${searchResult}" th:object="${searchResult}">
                     <div class="card mb-4 shadow-sm">
-                        <img class="part" src="/image/no-image.jpg">
+                        <!--/* 現在画像があった場合も対応せず */-->
+                        <img th:if="*{picture}" class="part" src="/image/no-image.jpg">
+                        <img th:unless="*{picture}" class="part" src="/image/no-image.jpg">
                         <div class="card-body">
-                            <h5 >苗字名前</h5>
+                            <h5 th:text="*{name.value}">苗字名前</h5>
                             <p>
                                 <div>
-                                    <span class="badge badge-pill badge-info mr-1">123456</span>
+                                    <span class="badge badge-pill badge-info mr-1" th:text="*{employeeId}">123456</span>
                                 </div>
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
