@@ -1,5 +1,6 @@
 package jp.co.tis.climate.albumweb.presentation.controller;
 
+import jp.co.tis.climate.albumweb.domain.model.member.Team;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
