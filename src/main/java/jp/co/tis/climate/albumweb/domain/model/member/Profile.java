@@ -6,7 +6,6 @@ import jp.co.tis.climate.albumweb.domain.code.City;
 import jp.co.tis.climate.albumweb.domain.code.Gender;
 import jp.co.tis.climate.albumweb.domain.code.Recruit;
 import lombok.Data;
-
 import org.seasar.doma.Entity;
 import org.seasar.doma.jdbc.entity.NamingType;
 

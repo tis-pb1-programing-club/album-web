@@ -63,29 +63,29 @@
     <section class="search-sec">
         <div class="container">
             <h3><small class="text-muted">プロフィール検索</small></h3>
-            <form action="top.html" method="get" novalidate="novalidate"th:action="@{/profile/list}">
+            <form action="top.html" method="get" th:action="@{/profile/list}" th:object="${profileSearchForm}">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 p-0">
-                                <input type="text" class="form-control search-slt" placeholder="名前（部分一致）">
+                                <input type="text" th:field="*{name}" th:value="*{name}" class="form-control search-slt" placeholder="名前（部分一致）">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 p-0">
-                                <input type="text" class="form-control search-slt" placeholder="趣味（部分一致）">
+                                <input type="text" th:field="*{hobby}" th:value="*{hobby}" class="form-control search-slt" placeholder="趣味（部分一致）">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <select class="form-control search-slt">
-                                    <option>都道府県</option>
+                                <select class="form-control search-slt" th:field="*{birthplaceId}" th:value="*{birthplaceId}">
+                                    <option value="">都道府県</option>
                                     <option th:each="value : ${cities}"
                                             th:value="${value.getValue()}"
                                             th:text="${value.getLabel()}"></option>
                                 </select>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <select class="form-control search-slt">
-                                    <option>所属チーム</option>
+                                <select class="form-control search-slt" th:field="*{teamId}" th:value="*{teamId}">
+                                    <option value="">所属チーム</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 p-0 text-right">
@@ -113,166 +113,6 @@
                                 <div>
                                     <span class="badge badge-pill badge-info mr-1" th:text="*{employeeId}">123456</span>
                                 </div>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">詳しく見る</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="part" src="/image/no-image.jpg">
-                        <div class="card-body">
-                            <h5 >苗字名前</h5>
-                            <p>
-                            <div>
-                                <span class="badge badge-pill badge-info mr-1">123456</span>
-                            </div>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">詳しく見る</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="part" src="/image/no-image.jpg">
-                        <div class="card-body">
-                            <h5 >苗字名前</h5>
-                            <p>
-                            <div>
-                                <span class="badge badge-pill badge-info mr-1">123456</span>
-                            </div>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">詳しく見る</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="part" src="/image/no-image.jpg">
-                        <div class="card-body">
-                            <h5 >苗字名前</h5>
-                            <p>
-                            <div>
-                                <span class="badge badge-pill badge-info mr-1">123456</span>
-                            </div>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">詳しく見る</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="part" src="/image/no-image.jpg">
-                        <div class="card-body">
-                            <h5 >苗字名前</h5>
-                            <p>
-                            <div>
-                                <span class="badge badge-pill badge-info mr-1">123456</span>
-                            </div>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">詳しく見る</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="part" src="/image/no-image.jpg">
-                        <div class="card-body">
-                            <h5 >苗字名前</h5>
-                            <p>
-                            <div>
-                                <span class="badge badge-pill badge-info mr-1">123456</span>
-                            </div>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">詳しく見る</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="part" src="/image/no-image.jpg">
-                        <div class="card-body">
-                            <h5 >苗字名前</h5>
-                            <p>
-                            <div>
-                                <span class="badge badge-pill badge-info mr-1">123456</span>
-                            </div>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">詳しく見る</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="part" src="/image/no-image.jpg">
-                        <div class="card-body">
-                            <h5 >苗字名前</h5>
-                            <p>
-                            <div>
-                                <span class="badge badge-pill badge-info mr-1">123456</span>
-                            </div>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">詳しく見る</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="part" src="/image/no-image.jpg">
-                        <div class="card-body">
-                            <h5 >苗字名前</h5>
-                            <p>
-                            <div>
-                                <span class="badge badge-pill badge-info mr-1">123456</span>
-                            </div>
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
