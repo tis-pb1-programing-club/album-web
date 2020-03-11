@@ -34,7 +34,7 @@ public class Profile implements Serializable {
 
     private Hobby hobby;
 
-    private CityName birthplace;
+    private City birthplace;
 
     private Presentation presentation;
 }
