@@ -42,7 +42,6 @@ public class TopController {
     }
 
     /** top画面検索表示 */
-    // TODO: 都道府県の検索がうまくいっていない
     @GetMapping("/profile/list")
     public String list(@Validated ProfileSearchForm profileSearchForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()){
@@ -57,6 +56,7 @@ public class TopController {
         profile.setBirthplace(City.of(profileSearchForm.getBirthplaceId()));
         // teamの処理
         List<Profile> searchResult = profileSearchService.searchProfile(profile);
+        // LogFactory.getLog(this.getClass()).info(searchResult);
         model.addAttribute("searchResult", searchResult);
         topCommonModelAttribute(model);
         return "top";
