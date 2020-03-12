@@ -15,6 +15,4 @@ public class Account {
     private EmployeeId employeeId;
 
     private Password password;
-
-    private String isAdmin;
 }

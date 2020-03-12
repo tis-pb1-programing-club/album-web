@@ -1,7 +1,6 @@
 INSERT INTO ACCOUNT VALUES (
     'tie000000',
-    'pass123-',
-    '1'
+    'pass123-'
 );
 
 INSERT INTO BIRTHPLACE VALUES (
@@ -82,8 +81,7 @@ INSERT INTO BELONG VALUES (
 
 INSERT INTO ACCOUNT VALUES (
     'tie333333',
-    'pass123-',
-    '0'
+    'pass123-'
 );
 
 INSERT INTO PROFILE (
@@ -112,8 +110,7 @@ VALUES (
 
 INSERT INTO ACCOUNT VALUES (
     'tie222222',
-    'pass123-',
-    '0'
+    'pass123-'
 );
 
 INSERT INTO PROFILE (
@@ -142,8 +139,7 @@ VALUES (
 
 INSERT INTO ACCOUNT VALUES (
     'tie111111',
-    'pass123-',
-    '0'
+    'pass123-'
 );
 
 INSERT INTO PROFILE (
@@ -167,4 +163,13 @@ VALUES (
     'セールスポイント',
     '趣味',
     '東京'
+);
+
+INSERT INTO USER_ROLE VALUES (
+    'tie111111',
+    'ROLE_ADMIN'
+);
+INSERT INTO USER_ROLE VALUES (
+    'tie222222',
+    'ROLE_ADMIN'
 );
