@@ -17,19 +17,20 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-12 p-0">
-                                <input type="text" class="form-control search-slt" placeholder="名前（部分一致）">
+                                <input type="text" name="name" class="form-control search-slt" placeholder="名前（部分一致）">
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12 p-0">
-                                <input type="text" class="form-control search-slt" placeholder="社員番号">
+                                <input type="text" name="employeeId" class="form-control search-slt" placeholder="社員番号">
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-12 p-0">
-                                <select class="form-control search-slt">
-                                    <option></option>
-                                    <option>管理者</option>
+                                <select class="form-control search-slt" name="admin">
+                                    <option value=""></option>
+                                    <option value="0">一般ユーザ</option>
+                                    <option value="1">管理者</option>
                                 </select>
                             </div>
                             <div class="col-lg-1 col-md-1 col-sm-12 p-0">
-                                <button type="submit" class="btn btn-primary" name="submit">検索</button>
+                                <button type="submit" class="btn btn-primary">検索</button>
                             </div>
                         </div>
                     </div>
@@ -39,7 +40,7 @@
     </section>
     <br />
     <section class="search-edit">
-        <div class="container">
+        <div class="container" th:if="!${#lists.isEmpty(userList)}">
             <h3><small class="text-muted">ユーザ検索結果</small></h3>
             <form enctype="multipart/form-data" method="post" action="top.html" th:action="@{/admin/edit}">
                 <table class="table table-striped">
@@ -53,6 +54,14 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr th:each="user : ${userList}">
+                        <th scope="row"><label th:text="${user.employeeId}">123456</label></th>
+                        <td><label th:text="${user.name}">山田太郎</label></td>
+                        <td><input type="checkbox" th:value="${user.isAdmin}" th:checked="${user.isAdmin.equals('1')}" data-toggle="toggle" data-onstyle="success"></td>
+                        <td><a href="#">パスワード変更</a></td>
+                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
+                    </tr>
+                    <!--/*-->
                     <tr>
                         <th scope="row"><label>123456</label></th>
                         <td><label>山田太郎</label></td>
@@ -67,13 +76,7 @@
                         <td><a href="#">パスワード変更</a></td>
                         <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
                     </tr>
-                    <tr>
-                        <th scope="row"><label>123456</label></th>
-                        <td><label>山田太郎</label></td>
-                        <td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success"></td>
-                        <td><a href="#">パスワード変更</a></td>
-                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
-                    </tr>
+                    <!--*/-->
                     </tbody>
                 </table>
                 <div class="float-right mb-3">

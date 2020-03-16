@@ -13,6 +13,9 @@ spring:
     encoding: UTF-8
   thymeleaf:
     cache: false
+  h2:
+    console:
+      enabled=true​:
 
 doma:
   dialect: h2

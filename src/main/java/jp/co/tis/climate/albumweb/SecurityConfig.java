@@ -39,6 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
         /*
         http.authorizeRequests()
                 .antMatchers("/album/newpage")
