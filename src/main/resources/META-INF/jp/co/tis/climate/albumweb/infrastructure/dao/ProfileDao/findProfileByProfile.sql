@@ -18,3 +18,8 @@ where
     and
     BIRTHPLACE = /* profile.birthplace.code */0
     /*%end */
+
+    /*%if teamId != null && teamId.value != null && teamId.value != ""*/
+    and
+    EMPLOYEE_ID in (select EMPLOYEE_ID from BELONG where TEAM_ID = /* teamId.value */'1')
+    /*%end */

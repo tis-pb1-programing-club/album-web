@@ -86,6 +86,9 @@
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                 <select class="form-control search-slt" th:field="*{teamId}" th:value="*{teamId}">
                                     <option value="">所属チーム</option>
+                                    <option th:each="value : ${teams}"
+                                            th:value="${value.getTeamId().getValue()}"
+                                            th:text="${value.getTeamName().getValue()}"></option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 p-0 text-right">

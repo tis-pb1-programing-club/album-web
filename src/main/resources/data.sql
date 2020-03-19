@@ -72,12 +72,21 @@ INSERT INTO REGISTRATION_UPDATE VALUES (
 
 INSERT INTO TEAM VALUES (
     '1',
-    'チーム名'
-);
+    'チーム１'
+), (
+    '2',
+    'チーム２'
+ );
 
 INSERT INTO BELONG VALUES (
     'tie000000',
     '1'
+), (
+    'tie111111',
+    '1'
+), (
+    'tie222222',
+    '2'
 );
 
 INSERT INTO ACCOUNT VALUES (

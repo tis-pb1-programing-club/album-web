@@ -1,5 +1,6 @@
 package jp.co.tis.climate.albumweb.infrastructure.dao;
 
+import jp.co.tis.climate.albumweb.domain.TeamId;
 import jp.co.tis.climate.albumweb.domain.model.member.Profile;
 import jp.co.tis.climate.albumweb.presentation.dto.ProfileCard;
 import org.seasar.doma.Dao;
@@ -27,9 +28,8 @@ public interface ProfileDao {
      * 実態はプロフィールの要素の内の名前（部分一致）、趣味（部分一致）、出身地、所属チームのみで検索し、
      * 社員番号、名前、顔写真のみを返す。
      * これはtop画面の検索/結果表示の仕様に準ずる */
-    // TODO: 現在所属チームでは検索していない
     @Select
-    List<Profile> findProfileByProfile(Profile profile);
+    List<Profile> findProfileByProfile(Profile profile, TeamId teamId);
 
     @Insert
     int insert(Profile profile);
