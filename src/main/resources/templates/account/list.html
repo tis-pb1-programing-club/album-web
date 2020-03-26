@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8"/>
     <title th:text="ユーザー一覧">ユーザー一覧</title>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/account/list.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -59,7 +61,9 @@
                         <td><label th:text="${user.name}">山田太郎</label></td>
                         <td><input type="checkbox" th:value="${user.isAdmin}" th:checked="${user.isAdmin.equals('1')}" data-toggle="toggle" data-onstyle="success"></td>
                         <td><a href="#">パスワード変更</a></td>
-                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
+                        <td><button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal"
+                                    th:data-employee="${user.employeeId}" th:data-name="${user.name}"
+                                    th:data-delurl="${user.employeeId + '/delete'}">削除</button></td>
                     </tr>
                     <!--/*-->
                     <tr>
@@ -95,13 +99,15 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form class="modal-form" method="post" th:action="@{/account/}">
                 <div class="modal-body">
-                    <p>123456 山田太郎 を削除しますか</p>
+                    <p><span class="modal-employee"></span> <span class="modal-name"></span> を削除しますか</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                    <button type="button" class="btn btn-danger">削除</button>
+                    <button type="submit" class="btn btn-danger">削除</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

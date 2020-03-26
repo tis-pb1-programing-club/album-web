@@ -6,6 +6,7 @@ import jp.co.tis.climate.albumweb.presentation.dto.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class ProfileServiceImpl implements ProfileService {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public List<User> findUser(String employeeId, String name, String isAdmin) {
-        return userDao.findUserBy(employeeId, name, isAdmin);
+        String nameLike = name;
+        if (StringUtils.hasText(name)){
+            nameLike = "%" + name + "%";
+        }
+        return userDao.findUserBy(employeeId, nameLike, isAdmin);
     }
 }

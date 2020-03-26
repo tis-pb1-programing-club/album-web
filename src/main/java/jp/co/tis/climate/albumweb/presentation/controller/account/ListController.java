@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,11 +18,9 @@ import java.util.List;
 @RequestMapping("/account")
 public class ListController {
 
-    private final ModelMapper modelMapper;
     private final ProfileService profileService;
 
-    public ListController(ModelMapper modelMapper, ProfileService profileService) {
-        this.modelMapper = modelMapper;
+    public ListController(ProfileService profileService) {
         this.profileService = profileService;
     }
 
@@ -29,18 +28,10 @@ public class ListController {
     public ModelAndView list(@Validated UserSearchForm form)
     {
         List<User> userList = profileService.findUser(form.getEmployeeId(), form.getName(), form.getAdmin());
-        System.out.println("user count : " + userList.size());
-        for (User user : userList) {
-            System.out.println(user.getEmployeeId());
-            System.out.println(user.getName());
-            System.out.println(user.getIsAdmin());
-        }
         ModelAndView model = new ModelAndView();
         model.addObject("userList", userList);
         model.setViewName("account/list");
         return model;
     }
-
-
 
 }

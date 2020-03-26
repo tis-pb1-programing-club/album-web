@@ -8,6 +8,7 @@ import jp.co.tis.climate.albumweb.domain.code.Recruit;
 import lombok.Data;
 
 import org.seasar.doma.Entity;
+import org.seasar.doma.Id;
 import org.seasar.doma.jdbc.entity.NamingType;
 
 import java.io.Serializable;
@@ -16,7 +17,8 @@ import java.io.Serializable;
 @Data
 public class Profile implements Serializable {
 
-    private String employeeId;
+    @Id
+    private EmployeeId employeeId;
 
     private Picture picture;
 
