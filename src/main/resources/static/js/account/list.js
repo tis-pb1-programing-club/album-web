@@ -7,7 +7,7 @@ $(function() {
     var modal = $(this)
     modal.find('.modal-employee').text(employee)
     modal.find('.modal-name').text(name)
-    var action = modal.find('.modal-form').attr('action');
-    modal.find('.modal-form').attr('action', action + delurl)
+    var url = modal.find('.modal-delurl').attr('href');
+    modal.find('.modal-form').attr('action', url + delurl)
   })
 })
