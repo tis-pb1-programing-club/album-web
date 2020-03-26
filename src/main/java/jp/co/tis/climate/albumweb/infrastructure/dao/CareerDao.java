@@ -29,6 +29,6 @@ public interface CareerDao {
     @BatchDelete
     int[] batchDelete(List<Career> careers);
 
-    @Delete
+    @Delete(sqlFile = true)
     int deleteByAccount(Account account);
 }

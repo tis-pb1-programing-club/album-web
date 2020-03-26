@@ -1,0 +1,2 @@
+DELETE FROM BELONG
+WHERE EMPLOYEE_ID = /* account.employeeId */0

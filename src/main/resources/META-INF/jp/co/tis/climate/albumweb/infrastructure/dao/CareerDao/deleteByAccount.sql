@@ -1,0 +1,2 @@
+DELETE FROM CAREER
+WHERE EMPLOYEE_ID = /* account.employeeId */0
