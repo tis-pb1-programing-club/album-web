@@ -53,7 +53,7 @@ VALUES (
     '1',
     'セールスポイント',
     '趣味',
-    '東京'
+    '13'
 );
 
 INSERT INTO CAREER VALUES (
@@ -104,7 +104,7 @@ VALUES (
     '1',
     'セールスポイント',
     '趣味',
-    '東京'
+    '13'
 );
 
 
@@ -133,7 +133,7 @@ VALUES (
     '1',
     'セールスポイント',
     '趣味',
-    '東京'
+    '13'
 );
 
 
@@ -162,7 +162,12 @@ VALUES (
     '1',
     'セールスポイント',
     '趣味',
-    '東京'
+    '13'
+);
+
+INSERT INTO ACCOUNT VALUES (
+    'tie444444',
+    'pass123-'
 );
 
 INSERT INTO USER_ROLE VALUES (
@@ -171,5 +176,20 @@ INSERT INTO USER_ROLE VALUES (
 );
 INSERT INTO USER_ROLE VALUES (
     'tie222222',
+    'ROLE_ADMIN'
+);
+
+INSERT INTO USER_ROLE VALUES (
+    'tie000000',
+    'ROLE_ADMIN'
+);
+
+INSERT INTO USER_ROLE VALUES (
+    'tie333333',
+    'ROLE_USER'
+);
+
+INSERT INTO USER_ROLE VALUES (
+    'tie444444',
     'ROLE_ADMIN'
 );

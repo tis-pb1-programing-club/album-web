@@ -1,15 +1,16 @@
-SELECT *
-FROM ACCOUNT AS A INNER JOIN PROFILE AS P
-  ON A.EMPLOYEE_ID = P.EMPLOYEE_ID
+SELECT /*%expand "A" */*
+FROM ACCOUNT AS A
+  INNER JOIN USER_ROLE AS U ON A.EMPLOYEE_ID = U.EMPLOYEE_ID
+  LEFT OUTER JOIN PROFILE AS P ON A.EMPLOYEE_ID = P.EMPLOYEE_ID
 WHERE
-/*%if employeeId != null*/
-A.EMPLOYEE_ID = /* employeeId */'0'
+/*%if accountSearch.employeeId != null*/
+A.EMPLOYEE_ID = /* accountSearch.employeeId */'0'
 /*%end*/
+/*%if accountSearch.name != null*/
 AND
-/*%if name != null*/
-P.NAME LIKE /* @infix(name) */'taro'
+P.NAME LIKE /* @infix(accountSearch.name.getValue()) */'taro'
 /*%end*/
+/*%if accountSearch.role != null && accountSearch.role.getValue() == "admin"*/
 AND
-/*%if isAdmin != null*/
-A.IS_ADMIN = /* isAdmin */'1'
+U.ROLE = 'ROLE_ADMIN'
 /*%end*/

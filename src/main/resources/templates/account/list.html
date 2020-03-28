@@ -12,20 +12,22 @@
     <section class="search-sec">
         <div class="container">
             <h3><small class="text-muted">ユーザ検索</small></h3>
-            <form th:action="@{/account/list}" action="top.html" method="get" novalidate="novalidate">
+            <form th:action="@{/account/list}" action="top.html" method="get" novalidate="novalidate" th:object="${accountSearchForm}">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-12 p-0">
-                                <input type="text" class="form-control search-slt" placeholder="名前（部分一致）">
+                                <input type="text" th:field="*{name}" class="form-control search-slt" placeholder="名前（部分一致）">
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12 p-0">
-                                <input type="text" class="form-control search-slt" placeholder="社員番号">
+                                <input type="text" th:field="*{employeeId}" class="form-control search-slt" placeholder="社員番号">
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-12 p-0">
-                                <select class="form-control search-slt">
-                                    <option></option>
-                                    <option>管理者</option>
+                                <select class="form-control search-slt" th:field="*{role}">
+                                    <option th:each="op : *{adminOptions()}"
+                                            th:value="${op.key}"
+                                            th:text="${op.value}">
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-lg-1 col-md-1 col-sm-12 p-0">
@@ -53,26 +55,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row"><label>123456</label></th>
-                        <td><label>山田太郎</label></td>
-                        <td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success"></td>
-                        <td><a href="#">パスワード変更</a></td>
-                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><label>123456</label></th>
-                        <td><label>山田太郎</label></td>
-                        <td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success"></td>
-                        <td><a href="#">パスワード変更</a></td>
-                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><label>123456</label></th>
-                        <td><label>山田太郎</label></td>
-                        <td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success"></td>
-                        <td><a href="#">パスワード変更</a></td>
-                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
+                    <tr th:each="account : ${accountList}">
+                        <div th:object="${account}">
+                            <th scope="row" th:text="*{employeeId.getValue()}"><label>123456</label></th>
+                            <td th:text="*{name.getValue()}"><label>山田太郎</label></td>
+                            <td>
+<!--                                <label th:for="${#ids.next('checked')}"></label>-->
+                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success">
+                            </td>
+                            <td><a href="#">パスワード変更</a></td>
+                            <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
+                        </div>
                     </tr>
                     </tbody>
                 </table>
