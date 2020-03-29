@@ -16,6 +16,7 @@ public class TeamService {
 
     public TeamService(TeamDao teamDao){this.teamDao = teamDao;}
 
+    //チーム一覧取得
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<Team> findTeamList(){
         return teamDao.findTeamList();

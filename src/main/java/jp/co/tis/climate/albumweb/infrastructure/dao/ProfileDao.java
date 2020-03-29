@@ -7,6 +7,7 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface ProfileDao {
     @Select
     List<ProfileCard> findProfileCardAll();
 
-    @Insert
+    @Insert(excludeNull = true)
     int insert(Profile profile);
     
     @Delete

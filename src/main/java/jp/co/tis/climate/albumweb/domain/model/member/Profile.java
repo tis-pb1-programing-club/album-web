@@ -6,15 +6,18 @@ import jp.co.tis.climate.albumweb.domain.code.City;
 import jp.co.tis.climate.albumweb.domain.code.Gender;
 import jp.co.tis.climate.albumweb.domain.code.Recruit;
 import lombok.Data;
-
 import org.seasar.doma.Entity;
+import org.seasar.doma.Id;
+import org.seasar.doma.Table;
 import org.seasar.doma.jdbc.entity.NamingType;
 
 import java.io.Serializable;
 
 @Entity(naming = NamingType.SNAKE_UPPER_CASE)
+//テーブルと紐づけ
+@Table(name = "profile")
 @Data
-public class Profile implements Serializable {
+public class Profile{
 
     private String employeeId;
 

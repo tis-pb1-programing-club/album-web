@@ -1,5 +1,7 @@
 package jp.co.tis.climate.albumweb.presentation.form;
 
+import jp.co.tis.climate.albumweb.domain.code.City;
+import jp.co.tis.climate.albumweb.domain.code.Recruit;
 import jp.co.tis.climate.albumweb.presentation.validation.AllowMimeType;
 import jp.co.tis.climate.albumweb.presentation.validation.MimeType;
 import jp.co.tis.climate.albumweb.presentation.validation.UploadFileMaxSize;
@@ -23,11 +25,11 @@ import java.util.List;
 public class ProfileForm {
     // TODO: パートナさんにも対応できるようにする。現状、数値以外が入るとdomaで変換エラーが発生
     // @Pattern(regexp="[kK\\d]\\d{5}")
-    @NotEmpty
+    //@NotEmpty
     @EmployeeId
     private String employeeId;
     
-    @NotEmpty
+    //@NotEmpty
     private String password;
 
     @UploadFileRequired
@@ -36,29 +38,28 @@ public class ProfileForm {
     @AllowMimeType(allowTypes = { MimeType.JPEG })
     private MultipartFile profileImage;
 
-    @NotEmpty
+    //姓・名から姓名に変更
+    //@NotEmpty
     @Size(min = 1, max = 20)
-    private String lastName;
-
-    @NotEmpty
-    @Size(min = 1, max = 20)
-    private String firstName;
+    private String fullName;
 
     @BeforeYear
     private String joiningYear;
 
-    @NotEmpty
+    //辞書と違っていたのでsex⇒genderへ変更
+    //@NotEmpty
     @Size(min = 1, max = 1)
-    private String sex;
+    private String genderId;
 
     @Size(min = 0, max = 1)
-    private String bloodType;
+    private String bloodTypeId;
 
     @Size(min = 0, max = 30)
-    private String team;
+    private String teamId;
 
-    @Size(min = 0, max = 30)
-    private String customer;
+    //customerは不要
+//    @Size(min = 0, max = 30)
+//    private String customer;
 
     @Size(min = 0, max = 30)
     private String project;
@@ -69,6 +70,12 @@ public class ProfileForm {
     @Size(min = 0, max = 200)
     private String comment;
 
-    @Valid
+    //なかったので追加
+    private String recruitId;
+
+    //@Valid
     private List<CareerForm> allCareers;
+
+    //なかったので追加
+    private String cityId;
 }

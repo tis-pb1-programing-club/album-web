@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{commons/layout_noheader}">
+
 <head>
     <meta charset="UTF-8"/>
     <title th:text="アルバム追加">アルバム追加</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <form enctype="multipart/form-data" method="post" action="top.html" th:action="@{/account/new}">
+    <form action="new.html" enctype="multipart/form-data" method="post" th:action="@{/account}" th:object="${profileForm}">
         <h1>プロフィール</h1>
         <div class="card bg-light mb-3">
             <div class="card-header">基本情報</div>
@@ -16,12 +17,12 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="col-form-label">名前<span class="badge badge-pill badge-danger ml-3">必須</span></label>
-                        <input type="text" class="form-control" placeholder="山田太郎"/>
+                        <input type="text" class="form-control" placeholder="山田太郎" th:field="*{fullName}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>社員番号<span class="badge badge-pill badge-danger ml-3">必須</span></label>
-                    <input type="text" class="form-control" placeholder="123456" />
+                    <input type="text" class="form-control" placeholder="123456" th:field="*{employeeId}"/>
                 </div>
                 <div class="form-group">
                     <label>パスワード<span class="badge badge-pill badge-danger ml-3">必須</span></label>
@@ -37,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label>新卒/中途</label>
-                    <select class="form-control">
+                    <select class="form-control" th:field="*{recruitId}">
                         <option value=""></option>
                         <option th:each="recruit : ${recruitList}"
             th:value="${recruit.value}" th:text="${recruit.label}"></option>
@@ -49,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label>性別</label>
-                    <select class="form-control">
+                    <select class="form-control" th:field="*{genderId}">
                         <option value=""></option>
                         <option th:each="gender : ${genderList}"
             th:value="${gender.value}" th:text="${gender.label}"></option>
@@ -57,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label>血液型</label>
-                    <select class="form-control">
+                    <select class="form-control" th:field="*{bloodTypeId}">
                         <option value=""></option>
                         <option th:each="bloodType : ${bloodTypeList}"
             th:value="${bloodType.value}" th:text="${bloodType.label}"></option>
@@ -83,7 +84,7 @@
                 </div>
                 <div class="form-group">
                     <label>出身地</label>
-                    <select class="form-control">
+                    <select class="form-control" th:field="*{cityId}">
                         <option value=""></option>
                         <option th:each="city : ${cityList}"
             th:value="${city.value}" th:text="${city.label}"></option>

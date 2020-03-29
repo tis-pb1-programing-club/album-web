@@ -17,6 +17,7 @@ spring:
 doma:
   dialect: h2
   sql-file-repository: no_cache
+  spring.h2.console.enabled: true
 
 fuudoapp:
   album:
