@@ -7,6 +7,7 @@ import jp.co.tis.climate.albumweb.domain.Name;
 import jp.co.tis.climate.albumweb.domain.TeamId;
 import jp.co.tis.climate.albumweb.domain.code.City;
 import jp.co.tis.climate.albumweb.domain.model.member.Profile;
+import jp.co.tis.climate.albumweb.domain.model.member.Team;
 import jp.co.tis.climate.albumweb.presentation.form.ProfileSearchForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,10 +30,19 @@ public class TopController {
         this.teamService = teamService;
     }
 
-    // 常にformを返す
     @ModelAttribute
     ProfileSearchForm setupForm() {
         return new ProfileSearchForm();
+    }
+
+    @ModelAttribute(name = "cities")
+    City[] setupCity() {
+        return City.values();
+    }
+
+    @ModelAttribute(name = "teams")
+    List<Team> setupTeam() {
+        return teamService.findTeamAll();
     }
 
     /** top画面初期表示 */
@@ -41,7 +51,6 @@ public class TopController {
         List<Profile> searchResult = profileSearchService.searchProfile(new Profile());
         // TODO: 顔写真をhtmlで表示できるようにはしてない
         model.addAttribute("searchResult", searchResult);
-        topCommonModelAttribute(model);
         return "top";
     }
 
@@ -49,7 +58,6 @@ public class TopController {
     @GetMapping("/profile/list")
     public String list(@Validated ProfileSearchForm profileSearchForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()){
-            topCommonModelAttribute(model);
             return "top";
         }
 
@@ -62,16 +70,9 @@ public class TopController {
         profile.setBirthplace(City.of(profileSearchForm.getBirthplaceId()));
 
         List<Profile> searchResult = profileSearchService.searchProfile(profile, new TeamId(profileSearchForm.getTeamId()));
-        // LogFactory.getLog(this.getClass()).info(searchResult);
-        model.addAttribute("searchResult", searchResult);
-        topCommonModelAttribute(model);
-        return "top";
-    }
 
-    /** top画面共通後処理 */
-    private void topCommonModelAttribute(Model model) {
-        model.addAttribute("cities", City.values());
-        model.addAttribute("teams", teamService.findTeamAll());
+        model.addAttribute("searchResult", searchResult);
+        return "top";
     }
 
 }
